@@ -1,4 +1,4 @@
-## Policy based usage control
+## Data usage control
 In information security, access control restricts access to digital resources. The term authorization is the process of granting permission to resources. Several access control models exist, such as Discretionary Access Control (DAC), Mandatory Access Control (MAC), Role-based Access Control (RBAC), Attribute-based Access Control (ABAC), etc. The XACML (eXtensible Access Control Markup Language) Standard is commonly used in the field of access control. XACML is a policy language to express ABAC rules. 
 
 In contrast to access control, where access to specific digital resources (e.g., a service or a file) is restricted, the IDS architecture additionally supports data-centric usage control. The overall goal is to enforce usage restrictions for data after access has been granted though policies that bind to data being exchanged. At configuration time, these policies support developers and administrators in setting up correct data flows. Usage control itself does not establish trust in an endpoint. It rather builds upon an existing trust relationship and facilitates the enforcement of legal or technical requirements or data privacy regulations. 
@@ -22,7 +22,7 @@ It must be noted that contract requests and contract offers are purely informati
 <img src="uc_2.png"  height="250">
 In the current code, step1 is simulated by having a dummy ContractRequest.
 
-## Classes
+## CAMEL Classes
     Following classes are used in the respective xml files in provider and consumer. The actual classes are hosted by Fraunhofer.
 ## Provider
 1. Class name: ContractOfferCreationProcessor
