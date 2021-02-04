@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Blueprint provides a dependency injection framework for OSGi. 
+The specification describes how the components get instantiated and wired together to form a running module. -->
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:camel="http://camel.apache.org/schema/blueprint" xsi:schemaLocation="
+ http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+ http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd">
+
+  <!-- Define TLS configuration for data provider -->
+  <camel:sslContextParameters id="clientSslContext">
+    <camel:keyManagers keyPassword="password">
+      <!-- KeyManager decides which authentication credentials should be sent to the remote host for authentication during SSL handshake-->
+      <!-- create and load keyManager  -->
+      <!-- params - algorithm, keyPassword, keyStore, provider  -->
+      <camel:keyStore resource="etc/provider-keystore.p12" password="password"/>
+    </camel:keyManagers>
+    <camel:trustManagers>
+      <!-- TrustManager determines whether remote connection should be trusted or not i.e. whether remote party is who it claims to-->
+      <!-- create and load trustManager  -->
+      <!-- params - algorithm, keyManager, keyStore, provider  -->
+      <camel:keyStore resource="etc/truststore.p12" password="password"/>
+    </camel:trustManagers>
+  </camel:sslContextParameters>
+
+  <!-- The following defines a single bean called TypeExtractionProcessor implemented by the POJO de.fhg.aisec.ids.camel.idscp2.processors.IdsMessageTypeExtractionProcessor -->
+  <bean id="TypeExtractionProcessor" class="de.fhg.aisec.ids.camel.idscp2.processors.IdsMessageTypeExtractionProcessor" />
+  
+  <!-- The following defines a single bean called ContractOfferCreationProcessor implemented by the POJO de.fhg.aisec.ids.camel.idscp2.processors.ContractOfferCreationProcessor -->
+  <bean id="ContractOfferCreationProcessor" class="de.fhg.aisec.ids.camel.idscp2.processors.ContractOfferCreationProcessor" />
+  
+  <!-- The following defines a single bean called ContractAgreementReceiverProcessor implemented by the POJO de.fhg.aisec.ids.camel.idscp2.processors.ContractAgreementReceiverProcessor -->
+  <bean id="ContractAgreementReceiverProcessor" class="de.fhg.aisec.ids.camel.idscp2.processors.ContractAgreementReceiverProcessor" />
+  
+  <!-- The following defines a single bean called ResourceUpdateCreationProcessor implemented by the POJO de.fhg.aisec.ids.camel.idscp2.processors.ResourceUpdateCreationProcessor -->
+  <bean id="ResourceUpdateCreationProcessor" class="de.fhg.aisec.ids.camel.idscp2.processors.ResourceUpdateCreationProcessor" />
+
+  <camelContext xmlns="http://camel.apache.org/schema/blueprint">
+    <!-- creates a rest endpoint -->
+    <!-- bindingMode - Configures the binding mode for the producer. If set to anything other than 'off' the producer will try to convert the body of the incoming message from inType to the json or xml, and the response from json or xml to outType. There are 5 enums and the value can be one of: auto, off, json, xml, json_xml -->
+    <!-- componet - camel-netty-http, camel-jetty, camel-servlet, camel-undertow -->
+    <restConfiguration component="jetty" bindingMode="off" port="8989" enableCORS="true"/>
+
+    <!-- Create a rest path -->
+    <rest path="/postUSImg">
+      <description>User rest service</description>
+      <post>
+        <to uri="direct:update"/>
+      </post>
+    </rest>
+
+    <!-- create route -->
+    <route>
+      <!-- timer creates a loop -->
+      <!-- repeatCount - Specifies a maximum limit of number of fires. So if you set it to 1, the timer will only fire once. If you set it to 5, it will only fire five times. A value of zero or negative means fire forever. -->
+      <from uri="timer://contractRequest?repeatCount=1" />
+      
+      <!-- The SetProperty allows us to set a property on our exchange i.e it can be retrieve later on from the headers -->
+      <setProperty name="artifactUri">
+        <constant>https://www.digitalgreen.org/wheatCsv</constant>
+      </setProperty>
+      <setProperty name="containerUri">
+        <!-- local registry for docker -->
+        <constant>https://private.docker.image/sha256-a66751153fb06dada83e3805af70dde28386c194f28f2727ec5033277529ac1d#8081</constant>
+      </setProperty>
+      <!-- The Processor interface is used to implement consumers of message exchanges or to implement a Message Translator i.e process the message into correct format. -->
+      
+      <!-- Accpets incoming message to process -->
+      <process ref="ContractOfferCreationProcessor" />
+      
+      <to uri="idscp2client://consumer-core:29292?awaitResponse=true&amp;connectionShareId=ucConnection&amp;sslContextParameters=#clientSslContext&amp;useIdsMessages=true"/>
+      
+      <!-- Checks message and it's type based on its headers. -->
+      <process ref="TypeExtractionProcessor"/>
+      
+      <!-- The Content Based Router from the EIP patterns allows you to route messages to the correct destination based on the contents of the message exchanges. -->
+      <choice>
+        <when>
+          <!-- Check for valid contract message  -->
+          <simple>${exchangeProperty.ids-type} == 'ContractAgreementMessage'</simple>
+          <log message="### Handle ContractAgreementMessage ###"/>
+          
+          <!-- Only processing of incoming request must be performed, no reply -->
+          <process ref="ContractAgreementReceiverProcessor"/>
+        </when>
+        <otherwise>
+          <!-- Log if invalid agreement is found -->
+          <log loggingLevel="ERROR" message="Expected ContractAgreementMessage, but received:\n${body}\n### Header: ###\n${headers[idscp2-header]}"/>
+        </otherwise>
+      </choice>
+      <!-- removes idscp2 header -->
+      <removeHeader headerName="idscp2-header" />
+      <setBody>
+        <simple>${null}</simple>
+      </setBody>
+    </route>
+
+    <route id="sendData">
+      <!-- <from uri="direct:update"/> -->
+      <from uri="file://deploy/?fileName=Wheatqualitycertification_short.csv&amp;charset=utf-8&amp;noop=true"/>
+      <!-- ensure that contract agreement is made before sending-->
+      <delay asyncDelayed="true">
+        <constant>10000</constant>
+      </delay>
+      <!-- Parses CSV -->
+      <unmarshal>
+        <csv delimiter="," useMaps="true"/>
+      </unmarshal>
+      <!-- Serializes maps to JSON -->
+      <marshal>
+        <json/>
+      </marshal>
+      <setProperty name="artifactUri">
+        <constant>https://www.digitalgreen.org/wheatCsv</constant>
+      </setProperty>
+      <!-- check this -->
+      <process ref="ResourceUpdateCreationProcessor" />
+      <to uri="idscp2client://consumer-core:29292?awaitResponse=true&amp;connectionShareId=ucConnection&amp;sslContextParameters=#clientSslContext&amp;useIdsMessages=true"/>
+      <!-- Sets the correct header for the text answer "OK" -->
+      <setHeader name="Content-Type">
+        <constant>text/plain</constant>
+      </setHeader>
+    </route>
+
+  </camelContext>
+
+</blueprint>

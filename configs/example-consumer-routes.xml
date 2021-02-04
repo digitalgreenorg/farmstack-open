@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Blueprint provides a dependency injection framework for OSGi. 
+The specification describes how the components get instantiated and wired together to form a running module. -->
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:camel="http://camel.apache.org/schema/blueprint"
+  xmlns:camel-cxf="http://camel.apache.org/schema/blueprint/cxf" xsi:schemaLocation="
+ http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+ http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd">
+
+  <!-- Define TLS configuration for data consumer -->
+  <camel:sslContextParameters id="serverSslContext">
+    <camel:keyManagers keyPassword="password">
+      <!-- KeyManager decides which authentication credentials should be sent to the remote host for authentication during SSL handshake-->
+      <!-- create and load keyManager  -->
+      <!-- params - algorithm, keyPassword, keyStore, provider  -->
+      <camel:keyStore resource="etc/consumer-keystore.p12" password="password"/>
+    </camel:keyManagers>
+    <camel:trustManagers>
+      <!-- TrustManager determines whether remote connection should be trusted or not i.e. whether remote party is who it claims to-->
+      <!-- create and load trustManager  -->
+      <!-- params - algorithm, keyManager, keyStore, provider  -->
+      <camel:keyStore resource="etc/truststore.p12" password="password"/>
+    </camel:trustManagers>
+  </camel:sslContextParameters>
+
+  <!-- The following defines a single bean called TypeExtractionProcessor implemented by the POJO de.fhg.aisec.ids.camel.idscp2.processors.IdsMessageTypeExtractionProcessor -->
+  <bean id="TypeExtractionProcessor" class="de.fhg.aisec.ids.camel.idscp2.processors.IdsMessageTypeExtractionProcessor" />
+  <!-- The following defines a single bean called ContractOfferProcessor implemented by the POJO de.fhg.aisec.ids.camel.idscp2.processors.ContractOfferProcessor -->
+  <bean id="ContractOfferProcessor" class="de.fhg.aisec.ids.camel.idscp2.processors.ContractOfferProcessor" />
+
+  <camelContext xmlns="http://camel.apache.org/schema/blueprint">
+
+    <route>
+      <from uri="idscp2server://0.0.0.0:29292?sslContextParameters=#serverSslContext&amp;useIdsMessages=true"/>
+      <!-- Checks message and it's type based on its headers. -->
+      <process ref="TypeExtractionProcessor"/>
+
+      <!-- The Content Based Router from the EIP patterns allows you to route messages to the correct destination based on the contents of the message exchanges. -->
+      <choice>
+        <when>
+          <!-- Check for valid contract message -->
+          <simple>${exchangeProperty.ids-type} == 'ContractOfferMessage'</simple>
+          <log message="### Handle ContractOfferMessage ###"/>
+          <!-- Only processing of incoming request must be performed, no reply -->
+          <process ref="ContractOfferProcessor"/>
+        </when>
+        <when>
+          <!-- process if property is ResourceUpdateMessage -->
+          <simple>${exchangeProperty.ids-type} == 'ResourceUpdateMessage'</simple>
+          <log message="### Handle ResourceUpdateMessage ###"/>
+          <setHeader name="Content-Type">
+            <constant>application/json</constant>
+          </setHeader>
+          <to uri="http://consumer-app:8081/post_data"/>
+        </when>
+        <otherwise>
+          <!-- if header doesn't match to a known header -->
+          <log loggingLevel="ERROR" message="Expected ContractOfferMessage or ResourceUpdateMessage, but received:\n${body}\n### Header: ###\n${headers[idscp2-header]}"/>
+          <removeHeader headerName="idscp2-header" />
+          <setBody>
+            <simple>${null}</simple>
+          </setBody>
+        </otherwise>
+      </choice>
+    </route>
+
+  </camelContext>
+
+</blueprint>

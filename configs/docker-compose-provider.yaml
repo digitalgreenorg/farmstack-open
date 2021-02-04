@@ -1,0 +1,34 @@
+version: '3'
+services:
+
+  # The core platform, mounts docker control socket and route definition into the image
+  provider-core:
+    image: fraunhoferaisec/trusted-connector-core:${EXAMPLE_TAG:-develop}
+    tty: true
+    stdin_open: true
+    volumes:
+      - ../log/:/root/log/
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ../cert-stores/provider-keystore.p12:/root/etc/provider-keystore.p12
+      - ../cert-stores/truststore.p12:/root/etc/truststore.p12
+      - /Users/sagar/Desktop/usage_control/IDSA-FS-Demo/configs/example-provider-routes.xml:/root/deploy/example-provider-routes.xml
+      - ./Wheatqualitycertification_short.csv:/root/deploy/Wheatqualitycertification_short.csv
+    
+    # Uncomment to run the provider & consumer nodes on separate server 
+    # replace x.x.x.x with the consumer ip address
+    # extra_hosts:
+    #  - "consumer-core:x.x.x.x"
+
+    ports:
+      - 8989:8989
+    
+    # Using two networks ids-wide and provider-internal for external comunication and internal communication respectively
+    networks:
+      - ids-wide
+      - provider-internal
+
+networks:
+  ids-wide:
+    driver: bridge
+  provider-internal:
+    driver: bridge

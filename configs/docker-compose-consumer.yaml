@@ -1,0 +1,42 @@
+version: '3'
+services:
+
+  # The core platform, mounts docker control socket and route definition into the image
+  consumer-core:
+    image: fraunhoferaisec/trusted-connector-core:${EXAMPLE_TAG:-develop}
+    tty: true
+    stdin_open: true
+    volumes:
+      - ../log/:/root/log/
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ../cert-stores/consumer-keystore.p12:/root/etc/consumer-keystore.p12
+      - ../cert-stores/truststore.p12:/root/etc/truststore.p12
+      - ./example-consumer-routes.xml:/root/deploy/example-consumer-routes.xml
+
+    # Uncomment to run the provider & consumer nodes on separate server 
+    # replace x.x.x.x with the provider ip address
+    # extra_hosts:
+    #  - "provider-core:x.x.x.x"
+
+    # Enable this port mappings for debugging or UI access from localhost
+    ports:
+    # Enable this port mapping (along with "ports:" above) to allow access to IDSCP from outside the ids-wide network
+      - "29292:29292"
+    # Using two networks ids-wide and consumer-internal for external comunication and internal communication, respectively
+    networks:
+      - ids-wide
+      - consumer-internal
+
+  # Data App (REST consumer, displays web page)
+  consumer-app:
+    image: merge-csv-nodejs
+    ports:
+      - "8081:8081"
+    networks:
+      - consumer-internal
+
+networks:
+  ids-wide:
+    driver: bridge
+  consumer-internal:
+    driver: bridge
