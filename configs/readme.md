@@ -32,7 +32,7 @@ In the current code, step1 is simulated by having a dummy ContractRequest.
         - Serializes ContractOffer to a json object
     2. Important methods:
         - ContractOfferBuilder() from de.fraunhofer.iais.eis.* 
-        - [Utils](https://github.com/industrial-data-space/trusted-connector/blob/develop/camel-idscp2/src/main/- - kotlin/de/fhg/aisec/ids/camel/idscp2/Utils.kt)
+        - [Utils](https://github.com/industrial-data-space/trusted-connector/blob/develop/camel-idscp2/src/main/kotlin/de/fhg/aisec/ids/camel/idscp2/Utils.kt)
         - [Constants](https://github.com/industrial-data-space/trusted-connector/blob/develop/camel-idscp2/src/main/kotlin/de/fhg/aisec/ids/camel/idscp2/Constants.kt)
     3. Where: the first step of the route
 
