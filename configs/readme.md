@@ -32,8 +32,8 @@ In the current code, step1 is simulated by having a dummy ContractRequest.
         - Serializes ContractOffer to a json object
     2. Important methods:
         - ContractOfferBuilder() from de.fraunhofer.iais.eis.* 
-        - Utils [source](https://github.com/industrial-data-space/trusted-connector/blob/develop/camel-idscp2/src/main/- - kotlin/de/fhg/aisec/ids/camel/idscp2/Utils.kt)
-        - Constants [source](https://github.com/industrial-data-space/trusted-connector/blob/develop/camel-idscp2/src/main/kotlin/de/fhg/aisec/ids/camel/idscp2/Constants.kt)
+        - [Utils](https://github.com/industrial-data-space/trusted-connector/blob/develop/camel-idscp2/src/main/- - kotlin/de/fhg/aisec/ids/camel/idscp2/Utils.kt)
+        - [Constants](https://github.com/industrial-data-space/trusted-connector/blob/develop/camel-idscp2/src/main/kotlin/de/fhg/aisec/ids/camel/idscp2/Constants.kt)
     3. Where: the first step of the route
 
 2. Class name: TypeExtractionProcessor
@@ -45,8 +45,8 @@ In the current code, step1 is simulated by having a dummy ContractRequest.
         - Takes ContractAgreement as input and saves it to UsageControlMaps object 
         - Deserialize ContractAgreement and saves its properties like container uri and artifacturi to hashmap for quick lookup in ProviderDB object
     2. Important methods:
-        - ProviderDB [source](https://github.com/industrial-data-space/trusted-connector/blob/develop/camel-idscp2/src/main/kotlin/de/fhg/aisec/ids/camel/idscp2/Constants.kt)
-        - UsageCotnrolMaps [source](https://github.com/industrial-data-space/trusted-connector/blob/develop/camel-idscp2/src/main/kotlin/de/fhg/aisec/ids/camel/idscp2/UsageControlMaps.kt)
+        - [ProviderDB](https://github.com/industrial-data-space/trusted-connector/blob/develop/camel-idscp2/src/main/kotlin/de/fhg/aisec/ids/camel/idscp2/Constants.kt)
+        - [UsageCotnrolMaps](https://github.com/industrial-data-space/trusted-connector/blob/develop/camel-idscp2/src/main/kotlin/de/fhg/aisec/ids/camel/idscp2/UsageControlMaps.kt)
     3. Where: Last step of accepting agreement
 4. Class name: ResourceUpdateCreationProcessor
     1. Function:
