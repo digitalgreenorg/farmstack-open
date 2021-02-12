@@ -17,7 +17,7 @@ FarmStack is required because:
 ### How does someone use FarmStack
 
 Business roles in FS can be viewed as layered operational spheres:
-* __FS Participants__ : These are stakeholders who are actually performing data exchange or providing some services (maybe in future, like discovery services) for data exchange. This could be a provider, a consumer etc
+* __FS Participants__ : These are stakeholders who are actually performing data exchange or providing some services for data exchange. This is mainly a data provider and data consumer
 * __FS Central/ Steward__ : This is a nodal agency/ consortium who will run farmstack in that geography/ jurisdiction. They will operate the gateways for the participants. Examples could be MoA or a global consortium.
 * __FS Core__: This is the technology stack that is maintained by DG and consortium based on IDS technology stack (Fraunhofer) which consists of the code repo under MIT/ Apache license. They will own the master services agreement - governance structure and the right to provision instance of FS central.
 
