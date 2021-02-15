@@ -2,7 +2,7 @@
 FarmStack is a digital infrastructure that enables data collaboration between different entities. It does this by providing a means to:
 1. Share data directly to the relevant organization without the need of third party through p2p connector (peer to peer connector) 
 2. Empower the data provider to specify how data can or cannot be used by the receiver through data owner defined usage policies
-3. Enable organizations to make their data discoverable by publishing metadata (description of data) and data transformation services in data catalog
+3. Enable organizations to make their data discoverable by publishing metadata (description of connectors and usage policies) and shareable through data interface containers
 
 ### Why is FarmStack required?
 FarmStack is required because:
