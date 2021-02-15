@@ -21,7 +21,7 @@ Business roles in FS can be viewed as layered operational spheres:
 * __FS Central/ Steward__ : This is a nodal agency/ consortium who will run farmstack in that geography/ jurisdiction. They will operate the gateways for the participants. Examples could be MoA or a global consortium.
 * __FS Core__: This is the technology stack that is maintained by DG and consortium based on IDS technology stack (Fraunhofer) which consists of the code repo under MIT/ Apache license. They will own the master services agreement - governance structure and the right to provision instance of FS central.
 
-###### Example:
+#### Example:
 Consider the diagram, there are two instances of FS run by two independent central bodies in different jurisdictions. Let us say MoA of Country1 and Country2 run separate instances of FarmStack C1 and C2 which have participants P1… Pn who do data exchange between each other. By provisioning FS, C1 and C2 run FS on their server in addition to managing the organizations.
 
 <img src="FS-business sphere.png"  height="250">
