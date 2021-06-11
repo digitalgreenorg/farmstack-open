@@ -97,7 +97,7 @@ The specification describes how the components get instantiated and wired togeth
 
     <route id="sendData">
       <!-- <from uri="direct:update"/> -->
-      <from uri="file://deploy/?fileName=Wheatqualitycertification_short.csv&amp;charset=utf-8&amp;noop=true"/>
+      <from uri="file://deploy/?fileName=csv_data.csv&amp;charset=utf-8&amp;noop=true"/>
       <!-- ensure that contract agreement is made before sending-->
       <delay asyncDelayed="true">
         <constant>10000</constant>
