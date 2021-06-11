@@ -61,7 +61,7 @@ The specification describes how the components get instantiated and wired togeth
       </setProperty>
       <setProperty name="containerUri">
         <!-- local registry for docker -->
-        <constant>https://private.docker.image/sha256:5c8815269c4584cb09399fc31adc2f842dabec549539fe706cc35a0f97150049#8081</constant>
+        <constant>https://private.docker.image/sha256:29e9e54510c508678499fea89970f5fbbc6f2076cbf4deed96432d4bb8609ecc#8081</constant>
       </setProperty>
       <!-- The Processor interface is used to implement consumers of message exchanges or to implement a Message Translator i.e process the message into correct format. -->
       

@@ -3,7 +3,7 @@ services:
 
   # The core platform, mounts docker control socket and route definition into the image
   consumer-core:
-    image: fraunhoferaisec/trusted-connector-core:${EXAMPLE_TAG:-develop}
+    image: fraunhoferaisec/trusted-connector-core:${EXAMPLE_TAG:-4.0.0}
     tty: true
     stdin_open: true
     volumes:
