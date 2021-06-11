@@ -42,12 +42,12 @@ The specification describes how the components get instantiated and wired togeth
     <restConfiguration component="jetty" bindingMode="off" port="8989" enableCORS="true"/>
 
     <!-- Create a rest path -->
-    <rest path="/postUSImg">
+    <!-- <rest path="/postUSImg">
       <description>User rest service</description>
       <post>
         <to uri="direct:update"/>
       </post>
-    </rest>
+    </rest> -->
 
     <!-- create route -->
     <route>
@@ -60,8 +60,8 @@ The specification describes how the components get instantiated and wired togeth
         <constant>https://www.digitalgreen.org/wheatCsv</constant>
       </setProperty>
       <setProperty name="containerUri">
-        <!-- local registry for docker -->
-        <constant>https://private.docker.image/sha256:29e9e54510c508678499fea89970f5fbbc6f2076cbf4deed96432d4bb8609ecc#8081</constant>
+        <!-- local registry for docker. This line is updated using prepareUC Script, do not change it manually-->
+        <constant>https://private.docker.image/sha256-{example_consumer_hash}#8081</constant>
       </setProperty>
       <!-- The Processor interface is used to implement consumers of message exchanges or to implement a Message Translator i.e process the message into correct format. -->
       
@@ -102,6 +102,7 @@ The specification describes how the components get instantiated and wired togeth
       <delay asyncDelayed="true">
         <constant>10000</constant>
       </delay>
+      <log message="Sending data from file: csv_data.csv"/>
       <!-- Parses CSV -->
       <unmarshal>
         <csv delimiter="," useMaps="true"/>
@@ -118,7 +119,7 @@ The specification describes how the components get instantiated and wired togeth
       <to uri="idscp2client://consumer-core:29292?awaitResponse=true&amp;connectionShareId=ucConnection&amp;sslContextParameters=#clientSslContext&amp;useIdsMessages=true"/>
       <!-- Sets the correct header for the text answer "OK" -->
       <setHeader name="Content-Type">
-        <constant>text/plain</constant>
+        <constant>application/json</constant>
       </setHeader>
     </route>
 
