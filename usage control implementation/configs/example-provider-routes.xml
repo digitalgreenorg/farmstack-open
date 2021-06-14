@@ -61,7 +61,7 @@ The specification describes how the components get instantiated and wired togeth
       </setProperty>
       <setProperty name="containerUri">
         <!-- local registry for docker. This line is updated using prepareUC Script, do not change it manually-->
-        <constant>https://private.docker.image/sha256-{example_consumer_hash}#8081</constant>
+        <constant>https://private.docker.image/sha256-2891251e26d2b9f9c657f918f1648fd1c99237bee41f86a07377eb040a24d966#8081</constant>
       </setProperty>
       <!-- The Processor interface is used to implement consumers of message exchanges or to implement a Message Translator i.e process the message into correct format. -->
       
