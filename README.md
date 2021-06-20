@@ -10,6 +10,11 @@ cd farmstack-open
 ./run.sh
 ```
 
+To stop the containers
+```bash
+./stop.sh
+```
+
 @TODO - Add extra ip instructions
 
 ## Features
