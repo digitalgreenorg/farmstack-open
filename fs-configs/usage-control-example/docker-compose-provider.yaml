@@ -7,7 +7,7 @@ services:
     tty: true
     stdin_open: true
     volumes:
-      - logs/provider/:/root/log/
+      - ./logs/provider/:/root/log/
       - /var/run/docker.sock:/var/run/docker.sock
       - ../../fs-assets/sample-certificates/provider-keystore.p12:/root/etc/provider-keystore.p12
       - ../../fs-assets/sample-certificates/truststore.p12:/root/etc/truststore.p12

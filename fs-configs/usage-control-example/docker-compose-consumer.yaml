@@ -7,7 +7,7 @@ services:
     tty: true
     stdin_open: true
     volumes:
-      - logs/consumer/:/root/log/
+      - ./logs/consumer/:/root/log/
       - /var/run/docker.sock:/var/run/docker.sock
       - ../../fs-assets/sample-certificates/consumer-keystore.p12:/root/etc/consumer-keystore.p12
       - ../../fs-assets/sample-certificates/truststore.p12:/root/etc/truststore.p12
