@@ -1,0 +1,28 @@
+{
+  "name": "@farmstack/merge-csv-nodejs",
+  "version": "1.0.0",
+  "description": "A sample application receiving json data and displaying it iin tabular format",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "style": "standard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/digitalgreen/farmstack-open.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FarmstackDG"
+  },
+  "homepage": "https://github.com/FarmstackDG",
+  "dependencies": {
+    "express": "^4.16.4",
+    "body-parser": "^1.18.3",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "standard": "^12.0.1"
+  }
+}

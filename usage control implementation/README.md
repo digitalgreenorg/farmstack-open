@@ -15,10 +15,10 @@ In this reference implementation, there is one provider and one consumer, both r
 The usage policy essentially constrains that data be not used by any other container or if the container is modified. This is a basic example that can be used to create multiple usage restrictions that require data being available and used for only specific applications.
 
 ## Data provider side
-<img src="FS_UCDiagram-UC(Provider).png"  height="250">
+<img src="../docs/assets/uc_provider.png"  height="250">
 
 ## Data consumer side
-<img src="FS_UCDiagram-UC(consumer).png"  height="250">
+<img src="../docs/assets/uc_consumer.png"  height="250">
 
 ## Code structure
 Config/

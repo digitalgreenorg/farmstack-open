@@ -12,14 +12,14 @@ The fundamental building blocks for IDS Policies are the Contracts. Contracts pr
 
 It must be noted that contract requests and contract offers are purely informative pieces of information and do not bind any contract. The figure below represents the hierarchical structure of a usage policy.
 
-<img src="uc_1.png"  height="250">
+<img src="../../docs/assets/uc_1.png"  height="250">
 
 ## Contract agreement message flow
     Step 1: Data consumer (IDSCP2 - Client) requests contract and sends ContractRequestMessage
     Step 2: Data provider (IDSCP2 - Server) checks the contract offer and if ok, sends ContractResponseMessage
     Step 3: Data consumer checks the ContractOffer and sends back the ContractAgreementMessage
 
-<img src="uc_2.png"  height="250">
+<img src="../../docs/assets/uc_2.png"  height="250">
 In the current code, step1 is simulated by having a dummy ContractRequest.
 
 ## CAMEL Classes

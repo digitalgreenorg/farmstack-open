@@ -7,10 +7,10 @@ services:
     tty: true
     stdin_open: true
     volumes:
-      - ../log/:/root/log/
+      - logs/consumer/:/root/log/
       - /var/run/docker.sock:/var/run/docker.sock
-      - ../cert-stores/consumer-keystore.p12:/root/etc/consumer-keystore.p12
-      - ../cert-stores/truststore.p12:/root/etc/truststore.p12
+      - ../../fs-assets/sample-certificates/consumer-keystore.p12:/root/etc/consumer-keystore.p12
+      - ../../fs-assets/sample-certificates/truststore.p12:/root/etc/truststore.p12
       - ./example-consumer-routes.xml:/root/deploy/example-consumer-routes.xml
 
     # Uncomment to run the provider & consumer nodes on separate server 
@@ -29,7 +29,7 @@ services:
 
   # Data App (REST consumer, displays web page)
   consumer-app:
-    image: merge-csv-nodejs
+    image: farmstack/merge-csv-nodejs
     ports:
       - "8081:8081"
     networks:

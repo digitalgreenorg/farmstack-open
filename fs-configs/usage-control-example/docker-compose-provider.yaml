@@ -7,12 +7,13 @@ services:
     tty: true
     stdin_open: true
     volumes:
-      - ../log/:/root/log/
+      - logs/provider/:/root/log/
       - /var/run/docker.sock:/var/run/docker.sock
-      - ../cert-stores/provider-keystore.p12:/root/etc/provider-keystore.p12
-      - ../cert-stores/truststore.p12:/root/etc/truststore.p12
+      - ../../fs-assets/sample-certificates/provider-keystore.p12:/root/etc/provider-keystore.p12
+      - ../../fs-assets/sample-certificates/truststore.p12:/root/etc/truststore.p12
       - ./example-provider-routes.xml:/root/deploy/example-provider-routes.xml
-      - ./csv_data.csv:/root/deploy/csv_data.csv
+      - ../../fs-assets/sample-data/sample_farmer_data1.csv:/root/deploy/sample_data1.csv
+      - ../../fs-assets/sample-data/sample_farmer_data2.csv:/root/deploy/sample_data2.csv
     
     # Uncomment to run the provider & consumer nodes on separate server 
     # replace x.x.x.x with the consumer ip address
