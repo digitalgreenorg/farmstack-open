@@ -46,7 +46,7 @@ For more information visit [our website](https://farmstack.digitalgreen.org) or 
 
 We would love your contribution to this project no matter big or small.
 
-To get started see our [contribution guide](docs/contributing-to-farmstack/).
+To get started see our [contribution guide](docs/contributing-to-farmstack.md).
 
 ## Roadmap
 
