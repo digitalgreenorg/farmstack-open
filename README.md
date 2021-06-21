@@ -44,7 +44,9 @@ For more information visit [our website](https://farmstack.digitalgreen.org) or 
 
 ## Contributing
 
-@TODO - Add contribution guide
+We would love your contribution to this project no matter big or small.
+
+To get started see our [contribution guide](docs/contribution/contribution.md).
 
 ## Roadmap
 
