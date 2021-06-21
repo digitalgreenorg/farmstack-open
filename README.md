@@ -2,7 +2,7 @@
 
 ![](docs/.gitbook/assets/farmstack_horizontal_color_transparent-bg.png)
 
-FarmStack is a reference implementation of an open and interoperable data sharing protocol in agriculture sector. 
+FarmStack is a reference implementation of an open and interoperable data sharing protocol in agriculture sector.
 
 Farmstack is required because:
 
@@ -46,7 +46,7 @@ For more information visit [our website](https://farmstack.digitalgreen.org) or 
 
 We would love your contribution to this project no matter big or small.
 
-To get started see our [contribution guide](docs/contribution/contribution.md).
+To get started see our [contribution guide](docs/contributing-to-farmstack.md).
 
 ## Roadmap
 
