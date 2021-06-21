@@ -1,8 +1,12 @@
 # Introduction
 
-![](.gitbook/assets/farmstack_horizontal_color_transparent-bg.png)
+![](docs/.gitbook/assets/farmstack_horizontal_color_transparent-bg.png)
 
-FarmStack is a reference implementation of an open and interoperable data sharing protocol in agriculture sector. FarmStack enables network of data providers and consumers through a suite of products and functionalities:
+FarmStack is a reference implementation of an open and interoperable data sharing protocol in agriculture sector. 
+
+
+
+FarmStack enables network of data providers and consumers through a suite of products and functionalities:
 
 1. Share data directly without any third party through trusted **peer to peer \(p2p\) connector**.
 2. Empower the data provider to restrict usage of data through **usage policies**.
@@ -18,6 +22,8 @@ git clone https://github.com/digitalgreenorg/farmstack-open.git
 cd farmstack-open
 ./run.sh
 ```
+
+In browser, open: [https://localhost:8081/](https://localhost:8081/)
 
 To stop the containers
 
