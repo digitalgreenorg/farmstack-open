@@ -57,11 +57,10 @@ The specification describes how the components get instantiated and wired togeth
       
       <!-- The SetProperty allows us to set a property on our exchange i.e it can be retrieve later on from the headers -->
       <setProperty name="artifactUri">
-        <constant>https://www.digitalgreen.org/wheatCsv</constant>
+        <constant>https://farmstack.digitalgreen.org/usageControlExample</constant>
       </setProperty>
       <setProperty name="containerUri">
-        <!-- local registry for docker. This line is updated using prepareUC Script, do not change it manually-->
-        <constant>https://private.docker.image/sha256-2891251e26d2b9f9c657f918f1648fd1c99237bee41f86a07377eb040a24d966#8081</constant>
+        <constant>https://hub.docker.com/layers/farmstack/merge-csv-nodejs/latest/images/sha256-1b903795a3d3f02967f864ed8f7b0074e283b9b08ce5a02000ce948a3e33bd03#8081</constant>
       </setProperty>
       <!-- The Processor interface is used to implement consumers of message exchanges or to implement a Message Translator i.e process the message into correct format. -->
       
@@ -97,12 +96,12 @@ The specification describes how the components get instantiated and wired togeth
 
     <route id="sendData">
       <!-- <from uri="direct:update"/> -->
-      <from uri="file://deploy/?fileName=csv_data.csv&amp;charset=utf-8&amp;noop=true"/>
+      <from uri="file://deploy/?fileName=sample_data1.csv&amp;charset=utf-8&amp;noop=true"/>
       <!-- ensure that contract agreement is made before sending-->
       <delay asyncDelayed="true">
         <constant>10000</constant>
       </delay>
-      <log message="Sending data from file: csv_data.csv"/>
+      <log message="Sending data from file: sample_data1.csv"/>
       <!-- Parses CSV -->
       <unmarshal>
         <csv delimiter="," useMaps="true"/>
@@ -112,7 +111,7 @@ The specification describes how the components get instantiated and wired togeth
         <json/>
       </marshal>
       <setProperty name="artifactUri">
-        <constant>https://www.digitalgreen.org/wheatCsv</constant>
+        <constant>https://farmstack.digitalgreen.org/usageControlExample</constant>
       </setProperty>
       <!-- check this -->
       <process ref="ResourceUpdateCreationProcessor" />
