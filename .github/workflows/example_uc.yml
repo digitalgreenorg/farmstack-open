@@ -34,7 +34,7 @@ jobs:
         run: sleep 60
         
       - name: Checking for data
-        run: curl http://localhost:8081 | echo
+        run: curl http://localhost:8081 | jq '.'
         
       - name: Stopping containers
         run: ./stop.sh
