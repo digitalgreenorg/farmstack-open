@@ -1,4 +1,5 @@
 # Introduction
+![build](https://github.com/digitalgreenorg/farmstack-open/workflows/example_uc/badge.svg)
 
 ![](docs/.gitbook/assets/farmstack_horizontal_color_transparent-bg.png)
 
