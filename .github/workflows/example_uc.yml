@@ -21,14 +21,21 @@ jobs:
         run: ./run.sh
         
       # Runs a set of commands using the runners shell
-      - name: Wait for connector to come online
-        run: sleep 60
-        
-      - name: Checking for data
+      # - name: Wait for connector to come online
+      #   run: sleep 60
+
+
+      - name: Checking for data1
         run: |
           data=$(curl http://localhost:8081)
           len=${#data}
-          $([ $len -le 93 ] && echo 'No data received at consumer' && exit 1)
+          [ $len -le 90 ] && echo "No data received at consumer $len" && exit 1
+        
+      - name: Checking for data2
+        run: |
+          data=$(curl http://localhost:8081)
+          len=${#data}
+          [ $len -le 93 ] && echo "No data received at consumer $len" && exit 1
         
       - name: Stopping containers
         run: ./stop.sh
