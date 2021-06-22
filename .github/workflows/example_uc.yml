@@ -1,4 +1,4 @@
-name: Running example use case test
+name: UC Test Case
 
 on:
   push:
