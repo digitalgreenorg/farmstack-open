@@ -29,7 +29,7 @@ jobs:
         run: sleep 60
         
       - name: Checking for data
-        run: curl http://localhost:8081 | jq '.'
+        run: curl http://localhost:8081
         
       - name: Stopping containers
         run: ./stop.sh
