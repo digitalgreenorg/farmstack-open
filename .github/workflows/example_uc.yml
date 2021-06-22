@@ -25,17 +25,8 @@ jobs:
       #   run: sleep 60
 
 
-      - name: Checking for data1
-        run: |
-          data=$(curl http://localhost:8081)
-          len=${#data}
-          [ $len -le 90 ] && echo "No data received at consumer $len" && exit 1
-        
-      - name: Checking for data2
-        run: |
-          data=$(curl http://localhost:8081)
-          len=${#data}
-          [ $len -le 93 ] && echo "No data received at consumer $len" && exit 1
+      - name: Checking for data transfer
+        run: ./scripts/checkData.sh
         
       - name: Stopping containers
         run: ./stop.sh
