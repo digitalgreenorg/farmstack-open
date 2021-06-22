@@ -28,7 +28,7 @@ jobs:
         run: |
           data=$(curl http://localhost:8081)
           len=${#data}
-          [ $len -le 93 ] && echo 'No data received at consumer' && exit 1
+          $([ $len -le 93 ] && echo 'No data received at consumer' && exit 1)
         
       - name: Stopping containers
         run: ./stop.sh
