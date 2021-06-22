@@ -24,12 +24,15 @@ jobs:
       - name: Running setup script
         run: ./run.sh
 
+      - name: Checking for data
+        run: echo ${#$(curl http://localhost:8081)}
+        
       # Runs a set of commands using the runners shell
       - name: Wait for connector to come online
         run: sleep 60
         
       - name: Checking for data
-        run: curl http://localhost:8081
+        run: echo ${#$(curl http://localhost:8081)}
         
       - name: Stopping containers
         run: ./stop.sh
