@@ -21,9 +21,8 @@ jobs:
         run: ./run.sh
         
       # Runs a set of commands using the runners shell
-      # - name: Wait for connector to come online
-      #   run: sleep 60
-
+      - name: Wait for connector to come online
+        run: sleep 60
 
       - name: Checking for data transfer
         run: ./scripts/checkData.sh
