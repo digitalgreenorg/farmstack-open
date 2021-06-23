@@ -39,9 +39,11 @@ class RunLocal(generics.RetrieveUpdateDestroyAPIView):
                 create_connector.save()
                 messagae = "Created connectors successfully."
             else:
-                messagae = "Created connectors successfully."
-                errors = create_connector.error
+                messagae = "Could not create connectors successfully."
+                errors = create_connector.errors
+                print(errors)
             
+            print(messagae)
             # check if docker for connectors alreay running
             try:
                 pid = os.fork()

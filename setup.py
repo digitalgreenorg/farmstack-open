@@ -32,7 +32,7 @@ def start_setup():
     os.system(activator_string)
 
     #start server
-    os.system("source venv/bin/activate;cd connector/;python manage.py makemigrations;python manage.py migrate;python manage.py runserver 127.0.0.1:8000;")
+    os.system("source venv/bin/activate;python connector/manage.py makemigrations;python connector/manage.py migrate;python connector/manage.py runserver 127.0.0.1:8000;")
 
 if __name__ == "__main__":
     start_setup()
