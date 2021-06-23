@@ -1,0 +1,93 @@
+:root {
+    --primary: #f7b733;
+    --primary-hover: #fbaf11;
+    --primary-light: #f4c769;
+}
+
+.content-wrapper {
+    padding: 1rem;
+}
+
+/* Primary Button Color CSS Starts */
+.btn-primary-2 {
+    background-color: var(--primary);
+    border: 1px solid transparent;
+    color: #fff;
+}
+.btn-primary-2:hover, .btn-primary-2:active {
+    background-color: var(--primary-hover);
+    border: 1px solid transparent;
+    color: #fff;
+}
+/* Primary Button Color CSS Ends */
+
+/* Toggle Switch CSS Starts */
+.toggle-switch input:checked+.toggle-switch-slider {
+    border: .0625rem solid var(--primary);
+}
+.toggle-switch input:checked+.toggle-switch-slider:before {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+/* Toggle Switch CSS Ends */
+
+.card {
+    background-color: #fff;
+    border: none;
+    border-radius: .625rem;
+    box-shadow: 0 0.46875rem 2.1875rem rgb(90 97 105 / 10%), 0 0.9375rem 1.40625rem rgb(90 97 105 / 10%), 0 0.25rem 0.53125rem rgb(90 97 105 / 12%), 0 0.125rem 0.1875rem rgb(90 97 105 / 10%);
+}
+
+.card {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+}
+
+.card-body {
+    padding: 1.875rem;
+}
+
+.card-body {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1.25rem;
+}
+
+/* .bootstrap-select .dropdown-toggle:focus {
+    outline: 5px auto var(--primary) !important;
+}
+.bootstrap-select .dropdown-menu .selected .dropdown-item {
+    color: var(--primary-light);
+} */
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: var(--primary-light);
+}
+
+.disbaled-control {
+    cursor: not-allowed;
+}
+
+@media screen and (max-width: 640px) {
+    .btn-container-right {
+        display: block !important;
+    }
+
+    .btn-container-right .btn {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+}

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmstack UI 3</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700,800|Roboto:400,500,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="/static/css/theme.css">
+    <link rel="stylesheet" href="/static/css/external-styles.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+    <div class="content-wrapper connection-container">
+        <ul class="nav nav-pills nav-fill flex-column flex-sm-row" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link mb-sm-3 active" id="source-tab" data-toggle="tab" href="#source" role="tab" aria-controls="source" aria-selected="true">
+                    <!-- <span class="nav-link-icon"><i class="fas fa-circle"></i></span> -->
+                    <span>Create a source</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link mb-sm-3" id="destination-tab" data-toggle="tab" href="#destination" role="tab" aria-controls="destination" aria-selected="false">
+                    <!-- <span class="nav-link-icon"><i class="fas fa-circle"></i></span> -->
+                    <span>Create a destination</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link mb-sm-3" id="connection-tab" data-toggle="tab" href="#connection" role="tab" aria-controls="connection" aria-selected="false">
+                    <!-- <span class="nav-link-icon"><i class="fas fa-circle"></i></span> -->
+                    <span>Set up connection</span>
+                </a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="source" role="tabpanel" aria-labelledby="source-tab">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="mb-0">Set up source.</h5>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="name">Name - Pick a name to help you identify the source</label>
+                            <input type="text" class="form-control" placeholder="Name" id="provider_name" name="connector_name">
+                            {% comment %} <input hidden type="text" class="form-control" name="status" value="active">
+                            <input hidden type="text" class="form-control" name="connector_type" value="provider"> {% endcomment %}
+                        </div>
+                        <div class="d-flex justify-content-end btn-container-right">
+                            <button type="button" class="btn btn-primary-2" onclick="changeTab('destination')">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="destination" role="tabpanel" aria-labelledby="destination-tab">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="mb-0">Set up destination.</h5>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="name">Name - Pick a name to help you identify the destination</label>
+                            <input type="text" class="form-control" placeholder="Name" id="consumer_name" name="name">
+                            {% comment %} <input hidden type="text" class="form-control" name="status" value="active">
+                            <input hidden type="text" class="form-control" name="connector_type" value="consumer"> {% endcomment %}
+                        </div>
+                        <div class="form-group">
+                            <label for="port">Port</label>
+                            <input type="text" class="form-control disbaled-control" placeholder="8081" name="port" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="destination_poth">Git Repo</label>
+                            <input type="text" class="form-control disbaled-control" placeholder="https://github.com/digitalgreenorg/farmstack-open" name="destination_poth" disabled>
+                        </div>
+                        <div class="d-flex justify-content-between btn-container-right">
+                            <button type="button" class="btn btn-primary-2" onclick="changeTab()">Prev</button>
+                            <button type="button" class="btn btn-primary-2" onclick="changeTab('connection')">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="connection" role="tabpanel" aria-labelledby="connection-tab">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="mb-0">Set up connection.</h5>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="detail-item source-details">
+                            <h6>Source:</h6>
+                            <div class="data-item">
+                                <div class="data-item-title"><strong>Name: </strong></div>
+                                <div class="data-item-details" id="source_name"></div>
+                            </div>
+                        </div>
+                        <div class="detail-item destination-details">
+                            <h6>Destination:</h6>
+                            <div class="data-item">
+                                <div class="data-item-title"><strong>Name: </strong></div>
+                                <div class="data-item-details" id="destination_name"></div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-item-title"><strong>Port: </strong></div>
+                                <div class="data-item-details">8081</div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-item-title"><strong>Git Repo: </strong></div>
+                                <div class="data-item-details">https://github.com/digitalgreenorg/farmstack-open</div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between btn-container-right">
+                            <button type="button" class="btn btn-primary-2" onclick="changeTab('destination')">Prev</button>
+                            <button type="button" id="submit" class="btn btn-primary-2">Set up connection</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/popper.js"></script>
+    <script src="/static/js/bootstrap.js"></script>
+    <script src="/static/js/fontawesome.js"></script>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

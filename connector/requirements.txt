@@ -1,0 +1,16 @@
+bcrypt
+certifi
+cffi
+chardet
+cryptography
+Django==2.2
+djangorestframework==3.12.2
+idna
+pycparser
+PyNaCl
+pytz
+PyYAML
+requests==2.25.1
+six
+sqlparse
+urllib3==1.26.3

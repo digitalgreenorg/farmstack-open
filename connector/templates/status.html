@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmstack UI 3</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700,800|Roboto:400,500,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="/static/css/theme.css">
+    <link rel="stylesheet" href="/static/css/external-styles.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+    <div class="content-wrapper source-title page-title">
+        <h2 class="title">Sources</h2>
+        <button type="button" class="btn btn-primary-2 btn-icon">
+            <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
+            <span class="btn-inner--text"><a href="/home/">New Connector</a></span>
+        </button>
+    </div>
+
+    <div class="content-wrapper source-container">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-table-container">
+                    <table class="table table-hover table-cards align-items-center">
+                        <thead>
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Connector Type</th>
+                                <th scope="col">Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for connector in connectors %}
+                                <tr class="bg-white">
+                                    <th scope="row">
+                                        <div class="media align-items-center">
+                                            {% comment %} <img src="" class="avatar avatar-sm mr-3"> {% endcomment %}
+                                            <div class="media-body">
+                                                <h6 class="h5 font-weight-normal mb-0">{{connector.name}}</h6>
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <td>{{connector.status}}</td>
+                                    <td>{{connector.connector_type}}</td>
+                                    <td>
+                                        <a href="/connector_api/delete/{{connector.connector_type}}/{{connector.id}}/" data-toggle="tooltip" title="Delete {{connector.connector_type}} {{connector.name}}"><i class="fas fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                                <tr class="table-divider"></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+    <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/popper.js"></script>
+    <script src="/static/js/bootstrap.js"></script>
+    <script src="/static/js/fontawesome.js"></script>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

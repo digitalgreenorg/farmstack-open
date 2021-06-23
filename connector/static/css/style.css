@@ -1,0 +1,78 @@
+
+.card-table-container {
+    overflow: auto;
+}
+.page-title {
+    display: flex;
+    justify-content: space-between;
+}
+.page-title .title {
+    margin-bottom: 0;
+}
+
+/* Source List Page CSS Starts */
+.source-title .page-title .title {
+    line-height: 1.5;
+}
+/* Source List Page CSS Ends */
+
+/* Connection Page CSS Starts */
+.detail-item {
+    border-bottom: 1px solid #ccc;
+    border-left: .5rem solid var(--primary);
+    padding: .3rem;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+}
+.detail-item h6 {
+    text-transform: uppercase;
+    font-size: 1rem;
+}
+.detail-item .data-item {
+    border: 1px solid #eee;
+    padding: 5px;
+    margin-bottom: 5px;
+    background-color: #eee;
+}
+.connection-container .nav-pills .nav-link {
+    padding: 0;
+    border: none;
+}
+.connection-container .nav-link span {
+    border: 1px solid var(--primary);
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+.connection-container .nav-link.active span {
+    background-color: var(--primary);
+    color: #fff;
+}
+/* Connection Page CSS Ends */
+
+/* Logs Page CSS Starts */
+.logs-container .page-title .title {
+    line-height: 2.5;
+}
+.logs-container .card-body {
+    padding: 1rem 1.2rem;
+}
+.logs-content-wrapper {
+    background-color: #efefef;
+}
+.logs-json-content {
+    padding: 1rem 2rem;
+}
+/* Logs Page CSS Ends */
+
+
+@media screen and (max-width: 640px) {
+    .page-title {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .page-title .btn {
+        width: 100%;
+    }
+}
