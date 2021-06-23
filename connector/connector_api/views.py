@@ -24,6 +24,8 @@ class CsrfExemptSessionAuthentication(SessionAuthentication):
 
 class RunLocal(generics.RetrieveUpdateDestroyAPIView):
     authentication_classes = (CsrfExemptSessionAuthentication, BasicAuthentication)
+    queryset = Connector.objects.all()
+    serializer_class = ConnectorSerializer
 
     def get(self, request, *args, **kwargs):
         return Response(status=status.HTTP_404_NOT_FOUND)
@@ -31,6 +33,7 @@ class RunLocal(generics.RetrieveUpdateDestroyAPIView):
     def post(self, request, *args, **kwargs):
         try:
             # create connector instance
+            print(request.data)
             create_connector = ConnectorSerializer(data=request.data, many=isinstance(request.data, list))
             if create_connector.is_valid():
                 create_connector.save()
@@ -40,30 +43,28 @@ class RunLocal(generics.RetrieveUpdateDestroyAPIView):
                 errors = create_connector.error
             
             # check if docker for connectors alreay running
-            docker_outout = check_output(["docker", "container", "ls", "-a"])
-            output_string = docker_outout.decode('utf-8')
-            # check for consumer and provider core
-            if "provider-core" in output_string and "consumer-core" in output_string:
-                # redirect to status page as connectors already running
-                return redirect("http://localhost:%s/status/" % (8000))
-            else:
-                try:
-                    pid = os.fork()
-                except Exception as e:
-                    print(e)
+            try:
+                pid = os.fork()
+            except Exception as e:
+                print(e)
                 
-                # create a background process
-                if pid == 0:
-                    subprocess.call(["./run.sh"])
-                    os._exit(0)
-            return redirect("http://localhost:%s/status/" % (8000))
+            # create a background process
+            if pid == 0:
+                subprocess.call(["./run.sh"])
+                print(os.getpid())
+                os._exit(0)
+            
+            time.sleep(5)
+            return Response(data={"message": "Connectors saved"}, status=status.HTTP_201_CREATED)
         except Exception as e:
             print(e)
-            return Response(data={"message": "message not saved"}, status=status.HTTP_304_NOT_MODIFIED)
+            return Response(data={"message": "Connectors not saved"}, status=status.HTTP_304_NOT_MODIFIED)
 
 
 class StopConnector(generics.RetrieveUpdateDestroyAPIView):
     authentication_classes = (CsrfExemptSessionAuthentication, BasicAuthentication)
+    queryset = Connector.objects.all()
+    serializer_class = ConnectorSerializer
 
     def post(self, request, *args, **kwargs):
         return Response(status=status.HTTP_404_NOT_FOUND)
@@ -119,8 +120,7 @@ class StopConnector(generics.RetrieveUpdateDestroyAPIView):
                 except:
                     pass
             
-            time.sleep(5)
-            return redirect("http://localhost:8000/home/status/")
+            return redirect("http://127.0.0.1:8000/home/status/")
         except Exception as e:
             print(e)
-            return Response(data={"message": "message not saved"}, status=status.HTTP_304_NOT_MODIFIED)
+            return Response(data={"message": "Connectors not deletd"}, status=status.HTTP_304_NOT_MODIFIED)

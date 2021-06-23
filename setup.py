@@ -12,11 +12,11 @@ def start_setup():
     
     requirements = [" --upgrade pip","bcrypt", "certifi", "cffi", 
                     "chardet", "cryptography", "Django==2.2", "python_on_whales",
-                    "django-rest-swagger==2.2.0", "djangorestframework==3.12.2", 
+                    "django-rest-swagger==2.2.0", "djangorestframework==3.12.4", 
                     "idna==2.10", "paramiko==2.7.2", "pycparser", 
-                    "PyNaCl", "pytz", "PyYAML", "requests==2.25.1", "six", 
+                    "PyNaCl", "pytz", "PyYAML", "requests", "six", 
                     "sqlparse", "uritemplate==3.0.1", "urllib3==1.26.4", 
-                    ]
+                    "django-cors-headers"]
     
     os.system(init_command)
 
@@ -26,7 +26,7 @@ def start_setup():
     os.system(activator_string)
 
     #start server
-    os.system("source venv/bin/activate;cd connector/connector/;python manage.py runserver 0.0.0.0:8000;")
+    os.system("source venv/bin/activate;cd connector/;python manage.py makemigrations;python manage.py migrate;python manage.py runserver 127.0.0.1:8000;")
 
 if __name__ == "__main__":
     start_setup()

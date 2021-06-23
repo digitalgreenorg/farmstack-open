@@ -1,7 +1,9 @@
-from django.shortcuts import render
 import json
-import requests
+import subprocess
 from connector_api.models import Connector
+from django.conf import settings
+from django.shortcuts import render
+import os
 
 def home(request):
     return render(request, "connection.html")
@@ -14,8 +16,17 @@ def con_status(request):
     return render(request, "status.html", context={"connectors": connectors})
 
 def log(request):
-    log_json = requests.get('http://localhost:3100/loki/api/v1/query_range?direction=BACKWARD&limit=1000&query=%7Bjob%3D%22varlogs%22%7D&start=1623317555000000000&end=1623321156000000000')
-    log_json = json.loads(log_json.text)["data"]["result"][0]["values"][:100]
-    for i, log in enumerate(log_json):
-        log_json[i] = json.loads(log[-1])
-    return render(request, "logs.html", context={"logs": log_json})
+    provider_logs_top_100 = []
+    consumer_logs_top_100 = []
+
+    print(settings.BASE_DIR)
+
+    consumer_log_path = file_path = os.path.join(settings.FILES_DIR, "consumer/karaf.log")
+    provider_log_path = file_path = os.path.join(settings.FILES_DIR, "provider/karaf.log")
+    with open(consumer_log_path, "r") as ofs:
+        consumer_logs_top_100 = ofs.readlines()[:100]
+    
+    with open(provider_log_path, "r") as ofs:
+        provider_logs_top_100 = ofs.readlines()[:100]
+
+    return render(request, "logs.html", context={"provider_logs_top_100": provider_logs_top_100, "consumer_logs_top_100": consumer_logs_top_100})

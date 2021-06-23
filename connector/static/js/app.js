@@ -35,6 +35,7 @@ $(document).ready(function(){
         xhr.addEventListener("readystatechange", function() {
         if(this.readyState === 4) {
             console.log(this.responseText);
+            window.location.href = '/status';
         }
         });
         
