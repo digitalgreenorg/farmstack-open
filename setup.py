@@ -6,6 +6,12 @@ def start_setup():
     # install virtualenv
     subprocess.call(["pip3", "install", "virtualenv"])
 
+    # create executbale sh
+    subprocess.call["chmod", "+x", "run.sh"]
+    subprocess.call["chmod", "+x", "stop_consumer.sh"]
+    subprocess.call["chmod", "+x", "stop_provider.sh"]
+    subprocess.call["chmod", "+x", "stop.sh"]
+
     init_command = "python3 -m venv venv"
 
     activator_string = '''source venv/bin/activate ;'''
