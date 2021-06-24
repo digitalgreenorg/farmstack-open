@@ -1,24 +1,30 @@
 #!/bin/sh
 
 echo "$OSTYPE"
+
 if [[ "$OSTYPE" =~ "darwin".* ]]
 then
     DOCKER_VERSION=$(docker-compose --version)
-    if [[ "$DOCKER_VERSION" =~ .*"dokcer-compose".* ]]
+
+    echo "$DOCKER_VERSION"
+    if [[ "$DOCKER_VERSION" =~ .*"docker-compose".* ]]
     then
         echo "docker compose found"
     else
         echo "install docker for mac then proceed"
         exit 1
+    fi
 else
-    DOCKER_VERSION=$(docker-compose --version)
-    if [[ "$DOCKER_VERSION" =~ .*"dokcer-compose".* ]]
+    DOCKER_VERSION=$(docker-compose --version)\
+
+    if [[ "$DOCKER_VERSION" =~ .*"docker-compose".* ]]
     then
         echo "docker compose found"
     else
         echo "installing docker"
         sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
         sudo chmod +x /usr/local/bin/docker-compose
+    fi
 fi
 
 git clone -b UI_backend_integration https://github.com/digitalgreenorg/farmstack-open.git
@@ -37,4 +43,5 @@ else
         python3 setup.py
     else
         echo "Invalid python versions found install python3.0 or greater and try again"
+    fi
 fi
