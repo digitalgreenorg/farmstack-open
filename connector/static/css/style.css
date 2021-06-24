@@ -5,9 +5,18 @@
 .page-title {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 .page-title .title {
     margin-bottom: 0;
+}
+.fs-main-content{
+    margin-left:5%;
+    margin-right: 5%;
+}
+
+.fs-tab {
+    margin-top : 2%
 }
 
 /* Source List Page CSS Starts */
@@ -50,9 +59,6 @@
 /* Connection Page CSS Ends */
 
 /* Logs Page CSS Starts */
-.logs-container .page-title .title {
-    line-height: 2.5;
-}
 .logs-container .card-body {
     padding: 1rem 1.2rem;
 }
@@ -63,6 +69,69 @@
     padding: 1rem 2rem;
 }
 /* Logs Page CSS Ends */
+
+/* Layout CSS Starts */
+.fs-navbar {
+    padding: 1rem;
+    background-color: var(--primary);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: -1;
+    min-height: 3.5rem;
+}
+.fs-sidebar {
+    background-color: var(--primary);
+    width: 15rem;
+    color: #fff;
+}
+.fs-sidebar-top-left-container {
+    display: flex;
+    justify-content: space-between;
+    padding: .5rem;
+    align-items: center;
+}
+.logo-data {
+    display: flex;
+    align-items: center;
+}
+.logo-data h5 {
+    margin-bottom: 0;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+}
+.fs-sidebar-list {
+    padding: .5rem 0 .5rem .5rem;
+}
+.fs-sidebar-list-item {
+    list-style: none;
+    padding: .5rem 0;
+    font-size: 1rem;
+}
+.fs-sidebar-list-item.active {
+    background-color: #fff;
+    border-radius: 20px 0 0 20px;
+}
+.fs-sidebar-list-item.active a {
+    color: var(--primary);
+}
+.fs-sidebar-list-item a {
+    color: #fff;
+    text-decoration: none;
+}
+.list-item-icon {
+    margin: 0 10px;
+}
+.fs-main-content {
+    padding-top: 3.5rem;
+    width: calc(100% - 15rem);
+}
+.main-wrapper {
+    min-height: 100vh;
+}
+/* Layout CSS Ends */
 
 
 @media screen and (max-width: 640px) {
