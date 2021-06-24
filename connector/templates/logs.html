@@ -13,8 +13,42 @@
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
-    
-    <div class="content-wrapper logs-container">
+    <nav class="fs-navbar"></nav>
+    <div class="main-wrapper d-flex">
+        <div class="fs-sidebar">
+            <div class="fs-sidebar-top-left-container">
+                <div class="logo-data">
+                    <div class="logo">
+                        <img src="/static/images/logo.png" class="avatar avatar-sm mr-3">
+                    </div>
+                    <h5>Farmstack</h5>
+                </div>
+            </div>
+            <ul class="fs-sidebar-list">
+                <li class="fs-sidebar-list-item">
+                    <a href="/home">
+                        <span class="list-item-icon"><i class="fas fa-home"></i></span>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="fs-sidebar-list-item">
+                    <a href="/status">
+                        <span class="list-item-icon"><i class="fas fa-home"></i></span>
+                        <span>Status</span>
+                    </a>
+                </li>
+                <li class="fs-sidebar-list-item active">
+                    <a href="/log">
+                        <span class="list-item-icon"><i class="fas fa-home"></i></span>
+                        <span>Logs</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- End Sidebar-->
+        <!-- Start Content -->
+        <div class="fs-main-content">
+            <div class="content-wrapper logs-container">
         <div class="card">
             <div class="card-body">
                 <div class="page-title">
@@ -61,7 +95,10 @@
             </div>
         </div>
     </div>
-
+        </div>
+            <!-- content end-->
+    </div>
+    
     <script src="/static/js/jquery.js"></script>
     <script src="/static/js/popper.js"></script>
     <script src="/static/js/bootstrap.js"></script>

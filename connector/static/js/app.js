@@ -3,6 +3,16 @@ function changeTab(tabName = 'source') {
     selectTab.click();
 }
 
+function observeRoute() {
+    const currentLocation = window.location.href;
+    const links = document.querySelectorAll('.fs-sidebar-list-item a');
+
+    links.forEach((link) => {
+        (link.href == currentLocation) ? link.parentElement.classList.add('active') : link.parentElement.classList.remove('active') ;
+    });
+}
+
+document.addEventListener('load', observeRoute())
 
 $(document).ready(function(){
     $( "#consumer_name" ).change(function() {
