@@ -40,6 +40,8 @@ def start_setup():
     if not os_name.startswith('win'):
         if not os_name.startswith('linux'):
             activator_string = '''source venv/bin/activate ;'''
+        else:
+            activator_string = ""
     
     requirements = [" --upgrade pip","bcrypt", "certifi", "cffi", 
                     "chardet", "cryptography", "Django==2.2", "python_on_whales",
