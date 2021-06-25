@@ -211,6 +211,9 @@
     display: none;
 }
 /* Layout CSS Ends */
+.fs-link{
+    color: #d9b128;
+}
 
 
 @media screen and (max-width: 640px) {
