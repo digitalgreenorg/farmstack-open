@@ -83,7 +83,7 @@ $(document).ready(function(){
         }
         });
         
-        xhr.open("POST", "http://127.0.0.1:8000/connector_api/run_local/");
+        xhr.open("POST", "/connector_api/run_local/");
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.setRequestHeader("Cookie", "csrftoken=VDCAygOx52igW4LXYI2RtlrMlKTo3084NuirzSR0qxn0oKscJCguCaqnLlZdUKBU");
         

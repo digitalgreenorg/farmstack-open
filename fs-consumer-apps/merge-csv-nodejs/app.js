@@ -27,7 +27,7 @@ app.get('/', function (req, res) {
 app.post('/post_data', function (req, res) {
   try {
     var req_body = req.body;
-    req_body = JSON.parse(req.body);
+    // req_body = JSON.parse(req.body);
     // console.log('req_body ', JSON.stringify(req_body));
     req_body.forEach(item => {
       data.push(item)

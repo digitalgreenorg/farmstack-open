@@ -16,6 +16,8 @@ from django.views.decorators.csrf import csrf_exempt
 from subprocess import check_output
 from .serializers import ConnectorSerializer
 from django.conf import settings
+from django.urls import reverse, reverse_lazy
+from django.http import HttpResponseRedirect
 
 class CsrfExemptSessionAuthentication(SessionAuthentication):
 
@@ -44,8 +46,11 @@ class RunLocal(generics.RetrieveUpdateDestroyAPIView):
                 consumer_log_path = os.path.join(settings.FILES_DIR, "consumer/karaf.log")
                 provider_log_path = os.path.join(settings.FILES_DIR, "provider/karaf.log")
 
-                open(consumer_log_path, 'w').close()
-                open(provider_log_path, 'w').close()
+                try:
+                    open(consumer_log_path, 'w+').close()
+                    open(provider_log_path, 'w+').close()
+                except Exception as e:
+                    print(e)
             else:
                 messagae = "Could not create connectors successfully."
                 errors = create_connector.errors
@@ -130,7 +135,7 @@ class StopConnector(generics.RetrieveUpdateDestroyAPIView):
                 except:
                     pass
             
-            return redirect("http://127.0.0.1:8000/home/status/")
+            return HttpResponseRedirect(reverse('status'))
         except Exception as e:
             print(e)
             return Response(data={"message": "Connectors not deletd"}, status=status.HTTP_304_NOT_MODIFIED)

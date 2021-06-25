@@ -2,6 +2,13 @@ from django.urls import path
 from .views import home, start_connector, con_status, log
 
 urlpatterns = [
+
+    path(
+        "", 
+        home, 
+        name="default_home"
+    ),
+
     path(
         "home/", 
         home, 

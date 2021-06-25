@@ -66,9 +66,9 @@ def start_setup():
     #start server
     if not os.name.startswith('win'):
         if not os_name.startswith('linux'):
-            os.system("source venv/bin/activate;python connector/manage.py makemigrations;python connector/manage.py migrate;python connector/manage.py runserver 127.0.0.1:8000;")
+            os.system("source venv/bin/activate;python connector/manage.py makemigrations;python connector/manage.py migrate;python connector/manage.py runserver 0.0.0.0:8000;")
         else:
-            os.system("venv/bin/python connector/manage.py makemigrations;venv/bin/python connector/manage.py migrate;venv/bin/python connector/manage.py runserver 127.0.0.1:8000;")
+            os.system("venv/bin/python connector/manage.py makemigrations;venv/bin/python connector/manage.py migrate;venv/bin/python connector/manage.py runserver 0.0.0.0:8000;")
 
 if __name__ == "__main__":
     start_setup()

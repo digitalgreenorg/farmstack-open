@@ -23,12 +23,15 @@ def log(request):
 
     consumer_log_path = os.path.join(settings.FILES_DIR, "consumer/karaf.log")
     provider_log_path = os.path.join(settings.FILES_DIR, "provider/karaf.log")
+
     with open(consumer_log_path, "r") as ofs:
-        file_length = len(ofs.readlines())
-        consumer_logs_top_100 = ofs.readlines()[file_length-100:]
+        consumer_logs_top_100 = ofs.readlines()
+        file_length = len(consumer_logs_top_100)
+        consumer_logs_top_100 = consumer_logs_top_100[file_length-100:]
     
     with open(provider_log_path, "r") as ofs:
-        file_length = len(ofs.readlines())
-        provider_logs_top_100 = ofs.readlines()[file_length-100:]
-
+        provider_logs_top_100 = ofs.readlines()
+        file_length = len(provider_logs_top_100)
+        provider_logs_top_100 = provider_logs_top_100[file_length-100:]
+    
     return render(request, "logs.html", context={"provider_logs_top_100": provider_logs_top_100, "consumer_logs_top_100": consumer_logs_top_100})

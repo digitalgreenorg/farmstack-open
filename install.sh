@@ -15,7 +15,10 @@ then
         exit 1
     fi
 else
-    DOCKER_VERSION=$(docker-compose --version)\
+    echo "installing/upgrading pip"
+    sudo apt install python3-pip -y
+    
+    DOCKER_VERSION=$(docker-compose --version)
 
     echo "$DOCKER_VERSION"
     if [[ "$DOCKER_VERSION" =~ .*"docker-compose".* ]]
