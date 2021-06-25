@@ -15,6 +15,7 @@ from rest_framework.authentication import SessionAuthentication, BasicAuthentica
 from django.views.decorators.csrf import csrf_exempt
 from subprocess import check_output
 from .serializers import ConnectorSerializer
+from django.conf import settings
 
 class CsrfExemptSessionAuthentication(SessionAuthentication):
 
@@ -38,6 +39,13 @@ class RunLocal(generics.RetrieveUpdateDestroyAPIView):
             if create_connector.is_valid():
                 create_connector.save()
                 messagae = "Created connectors successfully."
+
+                # clear log files
+                consumer_log_path = os.path.join(settings.FILES_DIR, "consumer/karaf.log")
+                provider_log_path = os.path.join(settings.FILES_DIR, "provider/karaf.log")
+
+                open(consumer_log_path, 'w').close()
+                open(provider_log_path, 'w').close()
             else:
                 messagae = "Could not create connectors successfully."
                 errors = create_connector.errors
