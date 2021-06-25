@@ -107,4 +107,6 @@ dist
 
 .DS_Store
 
-venv
+venv/
+.venv/
+.setup_complete

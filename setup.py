@@ -2,6 +2,7 @@
 import os
 import subprocess
 import sys
+from pathlib import Path
 
 def start_setup():
 
@@ -35,11 +36,11 @@ def start_setup():
     # install virtualenv
     subprocess.call(["%s" % (pip_version), "install", "virtualenv"])
 
-    init_command = "%s -m venv venv" % (python_version)
+    init_command = "%s -m venv .venv" % (python_version)
 
     if not os_name.startswith('win'):
         if not os_name.startswith('linux'):
-            activator_string = '''source venv/bin/activate ;'''
+            activator_string = '''source .venv/bin/activate ;'''
         else:
             activator_string = ""
     
@@ -58,17 +59,27 @@ def start_setup():
             if not os_name.startswith('linux'):
                 activator_string += "pip install %s;" % (req)
             else:
-                activator_string += '''venv/bin/pip install %s;''' % (req)
+                activator_string += '''.venv/bin/pip install %s;''' % (req)
     
     print(activator_string)
     os.system(activator_string)
+    os.system("touch .setup_complete")
+    
+    # run_server()
+    
 
+def run_server():
+    print("Server starting...")
+    os_name = sys.platform
     #start server
     if not os.name.startswith('win'):
         if not os_name.startswith('linux'):
-            os.system("source venv/bin/activate;python connector/manage.py makemigrations;python connector/manage.py migrate;python connector/manage.py runserver 0.0.0.0:8000;")
+            os.system("source .venv/bin/activate;python fs-server/manage.py makemigrations;python fs-server/manage.py migrate;python fs-server/manage.py runserver 0.0.0.0:8000;")
         else:
-            os.system("venv/bin/python connector/manage.py makemigrations;venv/bin/python connector/manage.py migrate;venv/bin/python connector/manage.py runserver 0.0.0.0:8000;")
+            os.system(".venv/bin/python fs-server/manage.py makemigrations;.venv/bin/python fs-server/manage.py migrate;.venv/bin/python fs-server/manage.py runserver 0.0.0.0:8000;")
+
 
 if __name__ == "__main__":
-    start_setup()
+    if not (Path(".setup_complete").is_file() and Path(".venv").is_dir()):
+        start_setup()
+    run_server()
