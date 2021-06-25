@@ -60,7 +60,7 @@ The specification describes how the components get instantiated and wired togeth
         <constant>https://farmstack.digitalgreen.org/usageControlExample</constant>
       </setProperty>
       <setProperty name="containerUri">
-        <constant>https://hub.docker.com/layers/farmstack/merge-csv-nodejs/latest/images/sha256-1b903795a3d3f02967f864ed8f7b0074e283b9b08ce5a02000ce948a3e33bd03#8081</constant>
+        <constant>https://hub.docker.com/layers/farmstack/merge-csv-nodejs/latest/images/sha256-ad7988908b021d9474e4cb0888cf78dc52d22b881c7477a50b842e2c13c47faa#8081</constant>
       </setProperty>
       <!-- The Processor interface is used to implement consumers of message exchanges or to implement a Message Translator i.e process the message into correct format. -->
       

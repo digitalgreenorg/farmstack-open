@@ -56,7 +56,7 @@ class RunLocal(generics.RetrieveUpdateDestroyAPIView):
                 print(os.getpid())
                 os._exit(0)
             
-            time.sleep(5)
+            time.sleep(60)
             return Response(data={"message": "Connectors saved"}, status=status.HTTP_201_CREATED)
         except Exception as e:
             print(e)

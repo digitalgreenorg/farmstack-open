@@ -13,6 +13,16 @@
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
+
+    <div class="loader-container">
+        <div class="loader-itself">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </div>
+        <div class="loader-message">
+            <p>Setting up connectors...</p>
+        </div>
+    </div>
+    
     <nav class="fs-navbar"></nav>
     <div class="main-wrapper d-flex">
         <div class="fs-sidebar">
@@ -155,7 +165,7 @@
                                 </div>
                                 <div class="d-flex justify-content-between btn-container-right">
                                     <button type="button" class="btn btn-primary-2" onclick="changeTab('destination')">Prev</button>
-                                    <button type="button" id="submit" class="btn btn-primary-2">Set up connection</button>
+                                    <button type="button" id="submit" class="btn btn-primary-2" onclick="loaderDemo()">Set up connection</button>
                                 </div>
                             </div>
                         </div>
