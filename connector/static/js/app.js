@@ -8,7 +8,7 @@ function observeRoute() {
     const links = document.querySelectorAll('.fs-sidebar-list-item a');
 
     links.forEach((link) => {
-        (link.href == currentLocation) ? link.parentElement.classList.add('active') : link.parentElement.classList.remove('active') ;
+        (currentLocation.startsWith(link.href)) ? link.parentElement.classList.add('active') : link.parentElement.classList.remove('active') ;
     });
 }
 

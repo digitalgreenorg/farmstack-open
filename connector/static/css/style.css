@@ -100,7 +100,8 @@
 /* Layout CSS Starts */
 .fs-navbar {
     padding: 1rem;
-    background-color: var(--primary);
+    /* background-color: #242A31; */
+    background-color: #3d3d3f;
     position: absolute;
     top: 0;
     left: 0;
@@ -109,7 +110,7 @@
     min-height: 3.5rem;
 }
 .fs-sidebar {
-    background-color: var(--primary);
+    background-color: #F5F7F9;
     width: 15rem;
     color: #fff;
     transition: all 0.5s ease;
@@ -121,10 +122,14 @@
     padding: .55rem .5rem;
     align-items: center;
     min-height: 3.5rem;
+    background-color: #3d3d3f;
 }
 .logo-data {
     display: flex;
     align-items: center;
+}
+.logo-data img {
+    width: 14rem;
 }
 .logo-data h5 {
     margin-bottom: 0;
@@ -145,15 +150,19 @@
     position: relative;
     margin: 5px 0;
 }
+.fs-sidebar-list-item:hover {
+    background-color: #E6ECF1;
+}
 .fs-sidebar-list-item.active {
     background-color: #fff;
     border-radius: 20px 0 0 20px;
 }
 .fs-sidebar-list-item.active a {
-    color: var(--primary);
+    /* color: var(--primary); */
+    color: rgb(217, 177, 40);
 }
 .fs-sidebar-list-item a {
-    color: #fff;
+    color: black;
     text-decoration: none;
     display: block;
 }
