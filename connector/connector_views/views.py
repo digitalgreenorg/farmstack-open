@@ -20,18 +20,24 @@ def log(request):
     consumer_logs_top_100 = []
 
     print(settings.BASE_DIR)
-
+    
     consumer_log_path = os.path.join(settings.FILES_DIR, "consumer/karaf.log")
     provider_log_path = os.path.join(settings.FILES_DIR, "provider/karaf.log")
 
-    with open(consumer_log_path, "r") as ofs:
-        consumer_logs_top_100 = ofs.readlines()
-        file_length = len(consumer_logs_top_100)
-        consumer_logs_top_100 = consumer_logs_top_100[file_length-100:]
+    try:
+        with open(consumer_log_path, "r") as ofs:
+            consumer_logs_top_100 = ofs.readlines()
+            file_length = len(consumer_logs_top_100)
+            consumer_logs_top_100 = consumer_logs_top_100[file_length-100:]
+    except:
+        print("folder not creater for logs")
     
-    with open(provider_log_path, "r") as ofs:
-        provider_logs_top_100 = ofs.readlines()
-        file_length = len(provider_logs_top_100)
-        provider_logs_top_100 = provider_logs_top_100[file_length-100:]
-    
+    try:
+        with open(provider_log_path, "r") as ofs:
+            provider_logs_top_100 = ofs.readlines()
+            file_length = len(provider_logs_top_100)
+            provider_logs_top_100 = provider_logs_top_100[file_length-100:]
+    except:
+        print("folder not creater for logs")
+
     return render(request, "logs.html", context={"provider_logs_top_100": provider_logs_top_100, "consumer_logs_top_100": consumer_logs_top_100})

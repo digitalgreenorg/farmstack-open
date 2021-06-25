@@ -17,8 +17,11 @@ then
         exit 1
     fi
 else
+    echo "install time module"
+    sudo apt install ntpdate
+    sudo ntpdate -s time.nist.gov
+    
     DOCKER_VERSION=$(docker-compose --version; echo $?)
-
     DOCKER_V=$(docker version; echo $?)
 
     echo "installing/upgrading pip"

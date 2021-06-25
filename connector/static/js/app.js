@@ -49,6 +49,13 @@ document.addEventListener('load', observeRoute());
 resizeObserver.observe(domBody);
 
 $(document).ready(function(){
+    window.onload = function() {
+        local_url = new URL(window.location)
+        local_url = local_url["origin"].split(":")
+        local_url = local_url[0] + ":" + local_url[1] + ":8081/"
+        $("#consumer_href").attr("href", local_url)
+    };
+
     $( "#consumer_name" ).change(function() {
         destination_name = $("#consumer_name").val()
         $('#destination_name').html(destination_name);
