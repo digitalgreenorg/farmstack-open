@@ -38,7 +38,10 @@ def start_setup():
     init_command = "%s -m venv venv" % (python_version)
 
     if not os_name.startswith('win'):
-        activator_string = '''source venv/bin/activate ;'''
+        if not os_name.startswith('linux'):
+            activator_string = '''source venv/bin/activate ;'''
+        else:
+            activator_string = '''venv/bin/pip ;'''
     
     requirements = [" --upgrade pip","bcrypt", "certifi", "cffi", 
                     "chardet", "cryptography", "Django==2.2", "python_on_whales",
@@ -48,20 +51,23 @@ def start_setup():
                     "sqlparse", "uritemplate==3.0.1", "urllib3==1.26.4", 
                     "django-cors-headers"]
 
-    subprocess.call(["pwd"])
-    print("path is above")
-    
     os.system(init_command)
 
     for req in requirements:
         if not os_name.startswith('win'):
-            activator_string += "%s install %s;" % (pip_version, req)
+            if not os_name.startswith('linux'):
+                activator_string += "pip install %s;" % (req)
+            else:
+                activator_string = '''venv/bin/pip install %s;''' % (req)
     
     os.system(activator_string)
 
     #start server
     if not os.name.startswith('win'):
-        os.system("source venv/bin/activate;python connector/manage.py makemigrations;python connector/manage.py migrate;python connector/manage.py runserver 127.0.0.1:8000;")
+        if not os_name.startswith('linux'):
+            os.system("source venv/bin/activate;python connector/manage.py makemigrations;python connector/manage.py migrate;python connector/manage.py runserver 127.0.0.1:8000;")
+        else:
+            os.system("venv/bin/python connector/manage.py makemigrations;venv/bin/python connector/manage.py migrate;venv/bin/python connector/manage.py runserver 127.0.0.1:8000;")
 
 if __name__ == "__main__":
     start_setup()
