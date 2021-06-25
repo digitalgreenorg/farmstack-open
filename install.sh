@@ -4,9 +4,9 @@ echo "$OSTYPE"
 
 if [[ "$OSTYPE" =~ "darwin".* ]]
 then
-    DOCKER_VERSION=$(docker-compose --version; echo $?)
+    DOCKER_VERSION=$(docker-compose --version)
 
-    DOCKER_V = $(docker version; echo $?)
+    DOCKER_V = $(docker version)
 
     echo "$DOCKER_VERSION"
     if [[ "$DOCKER_VERSION" =~ .*"docker-compose".* ]]
@@ -17,6 +17,10 @@ then
         exit 1
     fi
 else
+    DOCKER_VERSION=$(docker-compose --version; echo $?)
+
+    DOCKER_V=$(docker version; echo $?)
+
     echo "installing/upgrading pip"
     sudo apt install python3-pip -y
 
