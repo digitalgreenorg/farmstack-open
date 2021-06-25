@@ -58,8 +58,9 @@ def start_setup():
             if not os_name.startswith('linux'):
                 activator_string += "pip install %s;" % (req)
             else:
-                activator_string = '''venv/bin/pip install %s;''' % (req)
+                activator_string += '''venv/bin/pip install %s;''' % (req)
     
+    print(activator_string)
     os.system(activator_string)
 
     #start server
