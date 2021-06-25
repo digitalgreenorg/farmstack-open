@@ -22,6 +22,7 @@ else
     DOCKER_V=$(docker version; echo $?)
 
     echo "installing/upgrading pip"
+    sudo apt install python3-venv -y
     sudo apt install python3-pip -y
 
     echo "$DOCKER_V"
@@ -34,7 +35,7 @@ else
         sudo sh get-docker.sh
         sudo groupadd docker
         sudo usermod -aG docker $USER
-        newgrp docker
+        # newgrp docker
         echo "docker installation done"
     fi
 
