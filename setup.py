@@ -49,6 +49,7 @@ def start_setup():
                     "django-cors-headers"]
 
     subprocess.call(["pwd"])
+    print("path is above")
     
     os.system(init_command)
 
