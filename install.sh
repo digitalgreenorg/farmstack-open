@@ -4,9 +4,9 @@ echo "$OSTYPE"
 
 if [[ "$OSTYPE" =~ "darwin".* ]]
 then
-    DOCKER_VERSION=$(docker-compose --version)
+    DOCKER_VERSION=$(docker-compose --version; echo $?)
 
-    DOCKER_V = $(docker version)
+    DOCKER_V = $(docker version; echo $?)
 
     echo "$DOCKER_VERSION"
     if [[ "$DOCKER_VERSION" =~ .*"docker-compose".* ]]
@@ -21,8 +21,10 @@ else
     sudo apt install python3-pip -y
 
     echo "$DOCKER_V"
-    if [[ "$DOCKER_V" =~ .*"not found".* ]]
+    if [[ "$DOCKER_V" =~ "0".* ]]
     then
+        echo "docker found"
+    else
         echo "installing docker"
         curl -fsSL https://get.docker.com -o get-docker.sh
         sudo sh get-docker.sh
@@ -30,15 +32,13 @@ else
         sudo usermod -aG docker $USER
         newgrp docker
         echo "docker installation done"
-    else
-        echo "docker found"
     fi
 
     
     DOCKER_VERSION=$(docker-compose --version)
 
     echo "$DOCKER_VERSION"
-    if [[ "$DOCKER_VERSION" =~ .*"docker-compose".* ]]
+    if [[ "$DOCKER_VERSION" =~ "0".* ]]
     then
         echo "docker compose found"
     else
