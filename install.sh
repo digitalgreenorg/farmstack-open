@@ -36,14 +36,14 @@ PYTHON_VERSION=$(python -V)
 
 if [[ "$PYTHON_VERSION" =~ .*"Python 3".* ]]
 then
-    python farmstack-open/setup.py
+    python setup.py
 else
 
     PYTHON_VERSION=$(python3 -V)
     echo "$PYTHON_VERSION"
     if [[ "$PYTHON_VERSION" =~ .*"Python 3".* ]]
     then
-        python3 farmstack-open/setup.py
+        python3 setup.py
     else
         echo "Invalid python versions found install python3.0 or greater and try again"
     fi

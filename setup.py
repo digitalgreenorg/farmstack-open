@@ -48,6 +48,8 @@ def start_setup():
                     "sqlparse", "uritemplate==3.0.1", "urllib3==1.26.4", 
                     "django-cors-headers"]
 
+    subprocess.call(["pwd"])
+    
     os.system(init_command)
 
     for req in requirements:
