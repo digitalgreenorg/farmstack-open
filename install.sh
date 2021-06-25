@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 echo "$OSTYPE"
 
@@ -17,6 +17,7 @@ then
 else
     DOCKER_VERSION=$(docker-compose --version)\
 
+    echo "$DOCKER_VERSION"
     if [[ "$DOCKER_VERSION" =~ .*"docker-compose".* ]]
     then
         echo "docker compose found"
@@ -35,12 +36,14 @@ PYTHON_VERSION=$(python -V)
 
 if [[ "$PYTHON_VERSION" =~ .*"Python 3".* ]]
 then
-    python setup.py
+    python farmstack-open/setup.py
 else
+
     PYTHON_VERSION=$(python3 -V)
+    echo "$PYTHON_VERSION"
     if [[ "$PYTHON_VERSION" =~ .*"Python 3".* ]]
     then
-        python3 setup.py
+        python3 farmstack-open/setup.py
     else
         echo "Invalid python versions found install python3.0 or greater and try again"
     fi

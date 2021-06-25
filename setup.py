@@ -1,3 +1,4 @@
+#!/bin/bash
 import os
 import subprocess
 import sys
@@ -51,7 +52,7 @@ def start_setup():
 
     for req in requirements:
         if not os_name.startswith('win'):
-            activator_string += "pip install %s;" % (req)
+            activator_string += "%s install %s;" % (pip_version, req)
     
     os.system(activator_string)
 
