@@ -1,6 +1,7 @@
 // Start REST server
 const express = require('express');
 const bodyParser = require('body-parser');
+const request = require('request');
 
 const app = express();
 var data = []
@@ -25,10 +26,10 @@ app.get('/', function (req, res) {
 
 // Receive Message
 app.post('/post_data', function (req, res) {
+
   try {
     var req_body = req.body;
-    // req_body = JSON.parse(req.body);
-    // console.log('req_body ', JSON.stringify(req_body));
+    console.log('req_body ', JSON.stringify(req_body));
     req_body.forEach(item => {
       data.push(item)
     });
