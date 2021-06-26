@@ -38,11 +38,12 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="name">Provider Name</label>
-                                    <input type="text" class="form-control" placeholder="provider-1" id="provider_name" name="connector_name">
+                                    <input type="text" class="form-control" placeholder="" id="provider_name" name="connector_name">
+                                    <small id="providerHelp" class="form-text text-muted">Example: provider1, provider-project-1</small>
                                     {% comment %} <input hidden type="text" class="form-control" name="status" value="active">
                                     <input hidden type="text" class="form-control" name="connector_type" value="provider"> {% endcomment %}
                                 </div>
-                                <div class="d-flex justify-content-end btn-container-right">
+                                <div class="d-flex justify-content-end btn-container-right mt-2">
                                     <button type="button" class="btn btn-primary-2" onclick="changeTab('destination')">Next</button>
                                 </div>
                             </div>
@@ -61,21 +62,22 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="name">Consumer Name</label>
-                                    <input type="text" class="form-control" placeholder="consumer-1" id="consumer_name" name="name">
+                                    <input type="text" class="form-control" placeholder="" id="consumer_name" name="name">
+                                    <small id="consumerHelp" class="form-text text-muted">Example: consumer1, consumer-app-1</small>
                                     {% comment %} <input hidden type="text" class="form-control" name="status" value="active">
                                     <input hidden type="text" class="form-control" name="connector_type" value="consumer"> {% endcomment %}
                                 </div>
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label for="port">Port</label>
                                     <input type="text" class="form-control disbaled-control" placeholder="8081" name="port" disabled>
-                                </div>
+                                </div> -->
                                 <!-- <div class="form-group">
                                     <label for="destination_poth">Git Repo</label>
                                     <input type="text" class="form-control disbaled-control" placeholder="https://github.com/digitalgreenorg/farmstack-open" name="destination_poth" disabled>
                                 </div> -->
-                                <div class="d-flex justify-content-between btn-container-right">
-                                    <button type="button" class="btn btn-primary-2" onclick="changeTab()">Prev</button>
-                                    <button type="button" class="btn btn-primary-2" onclick="changeTab('connection')">Next</button>
+                                <div class="d-flex  justify-content-end btn-container-right mt-2">
+                                    <button type="button" class="btn btn-light mr-2" onclick="changeTab()">Previous</button>
+                                    <button type="button" class="btn btn-primary-2 ml-2" onclick="changeTab('connection')">Next</button>
                                 </div>
                             </div>
                         </div>
@@ -84,7 +86,7 @@
                     <div class="tab-pane fade" id="connection" role="tabpanel" aria-labelledby="connection-tab">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="mb-0">Set up connection.</h5>
+                                <h5 class="mb-0">Confirm Connection</h5>
                             </div>
                         </div>
                         <div class="card">
@@ -102,18 +104,18 @@
                                         <div class="data-item-title"><strong>Name: </strong></div>
                                         <div class="data-item-details" id="destination_name"></div>
                                     </div>
-                                    <div class="data-item">
+                                    <!-- <div class="data-item">
                                         <div class="data-item-title"><strong>Port: </strong></div>
                                         <div class="data-item-details">8081</div>
-                                    </div>
+                                    </div> -->
                                     <!-- <div class="data-item">
                                         <div class="data-item-title"><strong>Git Repo: </strong></div>
                                         <div class="data-item-details">https://github.com/digitalgreenorg/farmstack-open</div>
                                     </div> -->
                                 </div>
-                                <div class="d-flex justify-content-between btn-container-right">
-                                    <button type="button" class="btn btn-primary-2" onclick="changeTab('destination')">Prev</button>
-                                    <button type="button" id="submit" class="btn btn-primary-2" onclick="loaderDemo()">Set up connection</button>
+                                <div class="d-flex justify-content-end btn-container-right mt-2">
+                                    <button type="button" class="btn btn-light mr-2" onclick="changeTab('destination')">Previous</button>
+                                    <button type="button" id="submit" class="btn btn-primary-2 ml-2" onclick="loaderDemo()">Set up connection</button>
                                 </div>
                             </div>
                         </div>

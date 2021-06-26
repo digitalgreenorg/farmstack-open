@@ -103,14 +103,14 @@ class StopConnector(generics.RetrieveUpdateDestroyAPIView):
                     if "provider-core" in output_string:
                         # redirect to status page as connectors already running
                         if pid == 0:                   
-                            subprocess.call(["./stop_provider.sh"])
+                            subprocess.call(["./scripts/stop_provider.sh"])
                             print(os.getpid())
                             os._exit(0)
                         connector_object = Connector.objects.get(pk=connector_uuid)
                         connector_object.delete()
                 except:
                     pass
-                print("stop provider instnace")
+                print("stop provider instance")
             else:
                 # delete consumer instance from database
                 try:
@@ -127,7 +127,7 @@ class StopConnector(generics.RetrieveUpdateDestroyAPIView):
                     if "consumer-core" in output_string:
                         # redirect to status page as connectors already running
                         if pid == 0:                   
-                            subprocess.call(["./stop_consumer.sh"])
+                            subprocess.call(["./scripts/stop_consumer.sh"])
                             print(os.getpid())
                             os._exit(0)
                         connector_object = Connector.objects.get(pk=connector_uuid)
@@ -138,4 +138,4 @@ class StopConnector(generics.RetrieveUpdateDestroyAPIView):
             return HttpResponseRedirect(reverse('status'))
         except Exception as e:
             print(e)
-            return Response(data={"message": "Connectors not deletd"}, status=status.HTTP_304_NOT_MODIFIED)
+            return Response(data={"message": "Connectors not deleted"}, status=status.HTTP_304_NOT_MODIFIED)
