@@ -15,5 +15,5 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Running setup script
-        run: python3 setup.py
+      # - name: Running setup script
+        # run: python3 setup.py
