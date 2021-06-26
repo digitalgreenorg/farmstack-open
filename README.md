@@ -1,5 +1,6 @@
 # Introduction
-![build](https://github.com/digitalgreenorg/farmstack-open/actions/workflows/example_uc.yml/badge.svg)
+
+![](https://github.com/digitalgreenorg/farmstack-open/actions/workflows/example_uc.yml/badge.svg)
 
 ![](docs/.gitbook/assets/farmstack_horizontal_color_transparent-bg.png)
 
@@ -15,20 +16,12 @@ Farmstack is required because:
 ## Quick start
 
 ```bash
-git clone https://github.com/digitalgreenorg/farmstack-open.git
-cd farmstack-open
-./run.sh
+curl https://raw.githubusercontent.com/digitalgreenorg/farmstack-open/UI_backend_integration/install.sh > fs-install.sh && bash fs-install.sh
 ```
 
-In browser, open: [https://localhost:8081/](https://localhost:8081/)
+In browser, open: [https://localhost:8000/](https://localhost:8000/) and follow the instructions
 
-To stop the containers
-
-```bash
-./stop.sh
-```
-
-@TODO - Add extra ip instructions
+For more details see [local deployment](docs/deploying-farmstack/local-deployment.md).
 
 ## Features
 
