@@ -16,4 +16,4 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Running setup script
-        run: pyton3 setup.py
+        run: python3 setup.py
