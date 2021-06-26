@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+        <!-- Start Content -->
+        <div class="fs-main-content">
+            <div class="content-wrapper logs-container">
+        <div class="card">
+            <div class="card-body">
+                <div class="page-title">
+                    <h5 class="title">Sync History</h5>
+                    <a type="button" class="btn btn-primary-2 btn-icon" href="/log/">
+                        <span class="btn-inner--icon"><i class="fas fa-sync-alt"></i></span>
+                        <span class="btn-inner--text">Sync Now</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body logs-content-wrapper">
+                <div class="logs-sync-details">
+                    <div class="detail-item source-details">
+                        <div class="data-item">
+                            <div class="data-item-title"><strong>Last Sync: </strong></div>
+                            <div class="data-item-details" id="last-sync-timestamp" onload="setTime()"></div>
+                            <script type="text/javascript">
+                                $("#last-sync-timestamp").html(new Date())
+                             </script>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <p><strong>Log file: </strong>fs-configs/usage-control-example/provider/logs/karaf.log</p>
+                </div>
+                <div class="data-item-title"><strong>Provider Logs: </strong></div>
+                <p class="logs-json-content">
+                    {% for log in provider_logs_top_100 %}
+                        {{log}}
+                        </br>
+                    {% endfor %}
+                </p>
+                <div class="text-center">
+                    <p><strong>Log file: </strong>fs-configs/usage-control-example/consumer/logs/karaf.log</p>
+                </div>
+                <div class="data-item-title"><strong>Consumer Logs: </strong></div>
+                <p class="logs-json-content">
+                    {% for log in consumer_logs_top_100 %}
+                        {{log}}
+                        </br>
+                    {% endfor %}
+                </p>
+            </div>
+        </div>
+    </div>
+        </div>
+            <!-- content end-->
+    {% endblock content %}

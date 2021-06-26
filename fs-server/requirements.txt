@@ -1,0 +1,17 @@
+bcrypt
+certifi
+cffi
+chardet
+cryptography
+Django==2.2
+djangorestframework==3.12.4
+idna
+pycparser
+PyNaCl
+pytz
+PyYAML
+requests
+six
+sqlparse
+urllib3==1.26.3
+django-cors-headers

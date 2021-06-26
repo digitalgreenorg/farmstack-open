@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Home Page</title>
+    <link href='css/home.css' rel="stylesheet" />
+</head>
+<body>
+    <table id="data">
+        <thead>
+            <% var keys = Object.keys(data[0]) %>
+            <%keys.forEach((item) => { %>
+                <td><%= item %></td>
+            <%})%>
+        </thead>
+        <tbody>
+            <% data.forEach((item, index) => {
+                var counter = 0 %>
+                <tr>
+                <% while (counter < keys.length) { %>
+                    <td><%=item[keys[counter]]%></td>
+                    <%counter += 1%>
+                <% } %>
+                </tr>
+            <% }) %>        
+        </tbody>
+    </table>
+</body>
+</html>	

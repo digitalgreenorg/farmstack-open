@@ -106,3 +106,7 @@ dist
 .tern-port
 
 .DS_Store
+
+venv/
+.venv/
+.setup_complete
