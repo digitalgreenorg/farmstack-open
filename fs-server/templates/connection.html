@@ -1,78 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Farmstack</title>
+{% extends "base.html" %}
 
-    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700,800|Roboto:400,500,700" rel="stylesheet">
-
-    <link rel="stylesheet" href="/static/css/theme.css">
-    <link rel="stylesheet" href="/static/css/external-styles.css">
-    <link rel="stylesheet" href="/static/css/style.css">
-</head>
-<body>
-
-    <div class="loader-container">
-        <div class="loader-itself">
-            <i class="fas fa-circle-notch fa-spin"></i>
-        </div>
-        <div class="loader-message">
-            <p>Setting up connectors...</p>
-        </div>
-    </div>
-    
-    <nav class="fs-navbar"></nav>
-    <div class="main-wrapper d-flex">
-        <div class="fs-sidebar">
-            <div class="fs-sidebar-top-left-container">
-                <div class="logo-data">
-                    <img src="/static/images/logo.png" />
-                </div>
-            </div>
-            <ul class="fs-sidebar-list">
-                <li class="fs-sidebar-list-item">
-                    <a href="/home">
-                        <span class="list-item-icon"><i class="fas fa-home"></i></span>
-                        <span>Dashboard</span>
-                    </a>
-                </li>
-                <li class="fs-sidebar-list-item active">
-                    <a id="consumer_call" href="/status">
-                        <span class="list-item-icon"><i class="fas fa-info-circle"></i></span>
-                        <span>Status</span>
-                    </a>
-                </li>
-                <li class="fs-sidebar-list-item">
-                    <a href="/log">
-                        <span class="list-item-icon"><i class="fas fa-file-alt"></i></span>
-                        <span>Logs</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <!-- End Sidebar-->
+{% block content %}
         <!-- Start Content -->
-        <div class="fs-main-content fs-tab">
-            <div class="content-wrapper connection-container">
-                <ul class="nav nav-pills nav-fill flex-column flex-sm-row" id="myTab" role="tablist">
+        <div class="fs-main-content fs-tab container">
+            <div class="content-wrapper connection-container w-75 mx-auto">
+                <h2 class="text-center mb-4 mt-2">Setup your Connector</h2>
+                <ul class="nav nav-pills nav-fill flex-column flex-sm-row mb-2" id="myTab" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link mb-sm-3 active" id="source-tab" data-toggle="tab" href="#source" role="tab" aria-controls="source" aria-selected="true">
                             <!-- <span class="nav-link-icon"><i class="fas fa-circle"></i></span> -->
-                            <span>Create a source</span>
+                            <span id="tab"><span id="number">1</span>Create a provider</span>
                         </a>
                     </li>
+                    <i class="fas fa-arrow-right fa-lg next-arrow"></i>
                     <li class="nav-item">
                         <a class="nav-link mb-sm-3" id="destination-tab" data-toggle="tab" href="#destination" role="tab" aria-controls="destination" aria-selected="false">
                             <!-- <span class="nav-link-icon"><i class="fas fa-circle"></i></span> -->
-                            <span>Create a destination</span>
+                            <span id="tab"><span id="number">2</span>Create a consumer</span>
                         </a>
                     </li>
+                    <i class="fas fa-arrow-right fa-lg next-arrow"></i>
                     <li class="nav-item">
                         <a class="nav-link mb-sm-3" id="connection-tab" data-toggle="tab" href="#connection" role="tab" aria-controls="connection" aria-selected="false">
                             <!-- <span class="nav-link-icon"><i class="fas fa-circle"></i></span> -->
-                            <span>Set up connection</span>
+                            <span id="tab"><span id="number">3</span>Set up connection</span>
                         </a>
                     </li>
                 </ul>
@@ -80,14 +31,14 @@
                     <div class="tab-pane fade show active" id="source" role="tabpanel" aria-labelledby="source-tab">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="mb-0">Set up source.</h5>
+                                <h5 class="mb-0">Set up provider.</h5>
                             </div>
                         </div>
                         <div class="card">
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="name">Name - Pick a name to help you identify the source</label>
-                                    <input type="text" class="form-control" placeholder="Name" id="provider_name" name="connector_name">
+                                    <label for="name">Provider Name</label>
+                                    <input type="text" class="form-control" placeholder="provider-1" id="provider_name" name="connector_name">
                                     {% comment %} <input hidden type="text" class="form-control" name="status" value="active">
                                     <input hidden type="text" class="form-control" name="connector_type" value="provider"> {% endcomment %}
                                 </div>
@@ -103,14 +54,14 @@
                     <div class="tab-pane fade" id="destination" role="tabpanel" aria-labelledby="destination-tab">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="mb-0">Set up destination.</h5>
+                                <h5 class="mb-0">Set up consumer.</h5>
                             </div>
                         </div>
                         <div class="card">
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="name">Name - Pick a name to help you identify the destination</label>
-                                    <input type="text" class="form-control" placeholder="Name" id="consumer_name" name="name">
+                                    <label for="name">Consumer Name</label>
+                                    <input type="text" class="form-control" placeholder="consumer-1" id="consumer_name" name="name">
                                     {% comment %} <input hidden type="text" class="form-control" name="status" value="active">
                                     <input hidden type="text" class="form-control" name="connector_type" value="consumer"> {% endcomment %}
                                 </div>
@@ -118,10 +69,10 @@
                                     <label for="port">Port</label>
                                     <input type="text" class="form-control disbaled-control" placeholder="8081" name="port" disabled>
                                 </div>
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label for="destination_poth">Git Repo</label>
                                     <input type="text" class="form-control disbaled-control" placeholder="https://github.com/digitalgreenorg/farmstack-open" name="destination_poth" disabled>
-                                </div>
+                                </div> -->
                                 <div class="d-flex justify-content-between btn-container-right">
                                     <button type="button" class="btn btn-primary-2" onclick="changeTab()">Prev</button>
                                     <button type="button" class="btn btn-primary-2" onclick="changeTab('connection')">Next</button>
@@ -139,14 +90,14 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="detail-item source-details">
-                                    <h6>Source:</h6>
+                                    <h6>Provider:</h6>
                                     <div class="data-item">
                                         <div class="data-item-title"><strong>Name: </strong></div>
                                         <div class="data-item-details" id="source_name"></div>
                                     </div>
                                 </div>
                                 <div class="detail-item destination-details">
-                                    <h6>Destination:</h6>
+                                    <h6>Consumer:</h6>
                                     <div class="data-item">
                                         <div class="data-item-title"><strong>Name: </strong></div>
                                         <div class="data-item-details" id="destination_name"></div>
@@ -155,10 +106,10 @@
                                         <div class="data-item-title"><strong>Port: </strong></div>
                                         <div class="data-item-details">8081</div>
                                     </div>
-                                    <div class="data-item">
+                                    <!-- <div class="data-item">
                                         <div class="data-item-title"><strong>Git Repo: </strong></div>
                                         <div class="data-item-details">https://github.com/digitalgreenorg/farmstack-open</div>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div class="d-flex justify-content-between btn-container-right">
                                     <button type="button" class="btn btn-primary-2" onclick="changeTab('destination')">Prev</button>
@@ -167,16 +118,9 @@
                             </div>
                         </div>
                     </div>
+                    <div class="alert alert-light text-danger invisible mt-2" role="alert" id="alert"></div>
             </div>
             <!-- content-wrapper end-->
         </div>
             <!-- content end-->
-    </div>
-    
-    <script src="/static/js/jquery.js"></script>
-    <script src="/static/js/popper.js"></script>
-    <script src="/static/js/bootstrap.js"></script>
-    <script src="/static/js/fontawesome.js"></script>
-    <script src="/static/js/app.js"></script>
-</body>
-</html>
+{% endblock content %}

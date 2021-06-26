@@ -1,6 +1,9 @@
 function changeTab(tabName = 'source') {
     const selectTab = document.getElementById(`${tabName}-tab`);
     selectTab.click();
+    var alertElement = $("#alert")
+    alertElement.addClass("invisible")
+    alertElement.removeClass("visible")
 }
 
 function observeRoute() {
@@ -44,42 +47,63 @@ function loaderDemo() {
     // }, 3000);
 }
 
+function viewData() {
+    local_url = new URL(window.location)
+    local_url = local_url["origin"].split(":")
+    local_url = local_url[0] + ":" + local_url[1] + ":8081/"
+    window.open(local_url)
+}
+
 const domBody = document.querySelector('body');
 document.addEventListener('load', observeRoute());
 resizeObserver.observe(domBody);
 
 $(document).ready(function(){
-    window.onload = function() {
-        local_url = new URL(window.location)
-        local_url = local_url["origin"].split(":")
-        local_url = local_url[0] + ":" + local_url[1] + ":8081/"
-        $("#consumer_href").attr("href", local_url)
-    };
 
     $( "#consumer_name" ).change(function() {
-        destination_name = $("#consumer_name").val()
+        destination_name = $("#consumer_name").val().trim()
         $('#destination_name').html(destination_name);
     });
 
     $( "#provider_name" ).change(function() {
-        source_name = $("#provider_name").val()
+        source_name = $("#provider_name").val().trim()
         $('#source_name').html(source_name);
     });
 
     $( "#submit" ).click(function() {
+        var providerName = $("#provider_name").val()
+        var consumerName = $("#consumer_name").val()
+        var alertStr = ""
+        if(providerName.length === 0){
+            alertStr = "Please enter a valid provider name";
+        }
+        if(consumerName.length === 0){
+            alertStr = "Please enter valid consumer name";
+        }
+        var alertElement = $("#alert")
+        if(alertStr){
+            alertElement.html(alertStr)
+            alertElement.addClass("visible")
+            alertElement.removeClass("invisible")
+            const loaderContainer = document.querySelector('.loader-container');
+            loaderContainer.style.display = 'none';
+            return;
+        } else{
+            alertElement.addClass("invisible")
+            alertElement.removeClass("visible")
+        }
         var data = JSON.stringify([
             {
-              "name": $("#provider_name").val(),
+              "name": providerName,
               "connector_type": "provider",
               "status": "active"
             },
             {
-              "name": $("#consumer_name").val(),
+              "name": consumerName,
               "connector_type": "consumer",
               "status": "active"
             }
         ]);
-          
         var xhr = new XMLHttpRequest();
         xhr.withCredentials = true;
         

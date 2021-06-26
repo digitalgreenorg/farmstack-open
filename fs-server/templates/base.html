@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmstack</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700,800|Roboto:400,500,700" rel="stylesheet">
+    <link rel="icon" type="image/ico" href="/static/images/favicon.ico"/>
+
+    <link rel="stylesheet" href="/static/css/theme.css">
+    <link rel="stylesheet" href="/static/css/external-styles.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+
+    <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/popper.js"></script>
+    <script src="/static/js/bootstrap.js"></script>
+    <script src="/static/js/fontawesome.js"></script>
+</head>
+<body>
+    
+    <nav class="fs-navbar"></nav>
+    <div class="loader-container">
+        <div class="loader-itself">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </div>
+        <div class="loader-message">
+            <p>Setting up connectors...</p>
+        </div>
+    </div>
+    <div class="main-wrapper d-flex">
+        <div class="fs-sidebar">
+            <div class="fs-sidebar-top-left-container">
+                <div class="logo-data">
+                    <a href="/"><img src="/static/images/logo.png" /></a>
+                </div>
+            </div>
+            <ul class="fs-sidebar-list">
+                <li class="fs-sidebar-list-item">
+                    <a href="/home">
+                        <span class="list-item-icon"><i class="fas fa-home"></i></span>
+                        <span>New Connector</span>
+                    </a>
+                </li>
+                <li class="fs-sidebar-list-item">
+                    <a id="consumer_call" href="/status">
+                        <span class="list-item-icon"><i class="fas fa-info-circle"></i></span>
+                        <span>Status</span>
+                    </a>
+                </li>
+                <li class="fs-sidebar-list-item">
+                    <a href="/log">
+                        <span class="list-item-icon"><i class="fas fa-file-alt"></i></span>
+                        <span>Logs</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- End Sidebar-->
+    {% block content %}{% endblock content %}
+    </div>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

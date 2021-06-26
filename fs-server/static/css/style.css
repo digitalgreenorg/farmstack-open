@@ -70,18 +70,38 @@
     margin-bottom: 5px;
     background-color: #eee;
 }
+.connection-container .next-arrow {
+    margin: 2px;
+    color: var(--primary);
+}
 .connection-container .nav-pills .nav-link {
     padding: 0;
     border: none;
 }
-.connection-container .nav-link span {
+.connection-container .nav-link #tab {
     border: 1px solid var(--primary);
-    padding: 5px 10px;
+    padding: 5px 10px 5px 0px;
     border-radius: 20px;
 }
-.connection-container .nav-link.active span {
+.connection-container .nav-link.active #tab {
     background-color: var(--primary);
     color: #fff;
+}
+.connection-container .nav-link #number {
+    background-color: var(--primary);
+    padding: 5px 12px 5px 10px;
+    margin-right: 10px;
+    border-radius: 50%;
+    color: #fff;
+}
+
+.connection-container .nav-link.active #number {
+    background-color: #fff;
+    padding: 5px 12px 5px 10px;
+    margin-right: 10px;
+    border-radius: 50%;
+    border-color: var(--primary);
+    color: var(--primary);
 }
 /* Connection Page CSS Ends */
 
@@ -143,7 +163,7 @@
 .fs-sidebar-list {
     padding: .5rem 0 .5rem .5rem;
 }
-.fs-sidebar-list-item {
+.fs-sidebar-list-item a{
     list-style: none;
     padding: .5rem;
     font-size: 1rem;
@@ -152,6 +172,7 @@
 }
 .fs-sidebar-list-item:hover {
     background-color: #E6ECF1;
+    border-radius: 20px 0 0 20px;
 }
 .fs-sidebar-list-item.active {
     background-color: #fff;
@@ -215,6 +236,9 @@
     color: #d9b128;
 }
 
+.fs-link:hover{
+    color: #91751a;
+}
 
 @media screen and (max-width: 640px) {
     .page-title {
