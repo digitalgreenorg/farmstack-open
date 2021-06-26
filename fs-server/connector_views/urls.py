@@ -1,12 +1,11 @@
 from django.urls import path
 from .views import home, start_connector, con_status, log
-
+from django.shortcuts import redirect
 urlpatterns = [
 
     path(
         "", 
-        home, 
-        name="default_home"
+        lambda req: redirect('/home/')
     ),
 
     path(

@@ -65,7 +65,7 @@ class RunLocal(generics.RetrieveUpdateDestroyAPIView):
                 
             # create a background process
             if pid == 0:
-                subprocess.call(["./run.sh"])
+                subprocess.call(["./scripts/examples/run-uc.sh"])
                 print(os.getpid())
                 os._exit(0)
             
