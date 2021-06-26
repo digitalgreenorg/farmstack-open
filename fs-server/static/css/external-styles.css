@@ -19,6 +19,8 @@ a, a:hover {
     background-color: var(--primary);
     border: 1px solid transparent;
     color: #fff;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 .btn-primary-2:hover, .btn-primary-2:active {
     background-color: var(--primary-hover);

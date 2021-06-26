@@ -59,9 +59,6 @@ document.addEventListener('load', observeRoute());
 resizeObserver.observe(domBody);
 
 $(document).ready(function(){
-    window.onload = function() {
-        
-    };
 
     $( "#consumer_name" ).change(function() {
         destination_name = $("#consumer_name").val().trim()

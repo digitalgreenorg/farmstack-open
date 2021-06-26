@@ -21,7 +21,10 @@
                     <div class="detail-item source-details">
                         <div class="data-item">
                             <div class="data-item-title"><strong>Last Sync: </strong></div>
-                            <div class="data-item-details">23-06-2021</div>
+                            <div class="data-item-details" id="last-sync-timestamp" onload="setTime()"></div>
+                            <script type="text/javascript">
+                                $("#last-sync-timestamp").html(new Date())
+                             </script>
                         </div>
                     </div>
                 </div>
