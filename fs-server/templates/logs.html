@@ -1,56 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FarmStack</title>
+{% extends "base.html" %}
 
-    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700,800|Roboto:400,500,700" rel="stylesheet">
-
-    <link rel="stylesheet" href="/static/css/theme.css">
-    <link rel="stylesheet" href="/static/css/external-styles.css">
-    <link rel="stylesheet" href="/static/css/style.css">
-</head>
-<body>
-   <div class="loader-container">
-        <div class="loader-itself">
-            <i class="fas fa-circle-notch fa-spin"></i>
-        </div>
-        <div class="loader-message">
-            <p>Loading</p>
-        </div>
-    </div>
-    <nav class="fs-navbar"></nav>
-    <div class="main-wrapper d-flex">
-        <div class="fs-sidebar">
-            <div class="fs-sidebar-top-left-container">
-                <div class="logo-data">
-                    <img src="/static/images/logo.png" />
-                </div>
-            </div>
-            <ul class="fs-sidebar-list">
-                <li class="fs-sidebar-list-item">
-                    <a href="/home">
-                        <span class="list-item-icon"><i class="fas fa-home"></i></span>
-                        <span>Dashboard</span>
-                    </a>
-                </li>
-                <li class="fs-sidebar-list-item active">
-                    <a id="consumer_call" href="/status">
-                        <span class="list-item-icon"><i class="fas fa-info-circle"></i></span>
-                        <span>Status</span>
-                    </a>
-                </li>
-                <li class="fs-sidebar-list-item">
-                    <a href="/log">
-                        <span class="list-item-icon"><i class="fas fa-file-alt"></i></span>
-                        <span>Logs</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <!-- End Sidebar-->
+{% block content %}
         <!-- Start Content -->
         <div class="fs-main-content">
             <div class="content-wrapper logs-container">
@@ -58,10 +8,10 @@
             <div class="card-body">
                 <div class="page-title">
                     <h5 class="title">Sync History</h5>
-                    <button type="button" class="btn btn-primary-2 btn-icon">
+                    <a type="button" class="btn btn-primary-2 btn-icon" href="/log/">
                         <span class="btn-inner--icon"><i class="fas fa-sync-alt"></i></span>
-                        <span class="btn-inner--text"><a href="/log/">Sync Now</a></span>
-                    </button>
+                        <span class="btn-inner--text">Sync Now</span>
+                    </a>
                 </div>
             </div>
         </div>
@@ -100,12 +50,4 @@
     </div>
         </div>
             <!-- content end-->
-    </div>
-    
-    <script src="/static/js/jquery.js"></script>
-    <script src="/static/js/popper.js"></script>
-    <script src="/static/js/bootstrap.js"></script>
-    <script src="/static/js/fontawesome.js"></script>
-    <script src="/static/js/app.js"></script>
-</body>
-</html>
+    {% endblock content %}
