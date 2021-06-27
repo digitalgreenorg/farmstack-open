@@ -6,7 +6,7 @@
 
 FarmStack is a reference implementation of an open and interoperable data sharing protocol in agriculture sector.
 
-Farmstack is required because:
+FarmStack is required because:
 
 * Relevant farmer profile including farmer activity not available
 * Lack of trust on misuse or under utilisation of data with a centralised data warehouse
@@ -22,6 +22,11 @@ curl https://raw.githubusercontent.com/digitalgreenorg/farmstack-open/UI_backend
 In browser, open: [https://localhost:8000/](https://localhost:8000/) and follow the instructions
 
 For more details see [local deployment](docs/deploying-farmstack/local-deployment.md).
+
+Requirements:
+
+* Python3.6+
+* Docker Desktop \(for MacOS and Windows with wsl2\).
 
 ## Features
 
