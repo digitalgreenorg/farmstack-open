@@ -16,7 +16,7 @@ FarmStack is required because:
 ## Quick start
 
 ```bash
-curl https://raw.githubusercontent.com/digitalgreenorg/farmstack-open/UI_backend_integration/install.sh > fs-install.sh && bash fs-install.sh
+curl https://raw.githubusercontent.com/digitalgreenorg/farmstack-open/main/scripts/install.sh > fs-install.sh && bash fs-install.sh
 ```
 
 In browser, open: [https://localhost:8000/](https://localhost:8000/) and follow the instructions

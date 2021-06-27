@@ -9,7 +9,7 @@
 * Running this command will install Docker automatically on Linux, if it is not available.
 
 ```bash
-curl https://raw.githubusercontent.com/digitalgreenorg/farmstack-open/UI_backend_integration/install.sh > fs-install.sh && bash fs-install.sh
+curl https://raw.githubusercontent.com/digitalgreenorg/farmstack-open/main/scripts/install.sh > fs-install.sh && bash fs-install.sh
 ```
 
 ## Deployment on Linux, MacOS and Windows \(with WSL2\)

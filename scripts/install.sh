@@ -56,7 +56,7 @@ else
     fi
 fi
 
-git clone -b UI_backend_integration https://github.com/digitalgreenorg/farmstack-open.git
+git clone https://github.com/digitalgreenorg/farmstack-open.git
 
 cd farmstack-open
 
