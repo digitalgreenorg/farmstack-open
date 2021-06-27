@@ -14,6 +14,9 @@ curl https://raw.githubusercontent.com/digitalgreenorg/farmstack-open/UI_backend
 
 ## Deployment on Linux, MacOS and Windows \(with WSL2\)
 
+* Install Docker on your system according to OS:
+  * [Docker Desktop for MacOS and Windows](https://www.docker.com/products/docker-desktop)
+  * [Docker install on Ubuntu](https://docs.docker.com/engine/install/ubuntu/)
 * Clone the repository and open it.
 * Run the setup.py file using python3
 
