@@ -1,29 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Blueprint provides a dependency injection framework for OSGi. 
-The specification describes how the components get instantiated and wired together to form a running module. -->
-<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns:camel="http://camel.apache.org/schema/blueprint" xsi:schemaLocation="
- http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
- http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd">
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:camel="http://camel.apache.org/schema/spring"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+          http://camel.apache.org/schema/spring
+          http://camel.apache.org/schema/spring/camel-spring.xsd">
 
-  <!-- Define TLS configuration for data provider -->
-  <camel:sslContextParameters id="clientSslContext">
-    <camel:keyManagers keyPassword="password">
-      <!-- KeyManager decides which authentication credentials should be sent to the remote host for authentication during SSL handshake-->
-      <!-- create and load keyManager  -->
-      <!-- params - algorithm, keyPassword, keyStore, provider  -->
-      <camel:keyStore resource="etc/provider-keystore.p12" password="password"/>
-    </camel:keyManagers>
-    <camel:trustManagers>
-      <!-- TrustManager determines whether remote connection should be trusted or not i.e. whether remote party is who it claims to-->
-      <!-- create and load trustManager  -->
-      <!-- params - algorithm, keyManager, keyStore, provider  -->
-      <camel:keyStore resource="etc/truststore.p12" password="password"/>
-    </camel:trustManagers>
-  </camel:sslContextParameters>
+    <camel:sslContextParameters id="clientSslContext" certAlias="1.0.1">
+        <camel:keyManagers keyPassword="password">
+            <camel:keyStore resource="etc/provider-keystore.p12" password="password"/>
+        </camel:keyManagers>
+        <camel:trustManagers>
+            <camel:keyStore resource="etc/truststore.p12" password="password"/>
+        </camel:trustManagers>
+    </camel:sslContextParameters>
 
-  <!-- The following defines a single bean called TypeExtractionProcessor implemented by the POJO de.fhg.aisec.ids.camel.idscp2.processors.IdsMessageTypeExtractionProcessor -->
+    <!-- The following defines a single bean called TypeExtractionProcessor implemented by the POJO de.fhg.aisec.ids.camel.idscp2.processors.IdsMessageTypeExtractionProcessor -->
   <bean id="TypeExtractionProcessor" class="de.fhg.aisec.ids.camel.idscp2.processors.IdsMessageTypeExtractionProcessor" />
   
   <!-- The following defines a single bean called ContractOfferCreationProcessor implemented by the POJO de.fhg.aisec.ids.camel.idscp2.processors.ContractOfferCreationProcessor -->
@@ -35,22 +28,11 @@ The specification describes how the components get instantiated and wired togeth
   <!-- The following defines a single bean called ResourceUpdateCreationProcessor implemented by the POJO de.fhg.aisec.ids.camel.idscp2.processors.ResourceUpdateCreationProcessor -->
   <bean id="ResourceUpdateCreationProcessor" class="de.fhg.aisec.ids.camel.idscp2.processors.ResourceUpdateCreationProcessor" />
 
-  <camelContext xmlns="http://camel.apache.org/schema/blueprint">
-    <!-- creates a rest endpoint -->
-    <!-- bindingMode - Configures the binding mode for the producer. If set to anything other than 'off' the producer will try to convert the body of the incoming message from inType to the json or xml, and the response from json or xml to outType. There are 5 enums and the value can be one of: auto, off, json, xml, json_xml -->
-    <!-- componet - camel-netty-http, camel-jetty, camel-servlet, camel-undertow -->
-    <restConfiguration component="jetty" bindingMode="off" port="8989" enableCORS="true"/>
-
-    <!-- Create a rest path -->
-    <!-- <rest path="/postUSImg">
-      <description>User rest service</description>
-      <post>
-        <to uri="direct:update"/>
-      </post>
-    </rest> -->
-
-    <!-- create route -->
-    <route>
+    <camelContext xmlns="http://camel.apache.org/schema/spring">
+        <dataFormats>
+            <json id="jack" library="Jackson" prettyPrint="true"/>
+        </dataFormats>
+        <route>
       <!-- timer creates a loop -->
       <!-- repeatCount - Specifies a maximum limit of number of fires. So if you set it to 1, the timer will only fire once. If you set it to 5, it will only fire five times. A value of zero or negative means fire forever. -->
       <from uri="timer://contractRequest?repeatCount=1" />
@@ -122,6 +104,6 @@ The specification describes how the components get instantiated and wired togeth
       </setHeader>
     </route>
 
-  </camelContext>
+    </camelContext>
 
-</blueprint>
+</beans>
