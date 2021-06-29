@@ -3,7 +3,7 @@ services:
 
   # The core platform, mounts docker control socket and route definition into the image
   provider-core:
-    image: fraunhoferaisec/trusted-connector-core:${EXAMPLE_TAG:-4.0.0}
+    image: farmstack/trusted-connector:${EXAMPLE_TAG:-latest}
     tty: true
     stdin_open: true
     volumes:
@@ -14,7 +14,9 @@ services:
       - ./example-provider-routes.xml:/root/deploy/example-provider-routes.xml
       - ../../fs-assets/sample-data/sample_farmer_data1.csv:/root/deploy/sample_data1.csv
       - ../../fs-assets/sample-data/sample_farmer_data2.csv:/root/deploy/sample_data2.csv
-    
+      - ./allow-all-flows.pl:/root/deploy/allow-all-flows.pl
+      - ./settings.mapdb:/root/etc/settings.mapdb
+
     # Uncomment to run the provider & consumer nodes on separate server 
     # replace x.x.x.x with the consumer ip address
     # extra_hosts:
