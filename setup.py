@@ -50,7 +50,7 @@ def start_setup():
                     "idna==2.10", "paramiko==2.7.2", "pycparser", 
                     "PyNaCl", "pytz", "PyYAML", "requests", "six", 
                     "sqlparse", "uritemplate==3.0.1", "urllib3==1.26.4", 
-                    "django-cors-headers"]
+                    "django-cors-headers", "docker"]
 
     os.system(init_command)
 

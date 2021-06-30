@@ -4,6 +4,7 @@ import requests
 import os
 import time
 import subprocess
+import docker
 import json, csv
 from django import contrib, urls
 from django.shortcuts import render, redirect
@@ -86,55 +87,18 @@ class StopConnector(generics.RetrieveUpdateDestroyAPIView):
     
     def get(self, request, con_type, connector_uuid, *args, **kwargs):
         try:
+            docker_client = docker.from_env()
+            containers = docker_client.containers.list()
 
-            if con_type == "provider":
-                # delete provider instance from database
-                try:
-                    # create background process
+            for container in containers:
+                if con_type in container.name:
+                    container.stop()
+                    container.remove()
                     try:
-                        pid = os.fork()
+                        Connector.objects.get(pk=connector_uuid).delete()
                     except Exception as e:
                         print(e)
 
-                    # check if any provider connector running
-                    docker_outout = check_output(["docker", "container", "ls", "-a"])
-                    output_string = docker_outout.decode('utf-8')
-                    # check for consumer and provider core, if running stop it, else return to status
-                    if "provider-core" in output_string:
-                        # redirect to status page as connectors already running
-                        if pid == 0:                   
-                            subprocess.call(["./scripts/stop_provider.sh"])
-                            print(os.getpid())
-                            os._exit(0)
-                        connector_object = Connector.objects.get(pk=connector_uuid)
-                        connector_object.delete()
-                except:
-                    pass
-                print("stop provider instance")
-            else:
-                # delete consumer instance from database
-                try:
-                    # create background process
-                    try:
-                        pid = os.fork()
-                    except Exception as e:
-                        print(e)
-
-                    # check if any consumer connector running
-                    docker_outout = check_output(["docker", "container", "ls", "-a"])
-                    output_string = docker_outout.decode('utf-8')
-                    # check for consumer and provider core, if running stop it, else return to status
-                    if "consumer-core" in output_string:
-                        # redirect to status page as connectors already running
-                        if pid == 0:                   
-                            subprocess.call(["./scripts/stop_consumer.sh"])
-                            print(os.getpid())
-                            os._exit(0)
-                        connector_object = Connector.objects.get(pk=connector_uuid)
-                        connector_object.delete()
-                except:
-                    pass
-            
             return HttpResponseRedirect(reverse('status'))
         except Exception as e:
             print(e)
