@@ -94,7 +94,10 @@ class StopConnector(generics.RetrieveUpdateDestroyAPIView):
                 if con_type in container.name:
                     container.stop()
                     container.remove()
-                    Connector.objects.get(pk=connector_uuid).delete()
+                    try:
+                        Connector.objects.get(pk=connector_uuid).delete()
+                    except Exception as e:
+                        print(e)
 
             return HttpResponseRedirect(reverse('status'))
         except Exception as e:

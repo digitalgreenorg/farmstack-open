@@ -47,6 +47,14 @@ function loaderDemo() {
     // }, 3000);
 }
 
+function loaderDeleteDemo() {
+    const loaderContainer = document.querySelector('.loader-container-delete');
+    loaderContainer.style.display = 'block';
+    // setTimeout(() => {
+    //     loaderContainer.style.display = 'none';
+    // }, 3000);
+}
+
 function viewData() {
     local_url = new URL(window.location)
     local_url = local_url["origin"].split(":")

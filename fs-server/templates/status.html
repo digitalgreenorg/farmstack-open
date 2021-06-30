@@ -38,7 +38,7 @@
                                     <td>{{connector.status}}</td>
                                     <td>{{connector.connector_type}}</td>
                                     <td>
-                                        <a href="/connector_api/delete/{{connector.connector_type}}/{{connector.id}}/" data-toggle="tooltip" title="Delete {{connector.connector_type}} {{connector.name}}"><i class="fs-link fas fa-trash"></i></a>
+                                        <a id="delete_connectors" onclick="loaderDeleteDemo()" href="/connector_api/delete/{{connector.connector_type}}/{{connector.id}}/" data-toggle="tooltip" title="Delete {{connector.connector_type}} {{connector.name}}"><i class="fs-link fas fa-trash"></i></a>
                                     </td>
                                 </tr>
                                 <tr class="table-divider"></tr>
