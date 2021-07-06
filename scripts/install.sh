@@ -38,6 +38,7 @@ else
         sudo sh get-docker.sh
         sudo groupadd docker
         sudo usermod -aG docker $USER
+        sudo systemctl restart docker
         # newgrp docker
         echo "docker installation done"
     fi
