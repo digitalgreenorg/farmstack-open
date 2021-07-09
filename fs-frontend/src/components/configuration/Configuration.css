@@ -1,3 +1,7 @@
+.fs-configuration-container{
+    padding: 1em 0;
+}
+
 .step-change-btn-wrapper {
     margin-top: 1em;
     display: flex;

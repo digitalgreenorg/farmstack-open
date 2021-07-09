@@ -1,3 +1,7 @@
+.fs-flow-component {
+    padding: 1em 0;
+}
+
 .fs-flow-content {
     display: flex;
     flex-direction: column;
@@ -6,4 +10,19 @@
 
 .fs-flow-content p {
     margin: .5em 0;
+}
+
+.card.h_100_percent .content:last-child {
+    flex-grow: 25;
+    background-color: #eee;
+}
+
+.fs-flow-component .rodal-dialog {
+    width: 80vw !important;
+    height: 100vh !important;
+}
+
+.fs-flow-component .rodal-close {
+    top: 6px !important;
+    right: 8px !important;
 }

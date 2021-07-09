@@ -20,7 +20,7 @@ function SampleTab() {
             sampleName: 'ABC',
             sampleTimestamp: 7823842384734,
             sampleDesc: 'Lorem ipsum dolor sit amet.'
-        },
+        }
     ];
     return (
         <>

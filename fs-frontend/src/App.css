@@ -1,3 +1,50 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --fs_primary: #d9b128;
+    --fs_secondary: #3d3d3f;
+}
+
+.fs-primary {
+    color: var(--fs_primary) !important;
+}
+
+.fs-secondary {
+    color: var(--fs_secondary) !important;
+}
+
+.fs-primary-btn {
+    color: #fff !important;
+    background-color: var(--fs_primary) !important;
+    border: 1px solid var(--fs_primary) !important;
+    margin-bottom: .5em;
+}
+
+.fs-primary-outline-btn {
+    color: var(--fs_primary) !important;
+    background-color: #fff !important;
+    border: 1px solid var(--fs_primary) !important;
+    margin-bottom: .5em;
+}
+
+.fs-secondary-btn {
+    color: #fff !important;
+    background-color: var(--fs_secondary) !important;
+    border: 1px solid var(--fs_secondary) !important;
+    margin-bottom: .5em;
+}
+
+.fs-secondary-outline-btn {
+    color: var(--fs_secondary) !important;
+    background-color: #fff !important;
+    border: 1px solid var(--fs_secondary) !important;
+    margin-bottom: .5em;
+}
+
 .cursor__pointer {
     cursor: pointer;
 }
@@ -14,4 +61,18 @@
 .icon.info__icon {
     color: gray;
     margin-left: 5px;
+}
+
+.h_100_percent {
+    height: 100%;
+}
+
+.fs_mb_10 {
+    margin-bottom: 10px !important;
+}
+
+/* ----------- GENERAL CSS RULES ENDS ---------- */
+
+.fs-main-container {
+    height: 100vh;
 }
