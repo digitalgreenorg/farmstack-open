@@ -21,8 +21,8 @@ def log(request):
 
     print(settings.BASE_DIR)
     
-    consumer_log_path = os.path.join(settings.FILES_DIR, "consumer/karaf.log")
-    provider_log_path = os.path.join(settings.FILES_DIR, "provider/karaf.log")
+    consumer_log_path = os.path.join(settings.FILES_DIR, "consumer/app.json")
+    provider_log_path = os.path.join(settings.FILES_DIR, "provider/app.json")
 
     try:
         with open(consumer_log_path, "r") as ofs:

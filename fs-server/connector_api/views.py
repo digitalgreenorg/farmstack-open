@@ -44,8 +44,8 @@ class RunLocal(generics.RetrieveUpdateDestroyAPIView):
                 messagae = "Created connectors successfully."
 
                 # clear log files
-                consumer_log_path = os.path.join(settings.FILES_DIR, "consumer/karaf.log")
-                provider_log_path = os.path.join(settings.FILES_DIR, "provider/karaf.log")
+                consumer_log_path = os.path.join(settings.FILES_DIR, "consumer/app.json")
+                provider_log_path = os.path.join(settings.FILES_DIR, "provider/app.json")
 
                 try:
                     open(consumer_log_path, 'w+').close()
