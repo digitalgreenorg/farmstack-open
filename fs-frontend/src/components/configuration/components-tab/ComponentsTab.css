@@ -1,0 +1,34 @@
+.fs-conf-tab-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fs-conf-tab-container > div {
+    flex: .3;
+    text-align: center;
+    padding: 1em;
+}
+
+.fs-conf-tab-component {
+    border: 1px solid transparent;
+}
+
+.fs-conf-tab-component > .ui.header {
+    margin-top: .5em;
+}
+
+.fs-conf-tab-component > svg {
+    width: 64px;
+    fill: #38b000;
+}
+
+.fs-conf-tab-component:hover {
+    border: 1px solid lightgray;
+}
+
+@media screen and (max-width: 640px) {
+    .fs-conf-tab-container {
+        display: block;
+    }
+}

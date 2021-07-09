@@ -1,0 +1,17 @@
+.cursor__pointer {
+    cursor: pointer;
+}
+
+.pos__rel {
+    position: relative;
+}
+
+.mandate__star {
+    color: red;
+    font-size: 10px;
+}
+
+.icon.info__icon {
+    color: gray;
+    margin-left: 5px;
+}

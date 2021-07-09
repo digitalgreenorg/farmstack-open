@@ -1,0 +1,51 @@
+.fs-sample-container {
+    border: 1px solid lightgray;
+}
+
+.fs-sample-overview-header {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.fs-sample-overview-header > .button {
+    margin-right: 10px;
+}
+
+.fs-sample-overview-header > h3 {
+    margin: 0;
+}
+
+.fs-sample-header {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.fs-sample-content {
+    display: flex;
+    padding: 0 10px;
+}
+
+.fs-sample-secondary-header {
+    padding: 0 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.fs-sample-secondary-header .secondary-header-content > * {
+    margin-right: 5px;
+}
+
+.fs-sample-content > div {
+    margin-right: 1em;
+}
+
+.fs-sample-name {
+    color: gray;
+    font-size: 10px;
+}
+
+.fs-sample-timestamp {
+    color: lightgray;
+}

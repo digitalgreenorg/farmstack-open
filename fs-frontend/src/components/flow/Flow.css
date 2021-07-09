@@ -1,0 +1,9 @@
+.fs-flow-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.fs-flow-content p {
+    margin: .5em 0;
+}
