@@ -27,7 +27,7 @@ function Flow() {
                                     <button className="ui circular icon button fs-primary-outline-btn fs_mb_10" onClick={e => setOpen(true)}>
                                         <i aria-hidden="true" className="plus icon" />
                                     </button>
-                                    <p>Add the initial trigger</p>
+                                    <p>Add the producer</p>
                                 </div>
                             </div>
                         </div>

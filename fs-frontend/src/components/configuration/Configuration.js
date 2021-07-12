@@ -80,22 +80,13 @@ function Configuration({getConfigData}) {
 
                                     <div className="ui attached segment">
                                         {
-                                            (() => {
-                                                switch(activePane) {
-                                                    case 'components':
-                                                        return <ComponentsTab sendCompData={getComponentTabData}/>;
-                                                        case 'credentials':
-                                                            return <CredentialsTab />;
-                                                        case 'input':
-                                                            return <InputTab />;
-                                                        case 'sample':
-                                                            return <SampleTab />;
-                                                        case 'summary':
-                                                            return <SummaryTab />;
-                                                    default:
-                                                        return <></>
-                                                }
-                                            })()
+                                            {
+                                                components: <ComponentsTab sendCompData={getComponentTabData}/>,
+                                                credentials: <CredentialsTab />,
+                                                input: <InputTab />,
+                                                sample: <SampleTab />,
+                                                summary: <SummaryTab />
+                                            }[activePane]
                                         }
                                         {
                                             ['input', 'sample', 'summary'].includes(activePane) && (
