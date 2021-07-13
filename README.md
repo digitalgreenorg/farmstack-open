@@ -27,6 +27,7 @@ Requirements:
 
 * Python3.6+
 * Docker Desktop \(for MacOS and Windows with wsl2\).
+* Docker and Docker Compose for ubuntu
 
 ## Features
 
