@@ -1,0 +1,10 @@
+.header-container {
+    height: 60px;
+    padding: 10px 20px;
+    display: flex;
+    background-color: var(--fs_secondary);
+}
+
+.header-logo {
+    width: 20vw;
+}

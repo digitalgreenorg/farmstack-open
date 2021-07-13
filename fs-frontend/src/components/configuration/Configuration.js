@@ -9,27 +9,13 @@ import SummaryTab from './summary-tab/SummaryTab';
 function Configuration({getConfigData}) {
     const [activePane, setActivePane] = useState('components');
 
-    const getComponentTabData = (componentData) => {
-        // console.log('Component Tab Data: ', componentData);
-        setActivePane('credentials');
+    const switchToNextStep = (stepName) => {
+        setActivePane(stepName);
     }
 
-    const clickChangeTab = () => {
-        if (['input', 'sample', 'summary'].includes(activePane)) {
-            switch(activePane) {
-                case 'input':
-                    setActivePane('sample');
-                    break;
-                case 'sample':
-                    setActivePane('summary');
-                    break;
-                case 'summary':
-                    getConfigData({closeModal: true});
-                    break;
-                default:
-                    break;
-            }
-        }
+    const finishedChanges = () => {
+        setActivePane('components')
+        getConfigData({closeModal: true});
     }
 
     return (
@@ -81,19 +67,17 @@ function Configuration({getConfigData}) {
                                     <div className="ui attached segment">
                                         {
                                             {
-                                                components: <ComponentsTab sendCompData={getComponentTabData}/>,
+                                                components: <ComponentsTab nextStep={switchToNextStep}/>,
                                                 credentials: <CredentialsTab />,
-                                                input: <InputTab />,
-                                                sample: <SampleTab />,
+                                                input: <InputTab nextStep={switchToNextStep}/>,
+                                                sample: <SampleTab nextStep={switchToNextStep}/>,
                                                 summary: <SummaryTab />
                                             }[activePane]
                                         }
                                         {
-                                            ['input', 'sample', 'summary'].includes(activePane) && (
+                                            ['summary'].includes(activePane) && (
                                                 <div className="step-change-btn-wrapper">
-                                                    <button className="ui icon button" onClick={clickChangeTab}>
-                                                        {activePane !== 'summary' ? 'Continue' : 'Finish step'}
-                                                    </button>
+                                                    <button className="ui icon button" onClick={finishedChanges}>Finish step</button>
                                                 </div>
                                             )
                                         }

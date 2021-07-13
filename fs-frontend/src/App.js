@@ -3,14 +3,14 @@ import 'rodal/lib/rodal.css';
 import './App.css';
 
 import Flow from './components/flow/Flow';
+import Header from './components/header/Header';
 
 function App() {
   return (
-      <div className="App">
-          <div className="fs-main-container">
-              <Flow />
-          </div>
-      </div>
+        <div className="fs-main-container">
+            <Header />
+            <Flow />
+        </div>
   );
 }
 

@@ -1,5 +1,6 @@
 .fs-flow-component {
     padding: 1em 0;
+    height: calc(100% - 60px);
 }
 
 .fs-flow-content {
@@ -25,4 +26,25 @@
 .fs-flow-component .rodal-close {
     top: 6px !important;
     right: 8px !important;
+}
+
+.node-ico-wrapper, .spreadsheet-ico-wrapper {
+    border: 1px solid #38b000;
+    border-radius: 50%;
+    background-color: #fff;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 12px;
+}
+
+.spreadsheet-ico-wrapper {
+    padding: 10px 11px;
+}
+
+.spreadsheet-ico-wrapper > svg {
+    width: 24px;
+    fill: #38b000;
 }

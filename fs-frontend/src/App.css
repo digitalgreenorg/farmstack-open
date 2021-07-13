@@ -71,6 +71,13 @@
     margin-bottom: 10px !important;
 }
 
+.vertical__divider_5 {
+    border-right: 1px solid #ccc;
+    height: 5rem;
+    width: 0;
+    margin: 8px auto;
+}
+
 /* ----------- GENERAL CSS RULES ENDS ---------- */
 
 .fs-main-container {

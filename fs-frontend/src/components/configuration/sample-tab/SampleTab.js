@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './SampleTab.css';
+import { useConfiguration } from '../../flow/Flow';
 
-function SampleTab() {
+function SampleTab({nextStep}) {
+    const {updateConfigurationData} = useConfiguration();
+
+    const updateSampleData = (sampleData) => {
+        setSelctedSample(sampleData)
+        updateConfigurationData({sample: sampleData});
+    }
+
+    const [selectedSample, setSelctedSample] = useState(null)
+
     const samples = [
         {
             key: 'sample1',
@@ -68,7 +78,7 @@ function SampleTab() {
                 {
                     samples.map(sample => {
                         return (
-                            <div className="ui vertical segment" key={sample.key}>
+                            <div className={`ui vertical segment cursor__pointer fs-sample ${selectedSample && selectedSample.key === sample.key ? 'active' : ''}`} key={sample.key} onClick={e => updateSampleData(sample)}>
                                 <div className="fs-sample-content">
                                     <div className="fs-sample-name">{sample.sampleName}</div>
                                     <div className="fs-sample-timestamp">{sample.sampleTimestamp}</div>
@@ -78,6 +88,9 @@ function SampleTab() {
                         )
                     })
                 }
+            </div>
+            <div className="step-change-btn-wrapper">
+                <button className="ui icon button" onClick={e => nextStep('summary')}>Continue</button>
             </div>
         </>
     )

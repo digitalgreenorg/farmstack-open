@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useConfiguration } from '../../flow/Flow';
 
 /**
-    * TODO: Custom Select need to be made
+    * TODO: Custom Select design need to be made
 */
-function InputTab() {
+function InputTab({nextStep}) {
+    const {updateConfigurationData} = useConfiguration();
+
     const inputFields = {
         spreadsheet: [
             { key: 'ss1', value: 'tech_res', text: 'DG Tech Team Survey (Responses)' },
@@ -29,6 +32,19 @@ function InputTab() {
         ]
     };
 
+    const [formData, setFormData] = useState({
+        spreadsheet: inputFields.spreadsheet[0].value,
+        worksheet: inputFields.worksheet[0].value,
+        dimension: inputFields.dimension[0].value,
+        header: inputFields.header[0].value,
+        all: inputFields.all[0].value
+    });
+
+    const updateInputData = () => {
+        updateConfigurationData({input: formData});
+        nextStep('sample');
+    }
+
     return (
         <>
             <form className="ui form">
@@ -40,7 +56,7 @@ function InputTab() {
                             <i aria-hidden="true" className="info circle icon info__icon" />
                         </span>
                     </label>
-                    <select>
+                    <select value={formData.spreadsheet} onChange={e => setFormData({...formData, spreadsheet: e.target.value})}>
                         {inputFields.spreadsheet.map(option => {
                             return (
                                 <option key={option.key} value={option.value}>
@@ -58,7 +74,7 @@ function InputTab() {
                             <i aria-hidden="true" className="info circle icon info__icon" />
                         </span>
                     </label>
-                    <select>
+                    <select value={formData.worksheet} onChange={e => setFormData({...formData, worksheet: e.target.value})}>
                         {inputFields.worksheet.map(option => {
                             return (
                                 <option key={option.key} value={option.value}>
@@ -70,7 +86,7 @@ function InputTab() {
                 </div>
                 <div className="field">
                     <label>Dimension&nbsp;<sup className="mandate__star">*</sup></label>
-                    <select>
+                    <select value={formData.dimension} onChange={e => setFormData({...formData, dimension: e.target.value})}>
                         {inputFields.dimension.map(option => {
                             return (
                                 <option key={option.key} value={option.value}>
@@ -82,7 +98,7 @@ function InputTab() {
                 </div>
                 <div className="field">
                     <label>Use first row or columns as a header&nbsp;<sup className="mandate__star">*</sup></label>
-                    <select>
+                    <select value={formData.header} onChange={e => setFormData({...formData, header: e.target.value})}>
                         {inputFields.header.map(option => {
                             return (
                                 <option key={option.key} value={option.value}>
@@ -94,7 +110,7 @@ function InputTab() {
                 </div>
                 <div className="field">
                     <label>Select all data&nbsp;<sup className="mandate__star">*</sup></label>
-                    <select>
+                    <select value={formData.all} onChange={e => setFormData({...formData, all: e.target.value})}>
                         {inputFields.all.map(option => {
                             return (
                                 <option key={option.key} value={option.value}>
@@ -105,6 +121,10 @@ function InputTab() {
                     </select>
                 </div>
             </form>
+
+            <div className="step-change-btn-wrapper">
+                <button className="ui icon button" onClick={updateInputData}>Continue</button>
+            </div>
         </>
     )
 }

@@ -1,7 +1,13 @@
 import React from 'react';
 import './CredentialsTab.css';
+import { useConfiguration } from '../../flow/Flow';
 
 function CredentialsTab() {
+    const {updateConfigurationData} = useConfiguration();
+
+    const updateCredentialsData = (credData) => {
+        updateConfigurationData({credentials: credData});
+    }
     return (
         <>
             <div className="fs-credentials-tab-content">
@@ -27,7 +33,7 @@ function CredentialsTab() {
                         <div className="header">You don't have any credentials yet.</div>
                         <div className="meta">Lorem ipsum dolor sit amet consectetur adipisicing elit. Error, facere?</div>
                     </div>
-                    <button className="ui icon button">
+                    <button className="ui icon button" onClick={() => updateCredentialsData('Credentials Added')}>
                         <i aria-hidden="true" className="plus icon" />&nbsp;
                         Add New Credential
                     </button>
