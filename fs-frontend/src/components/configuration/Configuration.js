@@ -75,7 +75,7 @@ function Configuration({getConfigData}) {
                                             }[activePane]
                                         }
                                         {
-                                            ['summary'].includes(activePane) && (
+                                            (activePane === 'summary') && (
                                                 <div className="step-change-btn-wrapper">
                                                     <button className="ui icon button" onClick={finishedChanges}>Finish step</button>
                                                 </div>

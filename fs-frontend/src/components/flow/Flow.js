@@ -1,8 +1,8 @@
 import React, {createContext, useContext, useState} from 'react';
 import './Flow.css';
-import Rodal from 'rodal';
 
 import Configuration from '../configuration/Configuration';
+import Modal from '../Modal/Modal';
 
 const ConfigurationContext = createContext();
 
@@ -11,7 +11,7 @@ export function useConfiguration() {
 }
 
 function Flow() {
-    const [open, setOpen] = useState(false);
+    const [modalOpen, setModalOpen] = useState(false);
     const [finishedConfiguration, setfinishedConfiguration] = useState(false);
     // Keeping all the steps data in a single place.
     const [configurationData, setConfigurationData] = useState({
@@ -25,7 +25,7 @@ function Flow() {
     // For handling Modal Close from Configuration Component
     const getConfigData = (configData) => {
         if (configData.closeModal && configData.closeModal === true) { 
-            setOpen(false);
+            setModalOpen(false);
             console.log('Configuration Data: ', configurationData)
             setfinishedConfiguration(true);
         }
@@ -35,6 +35,8 @@ function Flow() {
         const updatedConfigData = {...configurationData, ...configData};
         setConfigurationData(updatedConfigData);
     }
+
+
 
     return (
         <>
@@ -76,7 +78,7 @@ function Flow() {
                                 (
                                     <div className="description">
                                         <div className="fs-flow-content">
-                                            <button className="ui circular icon button fs-primary-outline-btn fs_mb_10" onClick={e => setOpen(true)}>
+                                            <button className="ui circular icon button fs-primary-outline-btn fs_mb_10" onClick={e => setModalOpen(true)}>
                                                 <i aria-hidden="true" className="plus icon" />
                                             </button>
                                             <p>Add the producer</p>
@@ -90,11 +92,11 @@ function Flow() {
 
                 </div>
 
-                <Rodal visible={open} onClose={e => setOpen(false)}>
+                <Modal open={modalOpen} close={e => setModalOpen(false)} header={'Configuration'}>
                     <ConfigurationContext.Provider value={{configurationData, updateConfigurationData}}>
                         <Configuration getConfigData={getConfigData} />
                     </ConfigurationContext.Provider>
-                </Rodal>
+                </Modal>
 
 
             </div>

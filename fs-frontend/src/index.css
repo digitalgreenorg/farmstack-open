@@ -1,0 +1,14 @@
+.Modal__Container {
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    inset: 0;
+    padding: 1% 0;
+    background-color: rgba(0,0,0,.85);
+    display: grid;
+    place-content: center;
+}
+
+.animate__animated.animate__bounce {
+    --animate-delay: .5s;
+}
