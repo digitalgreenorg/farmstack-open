@@ -20,7 +20,7 @@
   <bean id="TypeExtractionProcessor" class="de.fhg.aisec.ids.camel.idscp2.processors.IdsMessageTypeExtractionProcessor" />
   
   <!-- The following defines a single bean called ContractOfferCreationProcessor implemented by the POJO de.fhg.aisec.ids.camel.idscp2.processors.ContractOfferCreationProcessor -->
-  <bean id="ContractOfferCreationProcessor" class="de.fhg.aisec.ids.camel.idscp2.processors.ContractOfferCreationProcessor" />
+  <bean id="ContractOfferCreationProcessor" class="de.fhg.aisec.ids.dgprocessors.ContractOfferCreationProcessor" />
   
   <!-- The following defines a single bean called ContractAgreementReceiverProcessor implemented by the POJO de.fhg.aisec.ids.camel.idscp2.processors.ContractAgreementReceiverProcessor -->
   <bean id="ContractAgreementReceiverProcessor" class="de.fhg.aisec.ids.camel.idscp2.processors.ContractAgreementReceiverProcessor" />
@@ -81,7 +81,7 @@
       <from uri="file://deploy/?fileName=sample_data1.csv&amp;charset=utf-8&amp;noop=true"/>
       <!-- ensure that contract agreement is made before sending-->
       <delay asyncDelayed="true">
-        <constant>10000</constant>
+        <constant>40000</constant>
       </delay>
       <log message="Sending data from file: sample_data1.csv"/>
       <!-- Parses CSV -->
