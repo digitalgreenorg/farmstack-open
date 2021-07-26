@@ -1,30 +1,18 @@
 import React, { useState } from 'react';
 import './Configuration.css';
-import ComponentsTab from './components-tab/ComponentsTab';
-import CredentialsTab from './credentials-tab/CredentialsTab';
-import InputTab from './input-tab/InputTab';
-import SampleTab from './sample-tab/SampleTab';
-import SummaryTab from './summary-tab/SummaryTab';
-
-// const STEPS = [
-//     'componentsStep', 'credentialsStep', 'inputStep', 'sampleStep', 'summaryStep'
-// ]
+import SourceTab from './source-tab/SourceTab';
+import DestinationTab from './destination-tab/DestinationTab';
+import ConfigurePolicyTab from './configure-policy-tab/ConfigurePolicyTab';
 
 function Configuration({getConfigData}) {
-    const [activePane, setActivePane] = useState('components');
-    // const [completedSteps, setCompletedSteps] = useState([]);
+    const [activePane, setActivePane] = useState('source');
 
     const switchToNextStep = (stepName) => {
         setActivePane(stepName);
-
-        // console.log('Panes: ', document.querySelector('.fs-conf-content .ui.steps').children)
-        // setTimeout(() => {
-        //     console.log('Previous Panes: ', document.querySelector('.fs-conf-content .ui.steps .step.active').previousSibling)
-        // }, 100)
     }
 
     const finishedChanges = () => {
-        setActivePane('components')
+        setActivePane('source')
         getConfigData({closeModal: true});
     }
 
@@ -36,13 +24,7 @@ function Configuration({getConfigData}) {
                     <div className="ui fluid card">
                         <div className="content component-config-header pos__rel">
                             <div className="component-config-header-img">
-                                {
-                                    activePane !== 'components' ? (
-                                        <img src="/images/spreadsheets-icon.png" alt="component_default" />
-                                    ) : (
-                                        <img src="/images/Vector.png" alt="component_default" />
-                                    )
-                                }
+                                <img src="/images/Vector.png" alt="component_default" />
                             </div>
                             <div className="header">Creating a Connection</div>
                             <div className="meta">Step by step process to guide you through adding your own container</div>
@@ -51,39 +33,22 @@ function Configuration({getConfigData}) {
                             <div className="description">
                                 <div className="fs-conf-content">
                                     <div className="ui tablet stackable top attached fluid steps">
-                                        <div className={`componentsTab step cursor__pointer ${activePane === 'components' ? 'active' : ''}`} onClick={e => switchToNextStep('components')}>
-                                            {/* {completedSteps.includes('componentsTab') && <img src="/images/Completed.png" alt="" />} */}
+                                        <div className={`step cursor__pointer ${activePane === 'source' ? 'active' : ''}`} onClick={e => switchToNextStep('source')}>
                                             <div className="content">
                                                 <div className="title">Step 1</div>
-                                                <div className="description">Components</div>
+                                                <div className="description">Source</div>
                                             </div>
                                         </div>
-                                        <div className={`credentialsTab step cursor__pointer ${activePane === 'credentials' ? 'active' : ''}`} onClick={e => switchToNextStep('credentials')}>
-                                            {/* {completedSteps.includes('credentialsTab') && <img src="/images/Completed.png" alt="" />} */}
+                                        <div className={`step cursor__pointer ${activePane === 'destination' ? 'active' : ''}`} onClick={e => switchToNextStep('destination')}>
                                             <div className="content">
                                                 <div className="title">Step 2</div>
-                                                <div className="description">Credentials</div>
+                                                <div className="description">Destination</div>
                                             </div>
                                         </div>
-                                        <div className={`inputTab step cursor__pointer ${activePane === 'input' ? 'active' : ''}`} onClick={e => switchToNextStep('input')}>
-                                            {/* {completedSteps.includes('inputTab') && <img src="/images/Completed.png" alt="" />} */}
+                                        <div className={`step cursor__pointer ${activePane === 'policyConfig' ? 'active' : ''}`} onClick={e => switchToNextStep('policyConfig')}>
                                             <div className="content">
                                                 <div className="title">Step 3</div>
-                                                <div className="description">Input</div>
-                                            </div>
-                                        </div>
-                                        <div className={`sampleTab step cursor__pointer ${activePane === 'sample' ? 'active' : ''}`} onClick={e => switchToNextStep('sample')}>
-                                            {/* {completedSteps.includes('sampleTab') && <img src="/images/Completed.png" alt="" />} */}
-                                            <div className="content">
-                                                <div className="title">Step 4</div>
-                                                <div className="description">Sample</div>
-                                            </div>
-                                        </div>
-                                        <div className={`summaryTab step cursor__pointer ${activePane === 'summary' ? 'active' : ''}`} onClick={e => switchToNextStep('summary')}>
-                                            {/* {completedSteps.includes('summaryTab') && <img src="/images/Completed.png" alt="" />} */}
-                                            <div className="content">
-                                                <div className="title">Step 5</div>
-                                                <div className="description">Summary</div>
+                                                <div className="description">Configure Policy</div>
                                             </div>
                                         </div>
                                     </div>
@@ -91,11 +56,9 @@ function Configuration({getConfigData}) {
                                     <div className="ui attached segment">
                                         {
                                             {
-                                                components: <ComponentsTab nextStep={switchToNextStep}/>,
-                                                credentials: <CredentialsTab nextStep={switchToNextStep}/>,
-                                                input: <InputTab nextStep={switchToNextStep}/>,
-                                                sample: <SampleTab nextStep={switchToNextStep}/>,
-                                                summary: <SummaryTab />
+                                                source: <SourceTab nextStep={switchToNextStep} />,
+                                                destination: <DestinationTab />,
+                                                policyConfig: <ConfigurePolicyTab />
                                             }[activePane]
                                         }
                                         {

@@ -1,0 +1,13 @@
+.source__tab__component .ui.form .inline.field > label {
+    width: 100px;
+}
+
+.source__tab__component .ui.form .inline.field > select {
+    width: 20vw;
+    min-width: 250px;
+}
+
+.source__tab__component .ui.form .inline.field .ui.input > input {
+    width: 20vw;
+    min-width: 250px;
+}

@@ -8,11 +8,9 @@ export function useConfigurations() {
 
 export function ConfigurationsProvider({children}) {
     const [configurationData, setConfigurationData] = useState({
-        components: null,
-        credentials: null,
-        input: null,
-        sample: null,
-        summary: null
+        source: null,
+        destination: null,
+        policyConfig: null
     });
 
     function updateConfigurationData(configData) {
