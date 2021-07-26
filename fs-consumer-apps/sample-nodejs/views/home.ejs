@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Home Page</title>
+    <link href='css/home.css' rel="stylesheet" />
+</head>
+<body id="body">
+        <table id="data">
+            <% if (data.length > 0) { %>
+                <thead>
+                    <% var keys = Object.keys(data[0]) %>
+                    <%keys.forEach((item) => { %>
+                        <td><%= item %></td>
+                    <%})%>
+                </thead>
+                <tbody>
+                    <% data.forEach((item, index) => {
+                        var counter = 0 %>
+                        <tr>
+                        <% while (counter < keys.length) { %>
+                            <td><%=item[keys[counter]]%></td>
+                            <%counter += 1%>
+                        <% } %>
+                        </tr>
+                    <% }) %>        
+                </tbody>
+            <% } %>
+        </table>
+    
+    
+    <script src="https://code.jquery.com/jquery-1.11.0.min.js" ></script>
+    <script src="/socket.io/socket.io.js" ></script>
+    <script src="/js/home.js" ></script>
+</body>
+</html>	

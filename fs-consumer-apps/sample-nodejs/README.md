@@ -1,0 +1,1 @@
+This is a sample consumer application which receives data through post and displays it on the frontend.
