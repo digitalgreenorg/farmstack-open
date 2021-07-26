@@ -57,7 +57,7 @@ function Configuration({getConfigData}) {
                                         {
                                             {
                                                 source: <SourceTab nextStep={switchToNextStep} />,
-                                                destination: <DestinationTab />,
+                                                destination: <DestinationTab nextStep={switchToNextStep} />,
                                                 policyConfig: <ConfigurePolicyTab />
                                             }[activePane]
                                         }
