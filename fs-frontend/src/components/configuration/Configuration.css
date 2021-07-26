@@ -7,3 +7,20 @@
     display: flex;
     justify-content: flex-end;
 }
+
+.component-config-header-img {
+    position: absolute;
+    border: 1px solid lightgray;
+    padding: 10px;
+    top: 10px;
+    left: 10px;
+    border-radius: 10px;
+}
+
+.component-config-header-img > img {
+    width: 20px;
+}
+
+.component-config-header > .header, .component-config-header > .meta {
+    margin-left: 50px;
+}

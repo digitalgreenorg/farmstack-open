@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { useConfiguration } from '../../flow/Flow';
+import { useConfigurations } from '../../../contexts/ConfigurationsProvider';
+// import CustomSelect from '../../custom-select/CustomSelect';
+import './InputTab.css';
 
 /**
     * TODO: Custom Select design need to be made
 */
 function InputTab({nextStep}) {
-    const {updateConfigurationData} = useConfiguration();
+    const {updateConfigurationData} = useConfigurations();
 
     const inputFields = {
         spreadsheet: [
@@ -56,15 +58,20 @@ function InputTab({nextStep}) {
                             <i aria-hidden="true" className="info circle icon info__icon" />
                         </span>
                     </label>
-                    <select value={formData.spreadsheet} onChange={e => setFormData({...formData, spreadsheet: e.target.value})}>
-                        {inputFields.spreadsheet.map(option => {
-                            return (
-                                <option key={option.key} value={option.value}>
-                                    {option.text}
-                                </option>
-                            )
-                        })}
-                    </select>
+                    <div className="select-spreadsheet-group">
+                        <select value={formData.spreadsheet} onChange={e => setFormData({...formData, spreadsheet: e.target.value})}>
+                            {inputFields.spreadsheet.map(option => {
+                                return (
+                                    <option key={option.key} value={option.value}>
+                                        {option.text}
+                                    </option>
+                                )
+                            })}
+                        </select>
+                        <div className="spreadsheet-refresh">
+                            <i aria-hidden="true" className="refresh icon" />
+                        </div>
+                    </div>
                 </div>
                 <div className="field">
                     <label>
@@ -74,15 +81,20 @@ function InputTab({nextStep}) {
                             <i aria-hidden="true" className="info circle icon info__icon" />
                         </span>
                     </label>
-                    <select value={formData.worksheet} onChange={e => setFormData({...formData, worksheet: e.target.value})}>
-                        {inputFields.worksheet.map(option => {
-                            return (
-                                <option key={option.key} value={option.value}>
-                                    {option.text}
-                                </option>
-                            )
-                        })}
-                    </select>
+                    <div className="select-spreadsheet-group">
+                        <select value={formData.worksheet} onChange={e => setFormData({...formData, worksheet: e.target.value})}>
+                            {inputFields.worksheet.map(option => {
+                                return (
+                                    <option key={option.key} value={option.value}>
+                                        {option.text}
+                                    </option>
+                                )
+                            })}
+                        </select>
+                        <div className="spreadsheet-refresh">
+                            <i aria-hidden="true" className="refresh icon" />
+                        </div>
+                    </div>
                 </div>
                 <div className="field">
                     <label>Dimension&nbsp;<sup className="mandate__star">*</sup></label>
@@ -95,6 +107,7 @@ function InputTab({nextStep}) {
                             )
                         })}
                     </select>
+                    {/* <CustomSelect options={inputFields.dimension} getSelectedOption={optionValue => setFormData({...formData, dimension: optionValue})} /> */}
                 </div>
                 <div className="field">
                     <label>Use first row or columns as a header&nbsp;<sup className="mandate__star">*</sup></label>
@@ -123,7 +136,7 @@ function InputTab({nextStep}) {
             </form>
 
             <div className="step-change-btn-wrapper">
-                <button className="ui icon button" onClick={updateInputData}>Continue</button>
+                <button className="ui icon button fs-primary-outline-btn" onClick={updateInputData}>Continue</button>
             </div>
         </>
     )

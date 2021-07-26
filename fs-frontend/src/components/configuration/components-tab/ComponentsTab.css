@@ -2,16 +2,21 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    /* display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px; */
 }
 
-.fs-conf-tab-container > div {
+.fs-conf-tab-component {
+    border: 1px solid transparent;
     flex: .3;
     text-align: center;
     padding: 1em;
 }
 
-.fs-conf-tab-component {
-    border: 1px solid transparent;
+.fs-conf-tab-component > * {
+    margin: 20px auto;
 }
 
 .fs-conf-tab-component > .ui.header {
@@ -25,6 +30,11 @@
 
 .fs-conf-tab-component:hover {
     border: 1px solid lightgray;
+    border-radius: 10px;
+}
+
+.component-img {
+    width: 60px;
 }
 
 @media screen and (max-width: 640px) {

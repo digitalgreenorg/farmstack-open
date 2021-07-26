@@ -83,3 +83,7 @@
 .fs-main-container {
     height: 100vh;
 }
+
+.ui.steps .step.active .title {
+    color: var(--fs_primary);
+}

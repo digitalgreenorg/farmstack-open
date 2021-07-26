@@ -1,26 +1,15 @@
-import React, {createContext, useContext, useState} from 'react';
+import React, { useState } from 'react';
 import './Flow.css';
 
 import Configuration from '../configuration/Configuration';
 import Modal from '../Modal/Modal';
 
-const ConfigurationContext = createContext();
-
-export function useConfiguration() {
-    return useContext(ConfigurationContext);
-}
+import { useConfigurations } from '../../contexts/ConfigurationsProvider';
 
 function Flow() {
     const [modalOpen, setModalOpen] = useState(false);
     const [finishedConfiguration, setfinishedConfiguration] = useState(false);
-    // Keeping all the steps data in a single place.
-    const [configurationData, setConfigurationData] = useState({
-        components: null,
-        credentials: null,
-        input: null,
-        sample: null,
-        summary: null
-    });
+    const { configurationData } = useConfigurations();
 
     // For handling Modal Close from Configuration Component
     const getConfigData = (configData) => {
@@ -29,11 +18,6 @@ function Flow() {
             console.log('Configuration Data: ', configurationData)
             setfinishedConfiguration(true);
         }
-    }
-
-    const updateConfigurationData = (configData) => {
-        const updatedConfigData = {...configurationData, ...configData};
-        setConfigurationData(updatedConfigData);
     }
 
 
@@ -78,10 +62,11 @@ function Flow() {
                                 (
                                     <div className="description">
                                         <div className="fs-flow-content">
-                                            <button className="ui circular icon button fs-primary-outline-btn fs_mb_10" onClick={e => setModalOpen(true)}>
+                                            <div className="add-provider-container" onClick={e => setModalOpen(true)}>
                                                 <i aria-hidden="true" className="plus icon" />
-                                            </button>
-                                            <p>Add the producer</p>
+                                                <p>Initialize a provider</p>
+                                            </div>
+                                            <p>Add a provider connector to get started</p>
                                         </div>
                                     </div>
                                 )
@@ -93,9 +78,7 @@ function Flow() {
                 </div>
 
                 <Modal open={modalOpen} close={e => setModalOpen(false)} header={'Configuration'}>
-                    <ConfigurationContext.Provider value={{configurationData, updateConfigurationData}}>
-                        <Configuration getConfigData={getConfigData} />
-                    </ConfigurationContext.Provider>
+                    <Configuration getConfigData={getConfigData} />
                 </Modal>
 
 

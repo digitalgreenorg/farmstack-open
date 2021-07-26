@@ -15,7 +15,6 @@
 
 .card.h_100_percent .content:last-child {
     flex-grow: 25;
-    background-color: #eee;
 }
 
 .fs-flow-component .rodal-dialog {
@@ -47,4 +46,14 @@
 .spreadsheet-ico-wrapper > svg {
     width: 24px;
     fill: #38b000;
+}
+
+.add-provider-container {
+    border: 1px solid var(--fs_primary);
+    text-align: center;
+    padding: 15px 30px;
+    margin: 10px auto;
+    border-radius: 10px;
+    color: var(--fs_primary);
+    cursor: pointer;
 }

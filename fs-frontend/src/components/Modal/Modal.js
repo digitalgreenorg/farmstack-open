@@ -18,7 +18,7 @@ function Modal({children, open, close, header}) {
                         <div className="fs-modal-header-content">
                             <h2>{header}</h2>
                         </div>
-                        <div className="fs-modal-close-wrapper cursor__pointer" onClick={closeModal}><i aria-hidden="true" className="times circle icon" /></div>
+                        <div className="fs-modal-close-wrapper cursor__pointer" onClick={closeModal}><i aria-hidden="true" className="times circle outline icon" /></div>
                     </div>
                     <div className="fs-modal-content">
                         {children}

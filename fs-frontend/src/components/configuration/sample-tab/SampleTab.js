@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import './SampleTab.css';
-import { useConfiguration } from '../../flow/Flow';
+import { useConfigurations } from '../../../contexts/ConfigurationsProvider';
 
 function SampleTab({nextStep}) {
-    const {updateConfigurationData} = useConfiguration();
+    const {updateConfigurationData} = useConfigurations();
 
     const updateSampleData = (sampleData) => {
         setSelctedSample(sampleData)
@@ -90,7 +90,7 @@ function SampleTab({nextStep}) {
                 }
             </div>
             <div className="step-change-btn-wrapper">
-                <button className="ui icon button" onClick={e => nextStep('summary')}>Continue</button>
+                <button className="ui icon button fs-primary-outline-btn" onClick={e => nextStep('summary')}>Continue</button>
             </div>
         </>
     )
