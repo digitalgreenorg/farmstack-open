@@ -1,3 +1,7 @@
+.connector__map__component {
+    height: calc(100% - 60px);
+}
+
 .provider__stack__container {
     display: flex;
     /* justify-content: space-around; */

@@ -78,6 +78,10 @@
     margin: 8px auto;
 }
 
+.flex__container {
+    display: flex;
+}
+
 /* ----------- GENERAL CSS RULES ENDS ---------- */
 
 .fs-main-container {
@@ -86,4 +90,16 @@
 
 .ui.steps .step.active .title {
     color: var(--fs_primary);
+}
+
+.main__sidebar {
+    flex: 0.2;
+    /* border-right: 1px solid; */
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+.main__content__wrapper {
+    flex: 0.8;
+    padding: 10px;
 }

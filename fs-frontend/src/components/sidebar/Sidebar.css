@@ -1,0 +1,24 @@
+/* .route__container {
+    display: flex;
+} */
+
+.route__content {
+    border: 2px solid var(--fs_primary);
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 5px;
+    /* position: relative; */
+    /* flex: auto; */
+}
+
+/* .route__content::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    height: 100%;
+    left: 0;
+    width: 30px;
+    border-top: 15px solid transparent;
+    border-right: 20px solid gray;
+    border-bottom: 15px solid transparent;
+} */
