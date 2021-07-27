@@ -81,7 +81,7 @@
       <from uri="file://deploy/?fileName=sample_data1.csv&amp;charset=utf-8&amp;noop=true"/>
       <!-- ensure that contract agreement is made before sending-->
       <delay asyncDelayed="true">
-        <constant>40000</constant>
+        <constant>10000</constant>
       </delay>
       <log message="Sending data from file: sample_data1.csv"/>
       <!-- Parses CSV -->
