@@ -29,6 +29,16 @@ Requirements:
 * Docker Desktop \(for MacOS and Windows with wsl2\).
 * Docker and Docker Compose for ubuntu
 
+## Deployment and Guides
+
+You can see FarmStack in action by [Setting up Self-Managed Connector](docs/deploying-farmstack/setting-up-self-managed-connectors.md) for running a usage control example.
+
+Or you can follow one of our step-by-step guide to setup your own connectors:
+
+* [Configuring a connector with CSV file](docs/operation-guides/creating-a-connector-with-csv.md) 
+* [Dockerizing applications to be compatible with FarmStack Connector](docs/operation-guides/dockerization/)
+* [Install a dockerized application with a connector](docs/operation-guides/install-a-nodejs-application-with-connector.md)
+
 ## Features
 
 FarmStack enables network of data providers and consumers through a suite of products and functionalities:

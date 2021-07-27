@@ -1,10 +1,10 @@
-# Creating a connector with CSV
+# Configuring a connector with CSV
 
 ## Overview
 
 This tutorial will describe how to setup FarmStack connector for local csv files. Kindly follow the steps to install FarmStack requirements before proceeding with this setup.
 
-## Setup local CSV file
+## Local CSV file
 
 You can follow this process for any file, here we will be using a file called cities.csv present in Downloads directory in home folder.
 
@@ -50,6 +50,12 @@ Follow the steps to create your connectors, give a unique name to your connector
 Start the connection by clicking Setup Connection Button.
 
 When the connector setup is done click View transferred data link to see your data. Kindly wait a couple of minutes for the contract negotiation process of provider and consumer to complete before they can start sharing the data.
+
+## Online CSV file
+
+Watch this space for super exciting updates. Our bots are already hard at work to create this page for you.
+
+## Next Steps
 
 This completes the tutorial for CSV file transfer through FarmStack Provider Connector. If you face any issue while setting up your own csv file kindly open a new issue in the github repository and our experts will guide you.
 
