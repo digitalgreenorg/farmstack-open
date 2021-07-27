@@ -24,3 +24,13 @@ python3 setup.py
 
 After the setup is done, you can view the connector setup UI at: [http://localhost:8000](http://localhost:8000).
 
+## Next steps
+
+{% page-ref page="../deploying-farmstack/setting-up-self-managed-connectors.md" %}
+
+{% page-ref page="../operation-guides/creating-a-connector-with-csv.md" %}
+
+{% page-ref page="../operation-guides/install-a-nodejs-application-with-connector.md" %}
+
+
+
