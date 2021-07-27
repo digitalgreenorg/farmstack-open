@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import ConnectorMap from './components/connector-map/ConnectorMap';
 
 import Flow from './components/flow/Flow';
 import Header from './components/header/Header';
@@ -10,7 +11,8 @@ function App() {
         <div className="fs-main-container">
             <Header />
             <ConfigurationsProvider>
-              <Flow />
+              {/* <Flow /> */}
+              <ConnectorMap />
             </ConfigurationsProvider>
         </div>
   );
