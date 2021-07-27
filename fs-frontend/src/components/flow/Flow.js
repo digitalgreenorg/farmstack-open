@@ -15,7 +15,6 @@ function Flow() {
     const getConfigData = (configData) => {
         if (configData.closeModal && configData.closeModal === true) { 
             setModalOpen(false);
-            console.log('Configuration Data: ', configurationData)
             setfinishedConfiguration(true);
         }
     }

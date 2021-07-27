@@ -6,14 +6,15 @@ import ConfigurePolicyTab from './configure-policy-tab/ConfigurePolicyTab';
 
 function Configuration({getConfigData}) {
     const [activePane, setActivePane] = useState('source');
-
+    
     const switchToNextStep = (stepName) => {
-        setActivePane(stepName);
-    }
+        if (stepName === 'finish') {
+            setActivePane('source')
+            getConfigData({closeModal: true});
+            return;
+        }
 
-    const finishedChanges = () => {
-        setActivePane('source')
-        getConfigData({closeModal: true});
+        setActivePane(stepName);
     }
 
     return (
@@ -58,15 +59,8 @@ function Configuration({getConfigData}) {
                                             {
                                                 source: <SourceTab nextStep={switchToNextStep} />,
                                                 destination: <DestinationTab nextStep={switchToNextStep} />,
-                                                policyConfig: <ConfigurePolicyTab />
+                                                policyConfig: <ConfigurePolicyTab nextStep={switchToNextStep} />
                                             }[activePane]
-                                        }
-                                        {
-                                            (activePane === 'summary') && (
-                                                <div className="step-change-btn-wrapper">
-                                                    <button className="ui icon button fs-primary-outline-btn" onClick={finishedChanges}>Finish step</button>
-                                                </div>
-                                            )
                                         }
                                     </div>
                                 </div>

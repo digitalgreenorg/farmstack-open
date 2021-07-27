@@ -24,6 +24,14 @@ export function ConfigurationsProvider({children}) {
         updateConfigurationData
     };
 
+    /*
+        *   For Testing Configuration Data 
+        *   Can be used in future for persistence Data
+    */
+    // React.useEffect(() => {
+    //     localStorage.setItem('FARMSTACK_configurationData', JSON.stringify(configurationData));
+    // }, [configurationData])
+
     return (
         <ConfigurationContext.Provider value={configurationValue}>
             {children}
