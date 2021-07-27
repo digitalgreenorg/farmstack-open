@@ -12,9 +12,9 @@
 * [Guides](operation-guides/README.md)
   * [Creating a connector with CSV](operation-guides/creating-a-connector-with-csv.md)
   * [Dockerization](operation-guides/dockerization/README.md)
+    * [NodeJS](operation-guides/dockerization/dockerization-nodejs.md)
     * [Django](operation-guides/dockerization/dockerization-django.md)
     * [Flask](operation-guides/dockerization/dockerization-flask.md)
-    * [NodeJS](operation-guides/dockerization/dockerization-nodejs.md)
   * [Install a NodeJS application with connector](operation-guides/install-a-nodejs-application-with-connector.md)
 * [Contributing to FarmStack](contributing-to-farmstack.md)
 
