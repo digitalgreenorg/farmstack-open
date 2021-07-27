@@ -15,6 +15,6 @@
     * [NodeJS](operation-guides/dockerization/dockerization-nodejs.md)
     * [Django](operation-guides/dockerization/dockerization-django.md)
     * [Flask](operation-guides/dockerization/dockerization-flask.md)
-  * [Install a NodeJS application with connector](operation-guides/install-a-nodejs-application-with-connector.md)
+  * [Install a dockerized application with connector](operation-guides/install-a-nodejs-application-with-connector.md)
 * [Contributing to FarmStack](contributing-to-farmstack.md)
 

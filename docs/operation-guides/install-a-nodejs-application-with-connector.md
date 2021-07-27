@@ -1,4 +1,4 @@
-# Install a NodeJS application with connector
+# Install a dockerized application with connector
 
 ## Overview
 
@@ -6,7 +6,7 @@
 
 You can find the sample-nodejs application used in this tutorial [here](https://github.com/digitalgreenorg/farmstack-open/tree/main/fs-consumer-apps/sample-nodejs).
 
-## Installing NodeJS application with connector
+## Installing dockerized application with connector
 
 Kindly follow the previous tutorial to locally setup and deploy FarmStack before proceeding with this next step, if not done already.
 
