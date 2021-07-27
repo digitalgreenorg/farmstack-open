@@ -50,7 +50,7 @@ FarmStack enables network of data providers and consumers through a suite of pro
 
 FarmStack is the sum total of all the peer to peer connectors and associated usage policies.
 
-For more information visit [our website](https://farmstack.digitalgreen.org) or [Confluence Page](https://digitalgreenorg.atlassian.net/wiki/spaces/FS/overview).
+For more information visit [our website](https://www.farmstack.co) or [Confluence Page](https://digitalgreenorg.atlassian.net/wiki/spaces/FS/overview).
 
 ## Contributing
 
