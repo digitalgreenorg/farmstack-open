@@ -1,16 +1,20 @@
-import React, { useRef, useState } from 'react';
-import { Form, Image } from 'semantic-ui-react';
+import React, { useState } from 'react';
+import { Form, Image, Label } from 'semantic-ui-react';
 import { useConfigurations } from '../../../contexts/ConfigurationsProvider';
 import './DestinationTab.css';
 
 function DestinationTab({nextStep}) {
-    const pairConnectorRef = useRef();
+    const [pairConnector, setPairConnector] = useState('')
     const [showLoader, setShowLoader] = useState(false);
     const [dataLoaded, setDataLoaded] = useState(false);
+    const [submitted, setSubmitted] = useState(false);
     const { updateConfigurationData } = useConfigurations();
 
     function handleSubmit(e, param) {
         e.preventDefault();
+        setSubmitted(true);
+
+        if (!pairConnector) return;
 
         if (param === 'Continue') {
             setShowLoader(true);
@@ -22,7 +26,7 @@ function DestinationTab({nextStep}) {
 
         if (param === 'Connect') {
             const destinationData = {
-                pairConnector: pairConnectorRef.current.value
+                pairConnector
             }
             updateConfigurationData({destination: destinationData});
             nextStep('policyConfig');
@@ -43,10 +47,11 @@ function DestinationTab({nextStep}) {
             <div className="destination__tab__component">
                 {showLoader && loader()}
                 <Form>
-                    <div className="inline field">
+                    <div className={submitted && !pairConnector ? 'inline error field' : 'inline field'}>
                         <label>Pair Connector</label>
                         <div className="ui input">
-                            <input ref={pairConnectorRef} type="text" />
+                            <input value={pairConnector} onChange={e => setPairConnector(e.target.value)} type="text" />
+                            {submitted && !pairConnector && <Label basic color='red' pointing='left'>Please enter Pair Connector.</Label>}
                         </div>
                     </div>
 
