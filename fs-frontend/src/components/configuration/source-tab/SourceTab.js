@@ -60,7 +60,9 @@ function SourceTab({nextStep}) {
                         </div>
                         {submitted && !sourceDetails && <Label basic color='red' pointing='left'>Please provide Source details.</Label>}
                     </div>
-                    <button type="submit" className="ui button fs-primary-outline-btn" style={{marginTop: '20px', marginLeft: '110px'}}>Launch Connector</button>
+                    <div className="next__btn__container" style={{textAlign: 'right'}}>
+                        <button type="submit" className="ui button fs-primary-outline-btn">Launch Connector</button>
+                    </div>
                 </Form>
             </div>
         </>

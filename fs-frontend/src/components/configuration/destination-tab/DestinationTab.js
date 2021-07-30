@@ -74,9 +74,11 @@ function DestinationTab({nextStep}) {
                         </div>
                     )}
 
-                    <button onClick={e => handleSubmit(e, dataLoaded ? 'Connect' : 'Continue')} type="button" className="ui button fs-primary-outline-btn" style={{marginTop: '20px', marginLeft: '110px'}}>
-                        {dataLoaded ? 'Connect' : 'Continue'}
-                    </button>
+                    <div className="next__btn__container" style={{textAlign: 'right'}}>
+                        <button onClick={e => handleSubmit(e, dataLoaded ? 'Connect' : 'Continue')} type="button" className="ui button fs-primary-outline-btn" style={{marginTop: '20px', marginLeft: '110px'}}>
+                            {dataLoaded ? 'Connect' : 'Continue'}
+                        </button>
+                    </div>
                 </Form>
             </div>
         </>

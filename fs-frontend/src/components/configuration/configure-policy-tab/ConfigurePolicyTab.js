@@ -41,7 +41,9 @@ function ConfigurePolicyTab({nextStep}) {
                         <Checkbox ref={combinedAnalyticsDataRef} label="Combined Analytics Data"/>
                         <p>Number of farmers who watched the video and their produce details </p>
                     </div>
-                    <button type="submit" className="ui button fs-primary-outline-btn" style={{marginTop: '20px'}}>Finish Step</button>
+                    <div className="next__btn__container" style={{textAlign: 'right'}}>
+                        <button type="submit" className="ui button fs-primary-outline-btn" style={{marginTop: '20px'}}>Finish Step</button>
+                    </div>
                 </Form>
             </div>
         </>
