@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Checkbox.css';
 import { v4 as uuidv4 } from 'uuid';
 
-const Checkbox = React.forwardRef(({label}, ref) => {
+const Checkbox = React.forwardRef(({label, isChecked}, ref) => {
     const checkboxId = uuidv4();
+    const [checked, setChecked] = useState(isChecked ? isChecked : false)
     return (
         <>
             <div className="fs__custom__checkbox__container">
@@ -19,7 +20,7 @@ const Checkbox = React.forwardRef(({label}, ref) => {
                 </svg>
 
                 <div className="checkbox-container">
-                    <input ref={ref} className="checkbox-input" id={checkboxId} type="checkbox" />
+                    <input ref={ref} className="checkbox-input" id={checkboxId} type="checkbox" checked={checked} onChange={e => setChecked(e.target.checked)} />
                     <label className="checkbox" htmlFor={checkboxId}>
                         <span>
                             <svg width="12px" height="10px">

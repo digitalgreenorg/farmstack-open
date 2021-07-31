@@ -1,17 +1,14 @@
 import React, { useState } from 'react';
 import { Form, Label } from 'semantic-ui-react';
-import { useConfigurations } from '../../../contexts/ConfigurationsProvider';
+// import { useConfigurations } from '../../../contexts/ConfigurationsProvider';
 import './SourceTab.css';
 
 
-function SourceTab({nextStep}) {
-    const [route, setRoute] = useState('');
-    const [connector, setConnector] = useState('CSV');
-    const [sourceDetails, setSourceDetails] = useState('');
+function SourceTab({nextStep, collectData, stepData: { source }}) {
+    const [route, setRoute] = useState(source ? source.route : '');
+    const [connector, setConnector] = useState(source ? source.connector : 'CSV');
+    const [sourceDetails, setSourceDetails] = useState(source ? source.sourceDetails : '');
     const [submitted, setSubmitted] = useState(false);
-    
-    // Get the exposed context function to update the context data
-    const { updateConfigurationData } = useConfigurations();
 
     // Handle Form Submit
     function handleSubmit(e) {
@@ -28,7 +25,7 @@ function SourceTab({nextStep}) {
             sourceDetails
         };
 
-        updateConfigurationData({source: sourceData}); // Update the Context Data for the Source Tab
+        collectData({source: sourceData});
         nextStep('destination'); // Switch to the next Tab
     }
     return (

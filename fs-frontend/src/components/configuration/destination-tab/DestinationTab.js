@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import { Form, Image, Label } from 'semantic-ui-react';
-import { useConfigurations } from '../../../contexts/ConfigurationsProvider';
 import './DestinationTab.css';
 
-function DestinationTab({nextStep}) {
-    const [pairConnector, setPairConnector] = useState('')
+function DestinationTab({nextStep, collectData, stepData: { destination }}) {
+    const [pairConnector, setPairConnector] = useState(destination ? destination.pairConnector : '');
     const [showLoader, setShowLoader] = useState(false);
     const [dataLoaded, setDataLoaded] = useState(false);
     const [submitted, setSubmitted] = useState(false);
-    const { updateConfigurationData } = useConfigurations();
 
     function handleSubmit(e, param) {
         e.preventDefault();
@@ -28,7 +26,7 @@ function DestinationTab({nextStep}) {
             const destinationData = {
                 pairConnector
             }
-            updateConfigurationData({destination: destinationData});
+            collectData({destination: destinationData});
             nextStep('policyConfig');
         }
     }
