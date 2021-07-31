@@ -23,7 +23,7 @@ function Flow() {
 
     return (
         <>
-            <div className="fs-flow-component">
+            <div className="fs-flow-component h_100_percent">
                 
                 <div className="ui container h_100_percent">
                     <div className="ui fluid card h_100_percent">

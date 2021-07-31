@@ -16,7 +16,7 @@ function ConnectorMap() {
     }, [])
     return (
         <>
-            <div className="connector__map__component">
+            <div className="connector__map__component h_100_percent">
                 <div className="ui fluid card h_100_percent">
                         <div className="content">
                             <div className="header">Route 1</div>
