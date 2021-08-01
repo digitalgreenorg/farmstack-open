@@ -1,8 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Header } from 'semantic-ui-react';
+import { useConfigurations } from '../../contexts/ConfigurationsProvider';
 import './Sidebar.css';
 
 export default function Sidebar() {
+    const { routes, selectRoute } = useConfigurations();
+    const [routesList, setRoutesList] = useState([])
+
+    function handleRouteSelect(index) {
+        selectRoute(index);
+    }
+
+    useEffect(() => {
+        setRoutesList(routes)
+    }, [setRoutesList, routes]);
+
     return (
         <>
             <div className="sidebar__component">
@@ -14,18 +26,27 @@ export default function Sidebar() {
                             <Header size='medium' disabled>Route 1</Header>
                         </div>
                     </div> */}
-                    <div className="route__content">
+                    {/* <div className="route__content">
                         <Header size='medium' disabled>Route 1</Header>
                     </div>
                     <div className="route__content">
                         <Header size='medium' >Route 2</Header>
                     </div>
                     <div className="new__route__content">
-                        <button type="button" className="ui button fs-primary-outline-btn">
-                            {/* <Header size='medium' >New Route</Header> */}
-                            New Route
-                        </button>
-                    </div>
+                        <button type="button" className="ui button fs-primary-outline-btn">New Route</button>
+                    </div> */}
+                    {
+                        routesList.map((route, index) => {
+                            return (
+                                <div key={route.id} className="route__content cursor__pointer" onClick={() => handleRouteSelect(index)}>
+                                    <Header size='medium' >{route.name}</Header>
+                                </div>
+                            )
+                        })
+                    }
+                    {/* <div className="new__route__content">
+                        <button type="button" className="ui button fs-primary-outline-btn">New Route</button>
+                    </div> */}
                 </div>
             </div>
         </>

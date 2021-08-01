@@ -1,19 +1,24 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import './Modal.css';
 
-function Modal({children, open, close, header}) {
-
-    if(!open) return null;
+function Modal({children, close, header, width}) {
+    const modalContentRef = useRef();
 
     const closeModal = () => {
         close()
     }
     
+    useEffect(() => {
+        if (width) {
+            modalContentRef.current.style.width = width;
+        }
+    }, [width])
+    
     return createPortal(
         <>
             <div className="Modal__Container">
-                <div className="ui container fs-modal-container animate__animated animate__zoomIn">
+                <div ref={modalContentRef} className="ui container fs-modal-container animate__animated animate__zoomIn">
                     <div className="fs-modal-header">
                         <div className="fs-modal-header-content">
                             <h2>{header}</h2>

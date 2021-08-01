@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 const ConfigurationContext = createContext();
 
@@ -13,6 +14,43 @@ export function ConfigurationsProvider({children}) {
         policyConfig: null
     });
 
+    const [routes, setRoutes] = useState([
+        {
+            id: uuidv4(),
+            name: 'Unnamed Route',
+            description: 'Add description about your route',
+            data: null
+        },
+        // {
+        //     id: uuidv4(),
+        //     name: 'Route 2',
+        //     description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laudantium, incidunt.',
+        //     data: {}
+        // },
+        // {
+        //     id: uuidv4(),
+        //     name: 'Route 3',
+        //     description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laudantium, incidunt.',
+        //     data: {}
+        // }
+    ])
+
+    function updateRoutes(routeData) {
+        const updatedRouteData = {
+            ...currentRoute.route,
+            ...routeData
+        }
+        const updatedRoutes = [...routes];
+        updatedRoutes[currentRoute.index] = updatedRouteData
+        setRoutes(updatedRoutes)
+    }
+
+    const [currentRoute, setCurrentRoute] = useState({index: routes.length - 1, route: routes[routes.length - 1]})
+
+    function selectRoute(routeIndex) {
+        setCurrentRoute({index: routeIndex, route: routes[routeIndex]})
+    }
+
     function updateConfigurationData(configData) {
         setConfigurationData(prevConfigurationData => {
             return {...prevConfigurationData, ...configData}
@@ -21,7 +59,9 @@ export function ConfigurationsProvider({children}) {
 
     const configurationValue = {
         configurationData,
-        updateConfigurationData
+        updateConfigurationData,
+        routes, currentRoute,
+        selectRoute, updateRoutes
     };
 
     /*

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Form, Label } from 'semantic-ui-react';
-// import { useConfigurations } from '../../../contexts/ConfigurationsProvider';
 import './SourceTab.css';
 
 
