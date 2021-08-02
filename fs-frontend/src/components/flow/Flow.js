@@ -5,15 +5,19 @@ import Configuration from '../configuration/Configuration';
 import Modal from '../Modal/Modal';
 import { Form } from 'semantic-ui-react';
 import { useConfigurations } from '../../contexts/ConfigurationsProvider';
+import ConnectorMap from '../connector-map/ConnectorMap';
 
 function Flow() {
     const { currentRoute, updateRoutes } = useConfigurations();
     const [modalOpen, setModalOpen] = useState(false);
     const [routeModal, setRouteModal] = useState(false);
+    // Edit Route Details Form Data
     const [routeName, setRouteName] = useState('')
     const [routeDesc, setRouteDesc] = useState('')
+    // Page Header Data
     const [currentRouteName, setCurrentRouteName] = useState('')
     const [currentRouteDesc, setCurrentRouteDesc] = useState('')
+    const [ currentRouteData, setCurrentRouteData ] = useState()
     // const [finishedConfiguration, setfinishedConfiguration] = useState(false);
 
     // For handling Modal Close from Configuration Component
@@ -44,6 +48,7 @@ function Flow() {
         setRouteName(currentRoute.route.name)
         setCurrentRouteDesc(currentRoute.route.description)
         setRouteDesc(currentRoute.route.description)
+        setCurrentRouteData(currentRoute.route.data)
     }, [setCurrentRouteDesc, setCurrentRouteName, currentRoute])
 
     return (
@@ -54,22 +59,26 @@ function Flow() {
                     <div className="ui fluid card h_100_percent">
                         <div className="content">
                             <div className="header cursor__pointer" onClick={() => setRouteModal(true)}>{currentRouteName}</div>
-                            <div className="meta">{currentRouteDesc}</div>
-                            {/* <div className="header">Give me a name</div>
-                            <div className="meta">Please enter your flow description here</div> */}
+                            <div className="meta route__description">{currentRouteDesc}</div>
                         </div>
                         <div className="content">
 
-                            <div className="description">
-                                <div className="fs-flow-content">
-                                    <div className="add-provider-container" onClick={() => setModalOpen(true)}>
-                                        <i aria-hidden="true" className="plus icon" />
-                                        <p>Initialize a provider</p>
+                            {
+                                currentRouteData ? (
+                                    <ConnectorMap />
+                                ) : (
+                                    <div className="description">
+                                        <div className="fs-flow-content">
+                                            <div className="add-provider-container" onClick={() => setModalOpen(true)}>
+                                                <i aria-hidden="true" className="plus icon" />
+                                                <p>Initialize a provider</p>
+                                            </div>
+                                            <p>Add a provider connector to get started</p>
+                                        </div>
                                     </div>
-                                    <p>Add a provider connector to get started</p>
-                                </div>
-                            </div>
-
+                                )
+                            }
+                            
                         </div>
                     </div>
 

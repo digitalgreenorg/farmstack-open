@@ -22,10 +22,10 @@ function Configuration({getConfigData}) {
     }
 
     function getTabData(tabData) {
-        console.log('Tab Data in Configuration.js: ', tabData)
-        setStepData(prevData => { return {...prevData, ...tabData}; });
+        const updatedStepData = {...stepData, ...tabData};
+        setStepData(updatedStepData);
         // Update the Context Data for the Source Tab
-        updateConfigurationData(stepData);
+        updateConfigurationData(updatedStepData);
 
     }
 

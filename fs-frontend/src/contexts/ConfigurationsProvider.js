@@ -21,25 +21,35 @@ export function ConfigurationsProvider({children}) {
             description: 'Add description about your route',
             data: null
         },
-        // {
-        //     id: uuidv4(),
-        //     name: 'Route 2',
-        //     description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laudantium, incidunt.',
-        //     data: {}
-        // },
-        // {
-        //     id: uuidv4(),
-        //     name: 'Route 3',
-        //     description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laudantium, incidunt.',
-        //     data: {}
-        // }
+        {
+            id: uuidv4(),
+            name: 'Route 2',
+            description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laudantium, incidunt.',
+            data: {
+                "source": {
+                  "route": "demo route",
+                  "connector": "CSV",
+                  "sourceDetails": "demo source details"
+                },
+                "destination": {
+                  "pairConnector": "demo pair connector"
+                },
+                "policyConfig": {
+                  "timeSeriesData": true,
+                  "anayticsData": true
+                }
+            }
+        },
+        {
+            id: uuidv4(),
+            name: 'Route 3',
+            description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laudantium, incidunt.',
+            data: null
+        }
     ])
 
     function updateRoutes(routeData) {
-        const updatedRouteData = {
-            ...currentRoute.route,
-            ...routeData
-        }
+        const updatedRouteData = { ...currentRoute.route, ...routeData }
         const updatedRoutes = [...routes];
         updatedRoutes[currentRoute.index] = updatedRouteData
         setRoutes(updatedRoutes)
@@ -52,9 +62,15 @@ export function ConfigurationsProvider({children}) {
     }
 
     function updateConfigurationData(configData) {
-        setConfigurationData(prevConfigurationData => {
-            return {...prevConfigurationData, ...configData}
-        });
+        console.log('Config Data: ', configData)
+        const updatedConfigData = {...configurationData, ...configData};
+        // setConfigurationData(prevConfigurationData => {
+        //     return {...prevConfigurationData, ...configData}
+        // });
+        setConfigurationData(updatedConfigData);
+
+
+
     }
 
     const configurationValue = {

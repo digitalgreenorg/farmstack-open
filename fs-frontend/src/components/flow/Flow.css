@@ -52,3 +52,10 @@
     color: var(--fs_primary);
     cursor: pointer;
 }
+
+.route__description {
+    height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
