@@ -24,3 +24,22 @@
 .component-config-header > .header, .component-config-header > .meta {
     margin-left: 50px;
 }
+
+.fs-conf-content .step.completed {
+    background-color: var(--fs_primary);
+    color: #fff;
+}
+
+.fs-conf-content .step.completed .content::before {
+    content: "";
+    position: absolute;
+    background-image: url('./Completed.png');
+    width: 20px;
+    height: 10px;
+    background-repeat: no-repeat;
+    left: -25px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.fs-conf-content .step.completed .description { color: #fff; }

@@ -15,7 +15,6 @@ function App() {
             <div className="FS__sidebar"><Sidebar /></div>
             <div className="FS__mainContent">
                 <Flow />
-                {/* <ConnectorMap /> */}
             </div>
         </div>
       </ConfigurationsProvider>

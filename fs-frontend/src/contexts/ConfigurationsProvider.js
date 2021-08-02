@@ -62,15 +62,8 @@ export function ConfigurationsProvider({children}) {
     }
 
     function updateConfigurationData(configData) {
-        console.log('Config Data: ', configData)
         const updatedConfigData = {...configurationData, ...configData};
-        // setConfigurationData(prevConfigurationData => {
-        //     return {...prevConfigurationData, ...configData}
-        // });
         setConfigurationData(updatedConfigData);
-
-
-
     }
 
     const configurationValue = {
