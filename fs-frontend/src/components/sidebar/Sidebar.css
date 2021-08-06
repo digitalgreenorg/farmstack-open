@@ -164,10 +164,11 @@
 }
 /* -------------------------------------------------------- */
 .custom-btn {
-    width: 130px;
+    margin-top: 20px;
+    width: 100%;
     height: 40px;
     padding: 10px 25px;
-    border: 2px solid #000;
+    border: 2px solid var(--fs_secondary);
     font-family: 'Lato', sans-serif;
     font-weight: 500;
     background: transparent;
@@ -182,7 +183,7 @@
   }
   .btn-3:hover{
     background: transparent;
-    color: #000;
+    color: var(--fs_secondary)0;
   }
   .btn-3 span {
     position: relative;
@@ -196,7 +197,7 @@
     content: "";
     left: 0;
     top: 0;
-    background: #000;
+    background: var(--fs_secondary);
     transition: all 0.3s ease;
   }
   .btn-3:before {
@@ -219,7 +220,7 @@
     content: "";
     right: 0;
     bottom: 0;
-    background: #000;
+    background: var(--fs_secondary);
     transition: all 0.3s ease;
   }
   .btn-3 span:before {

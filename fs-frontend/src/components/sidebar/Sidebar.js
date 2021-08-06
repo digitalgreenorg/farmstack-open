@@ -4,7 +4,7 @@ import { useConfigurations } from '../../contexts/ConfigurationsProvider';
 import './Sidebar.css';
 
 export default function Sidebar() {
-    const { routes, selectRoute } = useConfigurations();
+    const { routes, selectRoute, createNewRoute } = useConfigurations();
     const [routesList, setRoutesList] = useState([])
 
     function handleRouteSelect(index) {
@@ -53,13 +53,17 @@ export default function Sidebar() {
                             <span></span>
                             HOVER ME
                         </div>
-                        <button class="custom-btn btn-3"><span>Read More</span></button>
-
+                        
                         <div className="route__content cursor__pointer pos__rel btn-3">
-                            <Header size='medium' >Name</Header>
+                        <Header size='medium' >Name</Header>
                         </div>
-
+                        
                     </div> */}
+                    <div className="new__route__content">
+                        <button className="custom-btn btn-3" onClick={createNewRoute}>
+                            <span>New Route</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </>

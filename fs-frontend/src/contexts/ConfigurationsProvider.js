@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useCallback, useContext, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 const ConfigurationContext = createContext();
@@ -8,6 +8,7 @@ export function useConfigurations() {
 }
 
 export function ConfigurationsProvider({children}) {
+    const [routeAdded, setRouteAdded] = useState(false)
     const [configurationData, setConfigurationData] = useState({
         source: null,
         destination: null,
@@ -48,19 +49,34 @@ export function ConfigurationsProvider({children}) {
         }
     ])
 
+    function createNewRoute() {
+        const newRoute = {
+            id: uuidv4(),
+            name: 'Unnamed Route',
+            description: 'Add description about your route',
+            data: null
+        }
+
+        const updatedRoutes = [...routes];
+        updatedRoutes.push(newRoute);
+        setRoutes(updatedRoutes)
+        setRouteAdded(true)
+    }
+
     function updateRoutes(routeData) {
         const updatedRouteData = { ...currentRoute.route, ...routeData }
         const updatedRoutes = [...routes];
         updatedRoutes[currentRoute.index] = updatedRouteData
         setRoutes(updatedRoutes)
         selectRoute(currentRoute.index, updatedRouteData) // Update Current Route whenever, routes list changes
+        setRouteAdded(false)
     }
 
     const [currentRoute, setCurrentRoute] = useState({index: routes.length - 1, route: routes[routes.length - 1]})
 
-    function selectRoute(routeIndex, routeData = null) {
+    const selectRoute = useCallback((routeIndex, routeData = null) => {
         setCurrentRoute({index: routeIndex, route: routeData ? routeData : routes[routeIndex]})
-    }
+    }, [setCurrentRoute, routes])
 
     function updateConfigurationData(configData) {
         const updatedConfigData = {...configurationData, ...configData};
@@ -71,7 +87,7 @@ export function ConfigurationsProvider({children}) {
     const configurationValue = {
         configurationData,
         updateConfigurationData,
-        routes, currentRoute,
+        routes, currentRoute, createNewRoute,
         selectRoute, updateRoutes
     };
 
@@ -82,6 +98,11 @@ export function ConfigurationsProvider({children}) {
     // React.useEffect(() => {
     //     localStorage.setItem('FARMSTACK_configurationData', JSON.stringify(configurationData));
     // }, [configurationData])
+    React.useEffect(() => {
+        if (routeAdded) {
+            selectRoute(routes.length - 1)
+        }
+    }, [routes, routeAdded, selectRoute])
 
     return (
         <ConfigurationContext.Provider value={configurationValue}>
