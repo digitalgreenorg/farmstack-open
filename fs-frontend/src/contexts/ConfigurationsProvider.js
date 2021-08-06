@@ -22,31 +22,31 @@ export function ConfigurationsProvider({children}) {
             description: 'Add description about your route',
             data: null
         },
-        {
-            id: uuidv4(),
-            name: 'Route 2',
-            description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laudantium, incidunt.',
-            data: {
-                "source": {
-                  "route": "demo route",
-                  "connector": "CSV",
-                  "sourceDetails": "demo source details"
-                },
-                "destination": {
-                  "pairConnector": "demo pair connector"
-                },
-                "policyConfig": {
-                  "timeSeriesData": true,
-                  "anayticsData": true
-                }
-            }
-        },
-        {
-            id: uuidv4(),
-            name: 'Route 3',
-            description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laudantium, incidunt.',
-            data: null
-        }
+        // {
+        //     id: uuidv4(),
+        //     name: 'Route 2',
+        //     description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laudantium, incidunt.',
+        //     data: {
+        //         "source": {
+        //           "route": "demo route",
+        //           "connector": "CSV",
+        //           "sourceDetails": "demo source details"
+        //         },
+        //         "destination": {
+        //           "pairConnector": "demo pair connector"
+        //         },
+        //         "policyConfig": {
+        //           "timeSeriesData": true,
+        //           "anayticsData": true
+        //         }
+        //     }
+        // },
+        // {
+        //     id: uuidv4(),
+        //     name: 'Route 3',
+        //     description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laudantium, incidunt.',
+        //     data: null
+        // }
     ])
 
     function createNewRoute() {
