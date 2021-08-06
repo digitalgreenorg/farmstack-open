@@ -53,16 +53,18 @@ export function ConfigurationsProvider({children}) {
         const updatedRoutes = [...routes];
         updatedRoutes[currentRoute.index] = updatedRouteData
         setRoutes(updatedRoutes)
+        selectRoute(currentRoute.index, updatedRouteData) // Update Current Route whenever, routes list changes
     }
 
     const [currentRoute, setCurrentRoute] = useState({index: routes.length - 1, route: routes[routes.length - 1]})
 
-    function selectRoute(routeIndex) {
-        setCurrentRoute({index: routeIndex, route: routes[routeIndex]})
+    function selectRoute(routeIndex, routeData = null) {
+        setCurrentRoute({index: routeIndex, route: routeData ? routeData : routes[routeIndex]})
     }
 
     function updateConfigurationData(configData) {
         const updatedConfigData = {...configurationData, ...configData};
+        updateRoutes({data: updatedConfigData});
         setConfigurationData(updatedConfigData);
     }
 

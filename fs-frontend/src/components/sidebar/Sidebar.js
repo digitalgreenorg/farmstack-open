@@ -45,7 +45,20 @@ export default function Sidebar() {
                         })
                     }
                     {/* <div className="new__route__content">
-                        <button type="button" className="ui button fs-primary-outline-btn">New Route</button>
+                        <button type="button" className="button button--anthe"><span>New Route</span></button>
+                        <div class="button2">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            HOVER ME
+                        </div>
+                        <button class="custom-btn btn-3"><span>Read More</span></button>
+
+                        <div className="route__content cursor__pointer pos__rel btn-3">
+                            <Header size='medium' >Name</Header>
+                        </div>
+
                     </div> */}
                 </div>
             </div>

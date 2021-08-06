@@ -24,8 +24,10 @@ function Configuration({getConfigData}) {
     function getTabData(tabData) {
         const updatedStepData = {...stepData, ...tabData};
         setStepData(updatedStepData);
-        // Update the Context Data for the Source Tab
-        updateConfigurationData(updatedStepData);
+        // Update the Context Data only when last tab work completes
+        if (tabData?.policyConfig) {
+            updateConfigurationData(updatedStepData);
+        }
 
     }
 
