@@ -66,5 +66,5 @@ To get started see our [contribution guide](docs/contributing-to-farmstack.md).
 
 ## License
 
-@TODO - Add License
+Farmstack is licensed under Apache License 2.0. See [LICENSE](./LICENSE) file for licensing information
 
