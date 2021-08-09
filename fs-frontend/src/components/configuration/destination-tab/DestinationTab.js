@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { Form, Image, Label } from 'semantic-ui-react';
 import './DestinationTab.css';
 
-function DestinationTab({nextStep, collectData, stepData: { destination }}) {
+function DestinationTab({nextStep, collectData, destDataLoaded, stepData: { destination }}) {
     const [pairConnector, setPairConnector] = useState(destination ? destination.pairConnector : '');
     const [showLoader, setShowLoader] = useState(false);
-    const [dataLoaded, setDataLoaded] = useState(false);
+    const [dataLoaded, setDataLoaded] = useState(destDataLoaded ? destDataLoaded : false);
     const [submitted, setSubmitted] = useState(false);
 
     function handleSubmit(e, param) {

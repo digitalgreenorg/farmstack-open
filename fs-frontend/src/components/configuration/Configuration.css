@@ -43,3 +43,5 @@
 }
 
 .fs-conf-content .step.completed .description { color: #fff; }
+
+.fs-conf-content .step.completed::after { background-color: var(--fs_primary); }

@@ -8,6 +8,7 @@ import { useConfigurations } from '../../contexts/ConfigurationsProvider';
 function Configuration({getConfigData}) {
     const [activePane, setActivePane] = useState('source');
     const [stepData, setStepData] = useState({});
+    const [destDataLoaded, setDestDataLoaded] = useState(false);
     // Get the exposed context function to update the context data
     const { updateConfigurationData } = useConfigurations();
     
@@ -24,6 +25,9 @@ function Configuration({getConfigData}) {
     function getTabData(tabData) {
         const updatedStepData = {...stepData, ...tabData};
         setStepData(updatedStepData);
+        if (tabData?.destination) {
+            setDestDataLoaded(true)
+        }
         // Update the Context Data only when last tab work completes
         if (tabData?.policyConfig) {
             updateConfigurationData(updatedStepData);
@@ -46,7 +50,7 @@ function Configuration({getConfigData}) {
     const childrenData = {
         nextStep: switchToNextStep,
         collectData: getTabData,
-        stepData
+        stepData, destDataLoaded
     }
 
     return (
