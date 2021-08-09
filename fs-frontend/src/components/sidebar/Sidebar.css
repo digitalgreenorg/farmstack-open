@@ -1,19 +1,48 @@
+.routes__list__container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
 .sidebar__component > .ui.header {
-    color: #fff;
     text-align: center;
-    text-transform: uppercase;
+    text-transform: capitalize;
 }
 
 .route__content {
-    border: 2px solid var(--fs_primary);
-    margin-top: 10px;
+    border-bottom: 2px solid var(--fs_primary);
     margin-bottom: 10px;
-    border: 1px solid #fff;
-    border-radius: 20px;
-    padding: 10px 20px;
+    padding: 15px 10px;
+    position: relative;
+    width: 90%;
+    padding-bottom: 5px;
 }
 
-.route__content .ui.header { color: #fff; }
+.route__content::before {
+    content: "";
+    position: absolute;
+    border-top: 2px solid var(--fs_primary);
+    border-left: 2px solid var(--fs_primary);
+    height: 60%;
+    width: 10%;
+    transform: rotate(-45deg);
+    bottom: 2px;
+    left: -11px;
+}
+
+.route__content .ui.header { color: var(--fs_primary); }
+
+.new__route__content .ui.button.newRoute__Btn {
+    background-color: #F9F3DF;
+    color: #947E38;
+    text-transform: uppercase;
+}
+
+.new__route__content {
+    text-align: right;
+    padding-right: 10px;
+    margin-top: 20px;
+}
 /* -------------------------------------------------------------------- */
 .button {
 	pointer-events: auto;

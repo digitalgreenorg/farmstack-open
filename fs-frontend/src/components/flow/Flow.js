@@ -32,7 +32,7 @@ function Flow() {
         e.preventDefault();
 
         setRouteModal(false)
-        if (!routeName || !routeDesc) return; // Do not update, if the fields are blank.
+        if (!routeName || !routeDesc) { return; } // Do not update, if the fields are blank.
 
         const routeData = {
             name: routeName,
@@ -61,7 +61,7 @@ function Flow() {
                 <div className="ui container h_100_percent">
                     <div className="ui fluid card h_100_percent">
                         <div className="content">
-                            <div className="header cursor__pointer" onClick={() => setRouteModal(true)}>{currentRouteName}</div>
+                            <div className="header" onClick={() => setRouteModal(true)}><span aria-label="Click to edit Route details" className="hint--right cursor__pointer">{currentRouteName}</span></div>
                             <div className="meta route__description">{currentRouteDesc}</div>
                         </div>
                         <div className="content">
@@ -100,7 +100,7 @@ function Flow() {
                                 <div className="field">
                                     <label>Route name</label>
                                     <div className="ui input">
-                                        <input type="text" value={routeName} onChange={e => setRouteName(e.target.value)} />
+                                        <input type="text" placeholder={routeName} onChange={e => setRouteName(e.target.value)} />
                                     </div>
                                 </div>
                                 <div className="field">
@@ -108,7 +108,7 @@ function Flow() {
                                     <div className="ui input">
                                         <textarea
                                             rows={3}
-                                            value={routeDesc}
+                                            placeholder={routeDesc}
                                             onChange={e => setRouteDesc(e.target.value)}
                                         />
                                     </div>

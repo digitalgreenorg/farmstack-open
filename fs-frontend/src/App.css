@@ -99,7 +99,7 @@
     overflow-y: auto;
     box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
     padding: 10px;
-    background-color: var(--fs_primary);
+    padding-right: 0;
 }
 
 .FS__mainContent {

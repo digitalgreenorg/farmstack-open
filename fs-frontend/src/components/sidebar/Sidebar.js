@@ -20,21 +20,6 @@ export default function Sidebar() {
             <div className="sidebar__component">
                 <Header as='h2'>Active Routes</Header>
                 <div className="routes__list__container">
-                    {/* <div className="route__container">
-                        <div className="route__angle"></div>
-                        <div className="route__content">
-                            <Header size='medium' disabled>Route 1</Header>
-                        </div>
-                    </div> */}
-                    {/* <div className="route__content">
-                        <Header size='medium' disabled>Route 1</Header>
-                    </div>
-                    <div className="route__content">
-                        <Header size='medium' >Route 2</Header>
-                    </div>
-                    <div className="new__route__content">
-                        <button type="button" className="ui button fs-primary-outline-btn">New Route</button>
-                    </div> */}
                     {
                         routesList.map((route, index) => {
                             return (
@@ -44,24 +29,9 @@ export default function Sidebar() {
                             )
                         })
                     }
-                    {/* <div className="new__route__content">
-                        <button type="button" className="button button--anthe"><span>New Route</span></button>
-                        <div class="button2">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            HOVER ME
-                        </div>
-                        
-                        <div className="route__content cursor__pointer pos__rel btn-3">
-                        <Header size='medium' >Name</Header>
-                        </div>
-                        
-                    </div> */}
                     <div className="new__route__content">
-                        <button className="custom-btn btn-3" onClick={createNewRoute}>
-                            <span>New Route</span>
+                        <button className="ui large button newRoute__Btn" onClick={createNewRoute}>
+                            <span><i aria-hidden="true" className="plus icon" /></span> New Route
                         </button>
                     </div>
                 </div>
