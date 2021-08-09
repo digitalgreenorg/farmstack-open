@@ -70,19 +70,19 @@ function Configuration({getConfigData}) {
                             <div className="description">
                                 <div className="fs-conf-content">
                                     <div className="ui tablet stackable top attached fluid steps">
-                                        <div className={`step cursor__pointer ${activePane === 'source' ? 'active' : ''} ${stepData?.source ? ((activePane === 'source') ? '' : 'completed') : ''}`} onClick={e => switchToNextStep('source')}>
+                                        <div className={`step cursor__pointer ${activePane === 'source' ? 'active' : ''} ${stepData?.source ? ((activePane === 'source') ? '' : 'completed') : ''}`}>
                                             <div className="content pos__rel">
                                                 <div className="title">Step 1</div>
                                                 <div className="description">Source</div>
                                             </div>
                                         </div>
-                                        <div className={`step cursor__pointer ${activePane === 'destination' ? 'active' : ''} ${stepData?.destination ? ((activePane === 'destination') ? '' : 'completed') : ''}`} onClick={e => switchToNextStep('destination')}>
+                                        <div className={`step cursor__pointer ${activePane === 'destination' ? 'active' : ''} ${stepData?.destination ? ((activePane === 'destination') ? '' : 'completed') : ''}`} >
                                             <div className="content pos__rel">
                                                 <div className="title">Step 2</div>
                                                 <div className="description">Destination</div>
                                             </div>
                                         </div>
-                                        <div className={`step cursor__pointer ${activePane === 'policyConfig' ? 'active' : ''} ${stepData?.policyConfig ? ((activePane === 'policyConfig') ? '' : 'completed') : ''}`} onClick={e => switchToNextStep('policyConfig')}>
+                                        <div className={`step cursor__pointer ${activePane === 'policyConfig' ? 'active' : ''} ${stepData?.policyConfig ? ((activePane === 'policyConfig') ? '' : 'completed') : ''}`} >
                                             <div className="content pos__rel">
                                                 <div className="title">Step 3</div>
                                                 <div className="description">Configure Policy</div>
