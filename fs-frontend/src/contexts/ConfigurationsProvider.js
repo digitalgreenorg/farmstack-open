@@ -57,8 +57,7 @@ export function ConfigurationsProvider({children}) {
             data: null
         }
 
-        const updatedRoutes = [...routes];
-        updatedRoutes.push(newRoute);
+        const updatedRoutes = [...routes, {...newRoute}];
         setRoutes(updatedRoutes)
         setRouteAdded(true)
     }

@@ -4,6 +4,9 @@ import SourceTab from './source-tab/SourceTab';
 import DestinationTab from './destination-tab/DestinationTab';
 import ConfigurePolicyTab from './configure-policy-tab/ConfigurePolicyTab';
 import { useConfigurations } from '../../contexts/ConfigurationsProvider';
+import csv from '../../assets/images/csv_ico.svg';
+import gsheet from '../../assets/images/gsheet_ico.svg';
+import vector from '../../assets/images/Vector.png';
 
 function Configuration({getConfigData}) {
     const [activePane, setActivePane] = useState('source');
@@ -39,11 +42,11 @@ function Configuration({getConfigData}) {
         const connector = stepData?.source?.connector;
         switch(connector) {
             case 'CSV':
-                return <img src="/images/csv_ico.svg" alt="csv_icon" />
+                return <img src={csv} alt="csv_icon" />
             case 'GOOGLE_SHEET':
-                return <img src="/images/gsheet_ico.svg" alt="gsheet_icon" />
+                return <img src={gsheet} alt="gsheet_icon" />
             default:
-                return <img src="/images/Vector.png" alt="component_default" />
+                return <img src={vector} alt="component_default" />
         }
     }
 

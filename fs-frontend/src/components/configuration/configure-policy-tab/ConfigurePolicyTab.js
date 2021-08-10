@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { Form, Header, Image } from 'semantic-ui-react';
 import Checkbox from '../../Checkbox/Checkbox';
 import './ConfigurePolicyTab.css';
+import nodeLogo from '../../../assets/images/node_logo.png';
 
 
 function ConfigurePolicyTab({nextStep, collectData, stepData: { policyConfig }}) {
@@ -26,7 +27,7 @@ function ConfigurePolicyTab({nextStep, collectData, stepData: { policyConfig }})
             <div className="configurepolicy__tab__component">
                 <Header size='tiny'>Configure Usage Policy</Header>
                 <div className="ui block header">
-                    <Image src='/images/node_logo.png' circular />
+                    <Image src={nodeLogo} circular />
                     Merge Aggregate App
                 </div>
                 <Header size='tiny'>Select Output Files</Header>

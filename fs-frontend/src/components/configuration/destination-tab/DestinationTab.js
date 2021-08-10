@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Image, Label } from 'semantic-ui-react';
 import './DestinationTab.css';
+import destDGLogo from '../../../assets/images/destination_dg.png';
 
 function DestinationTab({nextStep, collectData, destDataLoaded, stepData: { destination }}) {
     const [pairConnector, setPairConnector] = useState(destination ? destination.pairConnector : '');
@@ -56,7 +57,7 @@ function DestinationTab({nextStep, collectData, destDataLoaded, stepData: { dest
                     {dataLoaded && (
                         <div className="other__destination__details">
                             <div className="destination__dg__image">
-                                <Image src='/images/destination_dg.png' circular />
+                                <Image src={destDGLogo} circular />
                             </div>
                             <div className="owner__details">
                                 <p className="ui header">Owner</p>
