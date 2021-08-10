@@ -17,7 +17,7 @@ function ConnectorMap() {
     return (
         <>
             <div className="provider__stack__container">
-                <div className="provider__content" style={{marginRight: '500px'}}>
+                <div className="provider__content">
                     <Header size='medium'>Data Provider 1</Header>
                     <div className="provider__img__container">
                         <Image src='/images/spreadsheets-icon.png' />
@@ -33,7 +33,6 @@ function ConnectorMap() {
                     <Header size='medium'>Farmer Activity Data</Header>
                     <p>farmstack/MySQL</p>
                 </div>
-                <div className="horizontal__divider" style={{width: '670px'}}></div>
             </div>
             <div className="consumer__stack__container">
                 <div className="provider__content">
@@ -45,16 +44,6 @@ function ConnectorMap() {
                     <button type="button" className="ui button fs-primary-outline-btn" style={{marginTop: '10px'}}>Process Data and View Result</button>
                 </div>
             </div>
-            {/* <div className="connector__map__component h_100_percent">
-                <div className="ui fluid card h_100_percent">
-                        <div className="content">
-                            <div className="header">Route 1</div>
-                            <div className="meta">This route is to combine data from a spreadsheet with a MySQL DB  while the data is joined based on a common ID and aggregated</div>
-                        </div>
-                        <div className="content">
-                        </div>
-                </div>
-            </div> */}
         </>
     )
 }
