@@ -7,6 +7,9 @@ import { useConfigurations } from '../../contexts/ConfigurationsProvider';
 import csv from '../../assets/images/csv_ico.svg';
 import gsheet from '../../assets/images/gsheet_ico.svg';
 import vector from '../../assets/images/Vector.png';
+import postgres from '../../assets/images/postgresql-ico.svg';
+import mysql from '../../assets/images/mysql_logo.png';
+import odk from '../../assets/images/odk_logo.svg';
 
 function Configuration({getConfigData}) {
     const [activePane, setActivePane] = useState('source');
@@ -45,6 +48,12 @@ function Configuration({getConfigData}) {
                 return <img src={csv} alt="csv_icon" />
             case 'GOOGLE_SHEET':
                 return <img src={gsheet} alt="gsheet_icon" />
+            case 'POSTGRES':
+                return <img src={postgres} alt="gsheet_icon" />
+            case 'MYSQL':
+                return <img src={mysql} alt="gsheet_icon" />
+            case 'ODK':
+                return <img src={odk} alt="gsheet_icon" />
             default:
                 return <img src={vector} alt="component_default" />
         }

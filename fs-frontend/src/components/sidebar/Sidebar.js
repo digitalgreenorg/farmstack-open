@@ -24,7 +24,7 @@ export default function Sidebar() {
                         routesList.map((route, index) => {
                             return (
                                 <div key={route.id} className="route__content cursor__pointer" onClick={() => handleRouteSelect(index)}>
-                                    <Header size='medium' >{route.name}</Header>
+                                    <Header size='small' >{route.name}</Header>
                                 </div>
                             )
                         })

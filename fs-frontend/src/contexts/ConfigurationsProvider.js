@@ -1,5 +1,6 @@
 import React, { createContext, useCallback, useContext, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { newRouteDefaults } from '../appConfig';
 
 const ConfigurationContext = createContext();
 
@@ -18,8 +19,8 @@ export function ConfigurationsProvider({children}) {
     const [routes, setRoutes] = useState([
         {
             id: uuidv4(),
-            name: 'Unnamed Route',
-            description: 'Add description about your route',
+            name: newRouteDefaults.name,
+            description: newRouteDefaults.description,
             data: null
         },
         // {
@@ -52,8 +53,8 @@ export function ConfigurationsProvider({children}) {
     function createNewRoute() {
         const newRoute = {
             id: uuidv4(),
-            name: 'Unnamed Route',
-            description: 'Add description about your route',
+            name: newRouteDefaults.name,
+            description: newRouteDefaults.description,
             data: null
         }
 

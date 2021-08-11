@@ -19,10 +19,13 @@
     border-radius: 10px;
     padding: 10px;
     min-height: 65px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .provider__img__container > img {
-    width: 50px;
+    width: 45px;
 }
 
 .provider__content {

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Flow.css';
+import { newRouteDefaults } from '../../appConfig';
 
 import Configuration from '../configuration/Configuration';
 import Modal from '../Modal/Modal';
@@ -50,8 +51,8 @@ function Flow() {
         setCurrentRouteName(currentRoute.route.name) 
         setCurrentRouteDesc(currentRoute.route.description)
         // Edit Form Details
-        // setRouteName(currentRoute.route.name)
-        // setRouteDesc(currentRoute.route.description)
+        setRouteName(currentRoute.route.name !== newRouteDefaults.name ? currentRoute.route.name : '')
+        setRouteDesc(currentRoute.route.description !== newRouteDefaults.description ? currentRoute.route.description : '')
         // Current Route Data 
         setCurrentRouteData(currentRoute.route.data)
     }, [setCurrentRouteDesc, setCurrentRouteName, currentRoute])
@@ -72,7 +73,7 @@ function Flow() {
 
                             {
                                 currentRouteData ? (
-                                    <ConnectorMap />
+                                    <ConnectorMap currentRoute={currentRoute} />
                                 ) : (
                                     <div className="description">
                                         <div className="fs-flow-content">
@@ -104,7 +105,7 @@ function Flow() {
                                 <div className={editRouteSubmitted && !routeName ? 'error field' : 'field'}>
                                     <label>Route name</label>
                                     <div className="ui input">
-                                        <input type="text" placeholder="Unnamed Route" value={routeName} onChange={e => setRouteName(e.target.value)} />
+                                        <input type="text" placeholder={newRouteDefaults.name} value={routeName} onChange={e => setRouteName(e.target.value)} />
                                     </div>
                                     {editRouteSubmitted && !routeName && <Label basic color='red' pointing>Please enter Route name.</Label>}
                                 </div>
@@ -113,7 +114,7 @@ function Flow() {
                                     <div className="ui input">
                                         <textarea
                                             rows={3}
-                                            placeholder="Add description about your route"
+                                            placeholder={newRouteDefaults.description}
                                             value={routeDesc}
                                             onChange={e => setRouteDesc(e.target.value)}
                                         />
