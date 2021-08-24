@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>MySQL Connector</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="container mt-4">
+      <form class="d-grid gap-3" action="/configure" method="POST" id="configurationForm">
+        <div class="row">
+          <div class="form-group col">
+            <label for="engine" class="form-label">DB Engine</label>
+              <select id="engine" class="form-select" name="engine">
+                <% Object.keys(db_engines).forEach(element => { %>
+                  <% if(config.db_engine === db_engines[element]) { %>
+                    <option selected>
+                  <% } else {%>
+                    <option>
+                  <% } %>
+                  <%= db_engines[element]%></option>
+                <% }); %>
+              </select>
+          </div>
+          <div class="form-group col">
+            <label for="host" class="form-label">Connection URI (host)</label>
+            <input name="host" type="text" class="form-control" placeholder="Connection URI" value="<%= config.db.host %>">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col">
+            <label for="port" class="form-label">Connection port</label>
+            <input name="port" type="text" class="form-control" placeholder="Connection port" value="<%= config.db.port %>">
+          </div>
+          <div class="form-group col">
+            <label for="database" class="form-label">Database Name</label>
+            <input name="database" type="text" class="form-control" placeholder="Database Name" value="<%= config.db.database %>">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col">
+            <label for="user" class="form-label">User</label>
+            <input name="user" type="text" class="form-control" placeholder="User" value="<%= config.db.user %>">
+          </div>
+          <div class="form-group col">
+            <label for="password" class="form-label">Password</label>
+            <input name="password" type="password" class="form-control" placeholder="Password" value="<%= config.db.password %>">
+          </div>
+        </div>
+
+        <div class="form-group col-12">
+          <label for="query" class="form-label">SQL Query</label>
+          <textarea name="query" class="form-control" placeholder="SELECT * FROM example_table" rows="3"><%= config.query.statement %></textarea>
+        </div>
+
+          <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-3 float-end">Save Configuration</button>
+              <button type="button" class="btn btn-secondary mb-3 mx-3 float-end" onclick="testConnection()">Test Configuration</button>
+              <span id="connection-status" class="text-success float-end my-auto"></span>
+              <span id="connection-failed" class="text-danger float-end invisible">❌ Connection Failed</span>
+          </div>
+        </form>
+        <script>
+          async function testConnection(){
+            try{
+              let connStatus = document.getElementById("connection-status");
+              connStatus.innerHTML = "";
+              let myForm = document.getElementById('configurationForm');
+              let formData = JSON.stringify(Object.fromEntries(new FormData(myForm)));
+              const response = await fetch(`/test_configuration`, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: formData
+              })
+              const json = await response.json()
+              console.log(json);
+              if(json.success){
+                connStatus.innerHTML = "✔️ Connection Successful"
+              } else {
+                connStatus.innerHTML = "❌ Connection Failed"
+              }
+            } catch(err){
+                console.log(err);
+            }
+          }
+        </script>
+    </div>
+  </body>
+</html>
