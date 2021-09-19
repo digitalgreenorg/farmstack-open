@@ -1,0 +1,23 @@
+.configurepolicy__tab__component > * {
+    margin-left: 110px !important;
+}
+
+.configurepolicy__tab__component > .ui.block.header {
+    background-color: #fff;
+    width: 250px;
+    color: #aaa;
+    display: flex;
+    align-items: center;
+}
+
+.configurepolicy__tab__component > .ui.block.header > img {
+    width: 25px;
+}
+
+.output__file__option {
+    margin-bottom: 20px;
+}
+
+.output__file__option > p {
+    margin-left: 34px !important;
+}

@@ -1,0 +1,54 @@
+.destination__tab__component .ui.form .inline.field > label {
+    width: 100px;
+}
+
+.destination__tab__component .ui.form .inline.field > select {
+    width: 20vw;
+    min-width: 250px;
+}
+
+.destination__tab__component .ui.form .inline.field .ui.input > input {
+    width: 20vw;
+    min-width: 250px;
+}
+
+.other__destination__details {
+    display: flex;
+    justify-content: center;
+    width: calc(100% - 250px);
+    margin-left: 110px;
+}
+
+.other__destination__details > * {
+    margin-right: 10px;
+}
+
+.other__destination__details p:not(:first-child) {
+    color: #ccc;
+}
+
+.other__destination__details > .destination__dg__image {
+    flex: .1;
+}
+
+.other__destination__details > .owner__details {
+    flex: .2;
+}
+
+.owner__details .ui.header {
+    font-size: 14px;
+}
+
+.other__destination__details > .merge__app__details {
+    flex: .7;
+}
+
+.merge__app__details .ui.block.header {
+    font-size: 14px;
+    color: #ccc;
+}
+.merge__app__details strong {
+    font-weight: bolder;
+    font-size: 12px;
+    color: #aaa;
+}

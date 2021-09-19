@@ -1,0 +1,47 @@
+.fs-configuration-container{
+    padding: 1em 0;
+}
+
+.step-change-btn-wrapper {
+    margin-top: 1em;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.component-config-header-img {
+    position: absolute;
+    border: 1px solid lightgray;
+    padding: 10px;
+    top: 10px;
+    left: 10px;
+    border-radius: 10px;
+}
+
+.component-config-header-img > img {
+    width: 20px;
+}
+
+.component-config-header > .header, .component-config-header > .meta {
+    margin-left: 50px;
+}
+
+.fs-conf-content .step.completed {
+    background-color: var(--fs_primary);
+    color: #fff;
+}
+
+.fs-conf-content .step.completed .content::before {
+    content: "";
+    position: absolute;
+    background-image: url('./Completed.png');
+    width: 20px;
+    height: 10px;
+    background-repeat: no-repeat;
+    left: -25px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.fs-conf-content .step.completed .description { color: #fff; }
+
+.fs-conf-content .step.completed::after { background-color: var(--fs_primary); }
