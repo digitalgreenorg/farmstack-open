@@ -1,0 +1,56 @@
+version: '3'
+services:
+
+  # The core platform, mounts docker control socket and route definition into the image
+  provider-core:
+    image: farmstack/trusted-connector
+    tty: true
+    stdin_open: true
+    volumes:
+      - ./logs/provider/:/root/log/
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ../../fs-assets/deploy/allow-all-flows.pl:/root/deploy/allow-all-flows.pl
+      - ../../fs-assets/etc/settings.mapdb:/root/etc/settings.mapdb
+      - ../../fs-assets/sample-certificates/provider-keystore.p12:/root/etc/provider-keystore.p12
+      - ../../fs-assets/sample-certificates/truststore.p12:/root/etc/truststore.p12
+      - ./video-library-provider-routes.xml:/root/deploy/video-library-provider-routes.xml
+    
+    # Uncomment to run the provider & consumer nodes on separate server 
+    # replace x.x.x.x with the consumer ip address
+    # extra_hosts:
+    #  - "consumer-core:x.x.x.x"
+
+    ports:
+      - 8989:8989
+    
+    # Using two networks ids-wide and provider-internal for external comunication and internal communication respectively
+    networks:
+      - ids-wide
+      - provider-internal
+
+  mysql-connector1:
+    image: farmstack/mysql-connector
+    ports:
+      - 3001:3001
+    networks: 
+      - provider-internal
+
+  mysql-connector2:
+    image: farmstack/mysql-connector
+    ports:
+      - 3002:3001
+    networks: 
+      - provider-internal
+
+  mysql-connector3:
+    image: farmstack/mysql-connector
+    ports:
+      - 3003:3001
+    networks: 
+      - provider-internal
+
+networks:
+  ids-wide:
+    driver: bridge
+  provider-internal:
+    driver: bridge
