@@ -14,6 +14,7 @@ services:
       - ../../fs-assets/sample-certificates/provider-keystore.p12:/root/etc/provider-keystore.p12
       - ../../fs-assets/sample-certificates/truststore.p12:/root/etc/truststore.p12
       - ./video-library-provider-routes.xml:/root/deploy/video-library-provider-routes.xml
+      - ./video-library-provider-routes2.xml:/root/deploy/video-library-provider-routes2.xml
     
     # Uncomment to run the provider & consumer nodes on separate server 
     # replace x.x.x.x with the consumer ip address
@@ -22,6 +23,9 @@ services:
 
     ports:
       - 8989:8989
+      - 29292:29292
+      - 29293:29293
+      - 29294:29294
     
     # Using two networks ids-wide and provider-internal for external comunication and internal communication respectively
     networks:
