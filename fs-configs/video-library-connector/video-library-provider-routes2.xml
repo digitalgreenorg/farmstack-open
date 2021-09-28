@@ -81,7 +81,7 @@
             </choice>
         </route>
 
-        <route id="sendProviderData1">
+        <route id="sendProviderData2">
             <from uri="direct:sendData"/>
             <!-- <from uri="timer://tenSecondsTimer?fixedRate=true&amp;period=10000&amp;delay=20000"/> -->
             <!-- ensure that contract agreement is made before sending -->
