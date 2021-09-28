@@ -39,7 +39,7 @@
         <route>
             <from uri="timer://contractRequest?repeatCount=1" />
             <setProperty name="artifactUri">
-                <constant>https://farmstack.digitalgreen.org/videoLibrary</constant>
+                <constant>https://farmstack.digitalgreen.org/videoLibraryGsheet</constant>
             </setProperty>
             <process ref="ContractRequestCreationProcessor" />
             <to uri="idscp2client://3.142.225.24:29293?awaitResponse=true&amp;connectionShareId=ucConnection&amp;sslContextParameters=#clientSslContext&amp;useIdsMessages=true"/>
@@ -62,7 +62,7 @@
         <route id="consumer">
             <from uri="idscp2client://3.142.225.24:29293?awaitResponse=true&amp;connectionShareId=ucConnection&amp;sslContextParameters=#clientSslContext&amp;useIdsMessages=true"/>
             <setProperty name="artifactUri">
-                <constant>https://farmstack.digitalgreen.org/videoLibrary</constant>
+                <constant>https://farmstack.digitalgreen.org/videoLibraryGsheet</constant>
             </setProperty>
             <!-- <process ref="ArtifactRequestCreationProcessor" /> -->
             <!-- <to uri="idscp2client://provider-core:29292?awaitResponse=true&amp;connectionShareId=ucConnection&amp;sslContextParameters=#clientSslContext&amp;useIdsMessages=true"/> -->
@@ -95,7 +95,7 @@
             <from uri="direct:syncData"/>
             <!-- <from uri="timer://tenSecondsTimer?fixedRate=true&amp;period=10000&amp;delay=20000"/> -->
             <setProperty name="artifactUri">
-                <constant>https://farmstack.digitalgreen.org/videoLibrary</constant>
+                <constant>https://farmstack.digitalgreen.org/videoLibraryGsheet</constant>
             </setProperty>
             <process ref="ArtifactRequestCreationProcessor" />
             <to uri="idscp2client://3.142.225.24:29293?awaitResponse=true&amp;connectionShareId=ucConnection&amp;sslContextParameters=#clientSslContext&amp;useIdsMessages=true"/>

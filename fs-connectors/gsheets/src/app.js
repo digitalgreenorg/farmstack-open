@@ -39,7 +39,7 @@ async function createSheet(){
 async function updatePermissions(permission){
   const driveResult = await drive.permissions.create({
     resource: permission,
-    fileId: spreadsheet.spreadsheetId,
+    fileId: config.spreadsheet.spreadsheetId,
     fields: 'id',
   });
   console.log("Sheet permission set for: "+permission.emailAddress);
