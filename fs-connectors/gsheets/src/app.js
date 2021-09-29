@@ -75,15 +75,15 @@ app.post('/data', async (req, res) => {
         const resource = {
           values,
         }
-        result = await sheets.spreadsheets.values.update({
+        var result = sheets.spreadsheets.values.update({
           spreadsheetId: spreadsheet.spreadsheetId,
           resource,
           range,
           valueInputOption: "RAW"
-        })
+        });
         console.log("Data Synced to Sheet: "+spreadsheet.spreadsheetId);
         res.json({
-          success: result.data, 
+          success: (await result).data, 
         });
       } else {
         res.json({
