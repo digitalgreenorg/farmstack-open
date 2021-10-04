@@ -70,7 +70,7 @@ def configure_gsheets(config):
         'email': config['email'],
     }
     retry_count = 0
-    max_retry_count = 3
+    max_retry_count = 10
     while(True):
         time.sleep(5)
         try:
@@ -85,6 +85,7 @@ def configure_gsheets(config):
             retry_count = retry_count+1
             if retry_count > max_retry_count:
                 break
+        time.sleep(55)
         print('Retrying...')
 
 def check_connector_status(connectors):
