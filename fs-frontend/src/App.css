@@ -1,0 +1,109 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --fs_primary: #d9b128;
+    --fs_secondary: #3d3d3f;
+}
+
+.fs-primary {
+    color: var(--fs_primary) !important;
+}
+
+.fs-secondary {
+    color: var(--fs_secondary) !important;
+}
+
+.fs-primary-btn {
+    color: #fff !important;
+    background-color: var(--fs_primary) !important;
+    border: 1px solid var(--fs_primary) !important;
+    margin-bottom: .5em;
+}
+
+.fs-primary-outline-btn {
+    color: var(--fs_primary) !important;
+    background-color: #fff !important;
+    border: 1px solid var(--fs_primary) !important;
+    margin-bottom: .5em;
+}
+
+.fs-secondary-btn {
+    color: #fff !important;
+    background-color: var(--fs_secondary) !important;
+    border: 1px solid var(--fs_secondary) !important;
+    margin-bottom: .5em;
+}
+
+.fs-secondary-outline-btn {
+    color: var(--fs_secondary) !important;
+    background-color: #fff !important;
+    border: 1px solid var(--fs_secondary) !important;
+    margin-bottom: .5em;
+}
+
+.cursor__pointer {
+    cursor: pointer;
+}
+
+.pos__rel {
+    position: relative;
+}
+
+.mandate__star {
+    color: red;
+    font-size: 10px;
+}
+
+.icon.info__icon {
+    color: gray;
+    margin-left: 5px;
+}
+
+.h_100_percent {
+    height: 100%;
+}
+
+.fs_mb_10 {
+    margin-bottom: 10px !important;
+}
+
+.vertical__divider_5 {
+    border-right: 1px solid #ccc;
+    height: 5rem;
+    width: 0;
+    margin: 8px auto;
+}
+
+.flex__container {
+    display: flex;
+}
+
+/* ----------- GENERAL CSS RULES ENDS ---------- */
+
+.ui.steps .step.active .title {
+    color: var(--fs_primary);
+}
+
+.FS__contentWrapper {
+    height: calc(100vh - 60px);
+    display: grid;
+    grid-template-columns: 250px 1fr;
+}
+
+.FS__sidebar {
+    max-height: 100%;
+    overflow-y: auto;
+    padding: 10px;
+    padding-right: 0;
+    border-right: 1px solid lightgray;
+}
+
+.FS__mainContent {
+    max-height: 100%;
+    overflow-y: auto;
+    padding: 10px;
+}

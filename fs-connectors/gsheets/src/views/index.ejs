@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Gsheets Connector</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <style>
+      .icon {
+          position: relative;
+          display: inline;
+          left: 0.1em
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container mt-4">
+      <form class="d-grid gap-3" action="/configure" method="POST" id="configurationForm">
+        <h2 class="col-auto mx-auto">Google Sheet Configuration</h2>
+        <div class="row">
+          <div class="form-group col">
+            <label for="sheet_title" class="form-label">Sheet Title</label>
+            <input name="sheet_title" type="text" class="form-control" placeholder="Sheet Title" value="<%= config.sheet_title %>">
+          </div>
+
+          <div class="form-group col">
+            <label for="email" class="form-label">Email</label>
+            <input name="email" type="text" class="form-control" placeholder="email" value="<%= config.email %>">
+          </div>
+        </div>
+
+        <% if (config.spreadsheet) { %> 
+          <div class="col-auto">
+            <label for="url" class="form-label">Sheet URL: </label>
+            <a name="url" href="<%= config.spreadsheet.spreadsheetUrl %>" target="_blank"><%= config.spreadsheet.spreadsheetUrl %></a>
+          </div>
+        <% } %>
+
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary mb-3 float-end">Save Configuration</button>
+          <button type="button" class="btn btn-secondary mb-3 mx-3 float-end" onclick="syncData()">Sync Data</button>
+
+          <span id="connection-status" class="text-success float-end my-auto"></span>
+          <span id="connection-failed" class="text-danger float-end invisible">❌ Connection Failed</span>
+        </div>
+      </form>
+      <script>
+        async function syncData(){
+          try{
+            let connStatus = document.getElementById("connection-status");
+            connStatus.innerHTML = `<svg class="icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: none repeat scroll 0% 0%; display: block;" width="25px" height="25px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+<circle cx="50" cy="50" fill="none" stroke="#1d3f72" stroke-width="10" r="35" stroke-dasharray="164.93361431346415 56.97787143782138">
+  <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
+</circle>
+</svg> Syncing Data`;
+            let myForm = document.getElementById('configurationForm');
+            let formData = JSON.stringify(Object.fromEntries(new FormData(myForm)));
+            const response = await fetch(`http://localhost:9001/data/sync`, {
+              method: 'GET'
+            })
+            const json = await response.json()
+            // console.log(json);
+            if(json.success){
+              connStatus.innerHTML = "✔️ Syncing Successful"
+            } else {
+              connStatus.innerHTML = "❌ Syncing Failed"
+            }
+          } catch(err){
+              console.log(err);
+          }
+        }
+      </script>
+    </div>
+  </body>
+</html>

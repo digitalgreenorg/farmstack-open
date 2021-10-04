@@ -9,18 +9,30 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700,800|Roboto:400,500,700" rel="stylesheet">
     <link rel="icon" type="image/ico" href="/static/images/favicon.ico"/>
 
+    {% comment %} <link rel="stylesheet" href="/static/css/bootstrap.min.css"> {% endcomment %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/bootstrap-select.min.css">
+
     <link rel="stylesheet" href="/static/css/theme.css">
     <link rel="stylesheet" href="/static/css/external-styles.css">
     <link rel="stylesheet" href="/static/css/style.css">
+
 
     <script src="/static/js/jquery.js"></script>
     <script src="/static/js/popper.js"></script>
     <script src="/static/js/bootstrap.js"></script>
     <script src="/static/js/fontawesome.js"></script>
+    <script src="/static/js/bootstrap-select.min.js"></script>
 </head>
 <body>
     
-    <nav class="fs-navbar"></nav>
+    <nav class="fs-navbar">
+        <div class="fs-sidebar-top-left-container container">
+            <div class="logo-data">
+                <a href="/"><img src="/static/images/logo.png" /></a>
+            </div>
+        </div>
+    </nav>
     <div class="loader-container">
         <div class="loader-itself">
             <i class="fas fa-circle-notch fa-spin"></i>
@@ -38,7 +50,7 @@
         </div>
     </div>
     <div class="main-wrapper d-flex">
-        <div class="fs-sidebar">
+        <!-- <div class="fs-sidebar">
             <div class="fs-sidebar-top-left-container">
                 <div class="logo-data">
                     <a href="/"><img src="/static/images/logo.png" /></a>
@@ -64,7 +76,7 @@
                     </a>
                 </li>
             </ul>
-        </div>
+        </div> -->
         <!-- End Sidebar-->
     {% block content %}{% endblock content %}
     </div>

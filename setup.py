@@ -44,22 +44,24 @@ def start_setup():
         else:
             activator_string = ""
     
-    requirements = [" --upgrade pip","bcrypt", "certifi", "cffi", 
-                    "chardet", "cryptography", "Django==2.2", "python_on_whales",
-                    "django-rest-swagger==2.2.0", "djangorestframework==3.12.4", 
-                    "idna==2.10", "paramiko==2.7.2", "pycparser", 
-                    "PyNaCl", "pytz", "PyYAML", "requests", "six", 
-                    "sqlparse", "uritemplate==3.0.1", "urllib3==1.26.4", 
-                    "django-cors-headers", "docker"]
+    # requirements = [" --upgrade pip","bcrypt", "certifi", "cffi", 
+    #                 "chardet", "cryptography", "Django==2.2", "python_on_whales",
+    #                 "django-rest-swagger==2.2.0", "djangorestframework==3.12.4", 
+    #                 "idna==2.10", "paramiko==2.7.2", "pycparser", 
+    #                 "PyNaCl", "pytz", "PyYAML", "requests", "six", 
+    #                 "sqlparse", "uritemplate==3.0.1", "urllib3==1.26.4", 
+    #                 "django-cors-headers", "docker"]
 
     os.system(init_command)
 
-    for req in requirements:
-        if not os_name.startswith('win'):
-            if not os_name.startswith('linux'):
-                activator_string += "pip install %s;" % (req)
-            else:
-                activator_string += '''.venv/bin/pip install %s;''' % (req)
+    # for req in requirements:
+    if not os_name.startswith('win'):
+        if not os_name.startswith('linux'):
+            activator_string += "pip install --upgrade pip;"
+            activator_string += "pip install -r fs-server/requirements.txt;"
+        else:
+            activator_string += ".venv/bin/pip install --upgrade pip;"
+            activator_string += '''.venv/bin/pip install  -r fs-server/requirements.txt;'''
     
     print(activator_string)
     os.system(activator_string)

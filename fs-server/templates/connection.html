@@ -1,128 +1,40 @@
 {% extends "base.html" %}
 
 {% block content %}
-        <!-- Start Content -->
-        <div class="fs-main-content fs-tab container">
-            <div class="content-wrapper connection-container w-75 mx-auto">
-                <h2 class="text-center mb-4 mt-2">Setup your Connector</h2>
-                <ul class="nav nav-pills nav-fill flex-column flex-sm-row mb-2" id="myTab" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link mb-sm-3 active" id="source-tab" data-toggle="tab" href="#source" role="tab" aria-controls="source" aria-selected="true">
-                            <!-- <span class="nav-link-icon"><i class="fas fa-circle"></i></span> -->
-                            <span id="tab"><span id="number">1</span>Create a provider</span>
-                        </a>
-                    </li>
-                    <i class="fas fa-arrow-right fa-lg next-arrow"></i>
-                    <li class="nav-item">
-                        <a class="nav-link mb-sm-3" id="destination-tab" data-toggle="tab" href="#destination" role="tab" aria-controls="destination" aria-selected="false">
-                            <!-- <span class="nav-link-icon"><i class="fas fa-circle"></i></span> -->
-                            <span id="tab"><span id="number">2</span>Create a consumer</span>
-                        </a>
-                    </li>
-                    <i class="fas fa-arrow-right fa-lg next-arrow"></i>
-                    <li class="nav-item">
-                        <a class="nav-link mb-sm-3" id="connection-tab" data-toggle="tab" href="#connection" role="tab" aria-controls="connection" aria-selected="false">
-                            <!-- <span class="nav-link-icon"><i class="fas fa-circle"></i></span> -->
-                            <span id="tab"><span id="number">3</span>Set up connection</span>
-                        </a>
-                    </li>
-                </ul>
-                <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="source" role="tabpanel" aria-labelledby="source-tab">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="mb-0">Set up provider.</h5>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <label for="name">Provider Name</label>
-                                    <input type="text" class="form-control" placeholder="" id="provider_name" name="connector_name">
-                                    <small id="providerHelp" class="form-text text-muted">Example: provider1, provider-project-1</small>
-                                    {% comment %} <input hidden type="text" class="form-control" name="status" value="active">
-                                    <input hidden type="text" class="form-control" name="connector_type" value="provider"> {% endcomment %}
-                                </div>
-                                <div class="d-flex justify-content-end btn-container-right mt-2">
-                                    <button type="button" class="btn btn-primary-2" onclick="changeTab('destination')">Next</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <div class="fs-main-content container">
 
-                    <!-- First Tab content end -->
+            <div class="table__container">
+                <div class="add__btnContainer mb-3 text-right">
+                    <button type="button" class="btn btn-sm btn-secondary btn-icon mr-4 rounded-corners" onclick="location.reload();">
+                        <span class="btn-inner--text">Refresh</span>
+                        <span class="btn-inner--icon"><i class="fa fa-sync"></i></span>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-primary-2 btn-icon rounded-corners" data-toggle="modal" data-target="#modal_1" onclick="changeTab(); observeType()">
+                        <span class="btn-inner--text">Add New</span>
+                        <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
+                    </button>
+                </div>
+                {% include "connector_table.html" %}
+                
+                <!-- Modal -->
+                <div class="modal fade" id="modal_1" tabindex="-1" role="dialog" aria-labelledby="modal_1" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <button data-dismiss="modal" type="button" class="btn btn-primary btn-sm btn-icon-only rounded-circle fs__modal__closeIcon">
+                                <span class="btn-inner--icon"><i class="fas fa-times"></i></span>
+                            </button>
+                            <div class="modal-body">
+                                <div class="configuration__header text-center text-uppercase mb-4">
+                                    <h4>Configure a connector</h4>
+                                </div>
+                                {% include "modal/provider/provider_base.html" %}
 
-                    <div class="tab-pane fade" id="destination" role="tabpanel" aria-labelledby="destination-tab">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="mb-0">Set up consumer.</h5>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <label for="name">Consumer Name</label>
-                                    <input type="text" class="form-control" placeholder="" id="consumer_name" name="name">
-                                    <small id="consumerHelp" class="form-text text-muted">Example: consumer1, consumer-app-1</small>
-                                    {% comment %} <input hidden type="text" class="form-control" name="status" value="active">
-                                    <input hidden type="text" class="form-control" name="connector_type" value="consumer"> {% endcomment %}
-                                </div>
-                                <!-- <div class="form-group">
-                                    <label for="port">Port</label>
-                                    <input type="text" class="form-control disbaled-control" placeholder="8081" name="port" disabled>
-                                </div> -->
-                                <!-- <div class="form-group">
-                                    <label for="destination_poth">Git Repo</label>
-                                    <input type="text" class="form-control disbaled-control" placeholder="https://github.com/digitalgreenorg/farmstack-open" name="destination_poth" disabled>
-                                </div> -->
-                                <div class="d-flex  justify-content-end btn-container-right mt-2">
-                                    <button type="button" class="btn btn-light mr-2" onclick="changeTab()">Previous</button>
-                                    <button type="button" class="btn btn-primary-2 ml-2" onclick="changeTab('connection')">Next</button>
-                                </div>
+                                {% include "modal/consumer/consumer_base.html" %}
                             </div>
                         </div>
                     </div>
-                    <!-- Second Tab End-->
-                    <div class="tab-pane fade" id="connection" role="tabpanel" aria-labelledby="connection-tab">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="mb-0">Confirm Connection</h5>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="detail-item source-details">
-                                    <h6>Provider:</h6>
-                                    <div class="data-item">
-                                        <div class="data-item-title"><strong>Name: </strong></div>
-                                        <div class="data-item-details" id="source_name"></div>
-                                    </div>
-                                </div>
-                                <div class="detail-item destination-details">
-                                    <h6>Consumer:</h6>
-                                    <div class="data-item">
-                                        <div class="data-item-title"><strong>Name: </strong></div>
-                                        <div class="data-item-details" id="destination_name"></div>
-                                    </div>
-                                    <!-- <div class="data-item">
-                                        <div class="data-item-title"><strong>Port: </strong></div>
-                                        <div class="data-item-details">8081</div>
-                                    </div> -->
-                                    <!-- <div class="data-item">
-                                        <div class="data-item-title"><strong>Git Repo: </strong></div>
-                                        <div class="data-item-details">https://github.com/digitalgreenorg/farmstack-open</div>
-                                    </div> -->
-                                </div>
-                                <div class="d-flex justify-content-end btn-container-right mt-2">
-                                    <button type="button" class="btn btn-light mr-2" onclick="changeTab('destination')">Previous</button>
-                                    <button type="button" id="submit" class="btn btn-primary-2 ml-2" onclick="loaderDemo()">Set up connection</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="alert alert-light text-danger invisible mt-2" role="alert" id="alert"></div>
+                </div>
             </div>
-            <!-- content-wrapper end-->
+
         </div>
-            <!-- content end-->
 {% endblock content %}

@@ -1,0 +1,61 @@
+.fs-flow-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.fs-flow-content p {
+    margin: .5em 0;
+}
+
+.card.h_100_percent .content:last-child {
+    flex-grow: 25;
+}
+
+.fs-flow-component .rodal-dialog {
+    width: 80vw !important;
+    height: 100vh !important;
+}
+
+.fs-flow-component .rodal-close {
+    top: 6px !important;
+    right: 8px !important;
+}
+
+.node-ico-wrapper, .spreadsheet-ico-wrapper {
+    border: 1px solid #38b000;
+    border-radius: 50%;
+    background-color: #fff;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 12px;
+}
+
+.spreadsheet-ico-wrapper {
+    padding: 10px 11px;
+}
+
+.spreadsheet-ico-wrapper > svg {
+    width: 24px;
+    fill: #38b000;
+}
+
+.add-provider-container {
+    border: 1px solid var(--fs_primary);
+    text-align: center;
+    padding: 15px 30px;
+    margin: 10px auto;
+    border-radius: 10px;
+    color: var(--fs_primary);
+    cursor: pointer;
+}
+
+.route__description {
+    height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

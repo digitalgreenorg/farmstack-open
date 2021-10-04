@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:camel="http://camel.apache.org/schema/spring"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+          http://camel.apache.org/schema/spring
+          http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+    <camel:sslContextParameters id="clientSslContext" certAlias="1.0.1">
+        <camel:keyManagers keyPassword="password">
+            <camel:keyStore resource="etc/provider-keystore.p12" password="password"/>
+        </camel:keyManagers>
+        <camel:trustManagers>
+            <camel:keyStore resource="etc/truststore.p12" password="password"/>
+        </camel:trustManagers>
+    </camel:sslContextParameters>
+
+    <!-- The following defines a single bean called TypeExtractionProcessor implemented by the POJO de.fhg.aisec.ids.camel.idscp2.processors.IdsMessageTypeExtractionProcessor -->
+  <bean id="TypeExtractionProcessor" class="de.fhg.aisec.ids.camel.idscp2.processors.IdsMessageTypeExtractionProcessor" />
+  
+  <!-- The following defines a single bean called ContractOfferCreationProcessor implemented by the POJO de.fhg.aisec.ids.camel.idscp2.processors.ContractOfferCreationProcessor -->
+  <bean id="ContractOfferCreationProcessor" class="de.fhg.aisec.ids.dgprocessors.ContractOfferCreationProcessor" />
+  
+  <!-- The following defines a single bean called ContractAgreementReceiverProcessor implemented by the POJO de.fhg.aisec.ids.camel.idscp2.processors.ContractAgreementReceiverProcessor -->
+  <bean id="ContractAgreementReceiverProcessor" class="de.fhg.aisec.ids.camel.idscp2.processors.ContractAgreementReceiverProcessor" />
+  
+  <!-- The following defines a single bean called ResourceUpdateCreationProcessor implemented by the POJO de.fhg.aisec.ids.camel.idscp2.processors.ResourceUpdateCreationProcessor -->
+  <bean id="ResourceUpdateCreationProcessor" class="de.fhg.aisec.ids.camel.idscp2.processors.ResourceUpdateCreationProcessor" />
+
+    <camelContext xmlns="http://camel.apache.org/schema/spring">
+        <dataFormats>
+            <json id="jack" library="Jackson" prettyPrint="true"/>
+        </dataFormats>
+        <route>
+      <!-- timer creates a loop -->
+      <!-- repeatCount - Specifies a maximum limit of number of fires. So if you set it to 1, the timer will only fire once. If you set it to 5, it will only fire five times. A value of zero or negative means fire forever. -->
+      <from uri="timer://contractRequest?repeatCount=1" />
+      
+      <!-- The SetProperty allows us to set a property on our exchange i.e it can be retrieve later on from the headers -->
+      <setProperty name="artifactUri">
+        <constant>https://farmstack.digitalgreen.org/databaseConnectorExample</constant>
+      </setProperty>
+      <setProperty name="containerUri">
+        <constant>https://hub.docker.com/layers/farmstack/merge-csv-nodejs/latest/images/sha256-31dd26dc5f7c0a43b6e4559b81022107bd90becce575ce9eca727b4afefdc6fc#8081</constant>
+      </setProperty>
+      <!-- The Processor interface is used to implement consumers of message exchanges or to implement a Message Translator i.e process the message into correct format. -->
+      
+      <!-- Accpets incoming message to process -->
+      <process ref="ContractOfferCreationProcessor" />
+      
+      <to uri="idscp2client://consumer-core:29292?awaitResponse=true&amp;connectionShareId=ucConnection&amp;sslContextParameters=#clientSslContext&amp;useIdsMessages=true"/>
+      
+      <!-- Checks message and it's type based on its headers. -->
+      <process ref="TypeExtractionProcessor"/>
+      
+      <!-- The Content Based Router from the EIP patterns allows you to route messages to the correct destination based on the contents of the message exchanges. -->
+      <choice>
+        <when>
+          <!-- Check for valid contract message  -->
+          <simple>${exchangeProperty.ids-type} == 'ContractAgreementMessage'</simple>
+          <log message="### Handle ContractAgreementMessage ###"/>
+          
+          <!-- Only processing of incoming request must be performed, no reply -->
+          <process ref="ContractAgreementReceiverProcessor"/>
+        </when>
+        <otherwise>
+          <!-- Log if invalid agreement is found -->
+          <log loggingLevel="ERROR" message="Expected ContractAgreementMessage, but received:\n${body}\n### Header: ###\n${headers[idscp2-header]}"/>
+        </otherwise>
+      </choice>
+      <!-- removes idscp2 header -->
+      <removeHeader headerName="idscp2-header" />
+      <setBody>
+        <simple>${null}</simple>
+      </setBody>
+    </route>
+
+    <route id="sendData">
+      <!-- <from uri="direct:update"/> -->
+      <from uri="timer://tenSecondsTimer?fixedRate=true&amp;period=100000&amp;delay=20000"/>
+      <to uri="http://mysql-connector:3001/data"/>
+      <!-- ensure that contract agreement is made before sending-->
+      <delay asyncDelayed="true">
+        <constant>10000</constant>
+      </delay>
+      <log message="Sending data from db"/>
+      <setProperty name="artifactUri">
+        <constant>https://farmstack.digitalgreen.org/databaseConnectorExample</constant>
+      </setProperty>
+      <!-- check this -->
+      <process ref="ResourceUpdateCreationProcessor" />
+      <to uri="idscp2client://consumer-core:29292?awaitResponse=true&amp;connectionShareId=ucConnection&amp;sslContextParameters=#clientSslContext&amp;useIdsMessages=true"/>
+      <!-- Sets the correct header for the text answer "OK" -->
+      <setHeader name="Content-Type">
+        <constant>application/json</constant>
+      </setHeader>
+    </route>
+
+    </camelContext>
+
+</beans>

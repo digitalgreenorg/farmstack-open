@@ -1,0 +1,62 @@
+{% block connector_table %}
+<div class="table__content">
+    <table class="table table-hover table-cards align-items-center">
+        <thead class="card-header">
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">Connector</th>
+                <th scope="col">Paired Connector</th>
+                <th scope="col">Usage Policy</th>
+                <th scope="col">Status</th>
+                <th scope="col">Homepage</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for connector in connectors %}
+            <tr class="bg-white">
+                <th><img src="/static/images/{{connector.connector_app.icon}}" alt="" width="44px"></th>
+                <td scope="row">
+                    <div class="media-body">
+                        <h6 class="h5 font-weight-normal mb-0">{{ connector.connector_app.display_name }}</h6>
+                        <span class="font-weight-normal text-muted text-uppercase">Connector {{ forloop.counter  }}</span>
+                    </div>
+                </td>
+                <td> {{ connector.paired_connector }}</td>
+                <td><span class="text-muted addConnector__cell" data-toggle="modal" data-target="#modal_1">Restricted to {{connector.connector_app.display_name}} App</span></td>
+                <td><span class="badge badge-lg badge-pill badge-secondary text-uppercase">Checking</span></td>
+                <td><a class="text-primary" href="http://localhost:{{ connector.connector_app.port }}" target="_blank">Open Connector Homepage <i class="fas fa-external-link-alt" aria-hidden="true"></i>
+</a></td>
+                <td><a href="/stop_connector/?id={{ connector.id }}"><i class="fa fa-trash text-danger" aria-hidden="true"></i></a></td>
+            </tr>
+            <tr class="table-divider"></tr>
+
+        {% endfor %}
+            <!-- <tr class="bg-white">
+                <th scope="row">
+                    <div class="media-body">
+                        <h6 class="h5 font-weight-normal mb-0">Connector 1</h6>
+                        <span class="font-weight-normal text-muted text-uppercase">Consumer</span>
+                    </div>
+                </th>
+                <td>Connector 1 Paired</td>
+                <td><span class="text-muted addConnector__cell" data-toggle="modal" data-target="#modal_1" onclick="changeTab('usage', true)">Configure usage policy</span></td>
+                <td><span class="badge badge-lg badge-pill badge-danger text-uppercase">Danger</span></td>
+            </tr>
+            <tr class="table-divider"></tr>
+            <tr class="bg-white">
+                <th scope="row">
+                    <h6 class="h5 font-weight-normal mb-0">Connector 2</h6>
+                    <span class="font-weight-normal text-muted text-uppercase">Producer</span>
+                </th>
+                <td>
+                    <span class="text-muted addConnector__cell" data-toggle="modal" data-target="#modal_1" onclick="changeTab('destination', true)">Add Connector</span>
+                </td>
+                <td>Lorem ipsum dolor sit.</td>
+                <td><span class="badge badge-lg badge-pill badge-success text-uppercase">Success</span></td>
+            </tr>
+            <tr class="table-divider"></tr> -->
+        </tbody>
+    </table>
+</div>
+
+{% endblock connector_table %}

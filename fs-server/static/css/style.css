@@ -129,7 +129,7 @@
 
 /* Layout CSS Starts */
 .fs-navbar {
-    padding: 1rem;
+    /* padding: 1rem; */
     /* background-color: #242A31; */
     background-color: #3d3d3f;
     position: absolute;
@@ -208,7 +208,8 @@
 }
 .fs-main-content {
     padding-top: 3.5rem;
-    width: calc(100% - 15rem);
+    /* width: calc(100% - 15rem); */
+    width: 100%;
     transition: all 0.5s ease;
     max-height: 100vh;
     overflow-y: auto;
@@ -260,4 +261,112 @@
     .page-title .btn {
         width: 100%;
     }
+}
+
+/* ----------------------------------------------------------- */
+
+.table__container {
+    /* background-color: red; */
+    height: 100%;
+    padding: 20px;
+}
+
+.table__content {
+    /* background-color: yellow; */
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.type__details__container {
+    /* display: none; */
+}
+
+.addConnector__cell {
+    text-transform: uppercase;
+    cursor: pointer;
+
+    position: relative;
+    padding: 0.2em 0;
+}
+
+.addConnector__cell::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0.1em;
+    background-color: #adb5bd;
+    transition: opacity 300ms, transform 300ms;
+
+    opacity: 1;
+    transform: scale(0);
+    transform-origin: center;
+}
+  
+.addConnector__cell:hover::after,
+.addConnector__cell:focus::after{
+    transform: scale(1);
+}
+
+.fs__modal__closeIcon {
+    position: absolute;
+    right: -15px;
+    top: -15px;
+    font-size: 18px;
+    color: var(--primary-hover);
+    background: var(--primary);
+    border-color: var(--primary);
+    cursor: pointer;
+}
+
+.fs__modal__closeIcon:hover {
+    color: var(--primary-hover);
+    background: var(--primary-light);
+    border-color: var(--primary-light);
+}
+
+.stepper__container {
+    display: none;
+}
+
+.con-selector input{
+    margin:0;padding:0;
+    -webkit-appearance:none;
+       -moz-appearance:none;
+            appearance:none;
+}
+
+.con-selector input:active +.connector-label{opacity: .9;}
+.con-selector input:checked +.connector-label{
+    -webkit-filter: none;
+       -moz-filter: none;
+            filter: none;
+}
+
+.connector-label{
+    cursor:pointer;
+    background-size:contain;
+    background-repeat:no-repeat;
+    background-position: center top;
+    text-align: center;
+    display:inline-block;
+    width:100px;height:70px;
+    -webkit-transition: all 100ms ease-in;
+       -moz-transition: all 100ms ease-in;
+            transition: all 100ms ease-in;
+    -webkit-filter: brightness(1.8) grayscale(1) opacity(.7);
+       -moz-filter: brightness(1.8) grayscale(1) opacity(.7);
+            filter: brightness(1.8) grayscale(1) opacity(.7);
+}
+.connector-label:hover{
+    -webkit-filter: brightness(1.2) grayscale(.5) opacity(.9);
+       -moz-filter: brightness(1.2) grayscale(.5) opacity(.9);
+            filter: brightness(1.2) grayscale(.5) opacity(.9);
+}
+
+
+.rounded-corners {
+    border-radius: 100px!important;
 }

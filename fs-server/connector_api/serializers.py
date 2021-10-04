@@ -6,4 +6,4 @@ class ConnectorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Connector
-        fields = ('name', 'connector_type', 'status')
+        fields = ('connector_type', 'status', 'connector_app', 'paired_connector')
