@@ -1,0 +1,24 @@
+{% block tab_bar %}
+<ul class="nav nav-pills nav-fill flex-column flex-sm-row mb-2" id="myTab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link mb-sm-3 active" id="init-tab" data-toggle="tab" href="#init" role="tab" aria-controls="init" aria-selected="true">
+            <!-- <span class="nav-link-icon"><i class="fas fa-circle"></i></span> -->
+            <span id="tab"><span id="number">1</span>Initialize</span>
+        </a>
+    </li>
+    <i class="fas fa-arrow-right fa-lg next-arrow"></i>
+    <li class="nav-item">
+        <a class="nav-link mb-sm-3" id="configure-tab" data-toggle="tab" href="#configure" role="tab" aria-controls="configure" aria-selected="false">
+            <!-- <span class="nav-link-icon"><i class="fas fa-circle"></i></span> -->
+            <span id="tab"><span id="number">2</span>Configure</span>
+        </a>
+    </li>
+    <i class="fas fa-arrow-right fa-lg next-arrow"></i>
+    <li class="nav-item">
+        <a class="nav-link mb-sm-3" id="connect-tab" data-toggle="tab" href="#connect" role="tab" aria-controls="connect" aria-selected="false">
+            <!-- <span class="nav-link-icon"><i class="fas fa-circle"></i></span> -->
+            <span id="tab"><span id="number">3</span>Connect</span>
+        </a>
+    </li>
+</ul>
+{% endblock tab_bar %}

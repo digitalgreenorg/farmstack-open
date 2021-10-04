@@ -1,0 +1,139 @@
+{% block provider_modal %}
+<div class="stepper__container connection-container">
+
+    {% block tab_bar %}
+        <ul class="nav nav-pills nav-fill flex-column flex-sm-row mb-2" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link mb-sm-3 active" id="source-tab" data-toggle="tab" href="#source" role="tab" aria-controls="source" aria-selected="true">
+                    <!-- <span class="nav-link-icon"><i class="fas fa-circle"></i></span> -->
+                    <span id="tab"><span id="number">1</span>Provider</span>
+                </a>
+            </li>
+            <i class="fas fa-arrow-right fa-lg next-arrow"></i>
+            <li class="nav-item">
+                <a class="nav-link mb-sm-3" id="destination-tab" data-toggle="tab" href="#destination" role="tab" aria-controls="destination" aria-selected="false">
+                    <!-- <span class="nav-link-icon"><i class="fas fa-circle"></i></span> -->
+                    <span id="tab"><span id="number">2</span>Link</span>
+                </a>
+            </li>
+            <i class="fas fa-arrow-right fa-lg next-arrow"></i>
+            <li class="nav-item">
+                <a class="nav-link mb-sm-3" id="usage-tab" data-toggle="tab" href="#usage" role="tab" aria-controls="usage" aria-selected="false">
+                    <!-- <span class="nav-link-icon"><i class="fas fa-circle"></i></span> -->
+                    <span id="tab"><span id="number">3</span>Usage Policy</span>
+                </a>
+            </li>
+        </ul>
+    {% endblock tab_bar %}
+    
+    {% block tab_content %}
+        <div class="tab-content" id="myTabContent">
+
+            {% block tab1 %}
+                <div class="tab-pane fade show active" id="source" role="tabpanel" aria-labelledby="source-tab">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="mb-0 type__Display">Set up provider</h5>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="type">Type</label>
+                                <select class="selectpicker type__Select" title="Select" name="type" onchange="observeType(this.value)">
+                                    <option value="" disabled>Select</option>
+                                    <option value="provider">Provider</option>
+                                    <option value="consumer">Consumer</option>
+                                </select>
+                            </div>
+                            <div class="type__details__container">
+                                <div class="form-group">
+                                    <label for="typeName">Consumer Name</label>
+                                    <input type="text" class="form-control" placeholder="Name" name="typeName">
+                                </div>
+                                <div class="form-group">
+                                    <label for="appName">App Name</label>
+                                    <input type="text" class="form-control" placeholder="App" name="appName">
+                                </div>
+                                <div class="form-group">
+                                    <label for="dockerUrl">Dockerhub URL</label>
+                                    <input type="text" class="form-control" placeholder="URL" name="dockerUrl">
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-end btn-container-right mt-2">
+                                <button type="button" class="btn btn-primary-2" onclick="changeTab('destination')">Next</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endblock tab1 %}
+            
+
+            <!-- First Tab content end -->
+            {% block tab2 %}
+                <div class="tab-pane fade" id="destination" role="tabpanel" aria-labelledby="destination-tab">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="mb-0">Set up link</h5>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="provider">Provider</label>
+                                <select class="selectpicker" title="Select Provider" name="provider">
+                                    <option value="provider1">Provider 1</option>
+                                    <option value="provider2">Provider 2</option>
+                                    <option value="provider3">Provider 3</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="consumer">Consumer</label>
+                                <select class="selectpicker" title="Select Consumer" name="consumer">
+                                    <option value="consumer1">Consumer 1</option>
+                                    <option value="consumer2">Consumer 2</option>
+                                    <option value="consumer3">Consumer 3</option>
+                                </select>
+                            </div>
+                            <div class="step__action__container text-center">
+                                <button type="button" class="btn btn-primary-2 btn-icon-label">
+                                    <span class="btn-inner--icon"><i class="fas fa-play"></i></span>
+                                    <span class="btn-inner--text">Link and Run</span>
+                                </button>
+                            </div>
+                            <div class="d-flex justify-content-end btn-container-right mt-2">
+                                <button type="button" class="btn btn-light mr-2" onclick="changeTab('source')">Previous</button>
+                                <button type="button" class="btn btn-primary-2 ml-2" onclick="changeTab('usage')">Next</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endblock tab2 %}
+            
+            {% block tab3 %}
+                <div class="tab-pane fade" id="usage" role="tabpanel" aria-labelledby="usage-tab">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="mb-0">Set up usage policy</h5>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="encryptedCode">Encrypted</label>
+                                <input type="text" class="form-control" placeholder="SHA-256 of the Application" name="encryptedCode" disabled>
+                            </div>
+                            <div class="d-flex justify-content-end btn-container-right mt-2">
+                                <button type="button" class="btn btn-light mr-2" onclick="changeTab('destination')">Previous</button>
+                                <button type="button" class="btn btn-primary-2 ml-2">Finish</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endblock tab3 %}
+            
+        </div>
+    {% endblock tab_content %}
+    
+</div>
+{% endblock provider_modal %}

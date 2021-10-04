@@ -17,8 +17,8 @@ services:
       
     # Uncomment to run the provider & consumer nodes on separate server
     # replace x.x.x.x with the consumer ip address
-    # extra_hosts:
-      # - "provider-core:x.x.x.x"
+    extra_hosts:
+      - "provider-core:3.142.225.24"
 
     ports:
       - 29293:29293

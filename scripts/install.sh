@@ -57,9 +57,11 @@ else
     fi
 fi
 
-git clone https://github.com/digitalgreenorg/farmstack-open.git
+git clone https://github.com/digitalgreenorg/farmstack-open.git;
 
-cd farmstack-open
+cd farmstack-open;
+
+chmod +x './scripts/video-lib-connector/*';
 
 PYTHON_VERSION=$(python -V)
 
