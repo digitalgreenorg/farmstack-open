@@ -21,7 +21,7 @@ cd farmstack-open
 python3 setup.py
 ```
 
-In browser, open: [https://localhost:8000/](https://localhost:8000/) and follow the instructions
+In browser, open: [http://localhost:8000/](http://localhost:8000/) and follow the instructions
 
 For more details see [local deployment](docs/deploying-farmstack/local-deployment.md).
 
