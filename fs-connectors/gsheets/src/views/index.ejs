@@ -59,7 +59,6 @@
               method: 'GET'
             })
             const json = await response.json()
-            // console.log(json);
             if(json.success){
               connStatus.innerHTML = "✔️ Syncing Successful"
             } else {

@@ -13,8 +13,8 @@ services:
       - ../../fs-assets/etc/settings.mapdb:/root/etc/settings.mapdb
       - ../../fs-assets/sample-certificates/provider-keystore.p12:/root/etc/provider-keystore.p12
       - ../../fs-assets/sample-certificates/truststore.p12:/root/etc/truststore.p12
-      - ./video-library-provider-routes.xml:/root/deploy/video-library-provider-routes.xml
-      - ./video-library-provider-routes2.xml:/root/deploy/video-library-provider-routes2.xml
+      - ./provider-routes/video-library-display-table.xml:/root/deploy/video-library-display-table.xml
+      - ./provider-routes/video-library-gsheets.xml:/root/deploy/video-library-gsheets.xml
     
     # Uncomment to run the provider & consumer nodes on separate server 
     # replace x.x.x.x with the consumer ip address

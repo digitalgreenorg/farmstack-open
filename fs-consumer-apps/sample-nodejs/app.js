@@ -1,7 +1,6 @@
 // Start REST server
 const express = require('express');
 const bodyParser = require('body-parser');
-const request = require('request');
 
 const app = express();
 const http = require("http").createServer(app);
@@ -10,10 +9,7 @@ const io = require("socket.io")(http, {
   origins:["http://127.0.0.1:8081"]
 });
 
-
-
 var data = []
-// var data_count = 0;
 
 // just use JSON body data
 app.use(bodyParser.json({
@@ -26,10 +22,7 @@ app.set('view engine', 'ejs');
 
 // Start web page /
 app.get('/', function (req, res) {
-  // if(data.length > 0)
     res.render('home', {data:data})
-  // else
-    // res.send("Waiting for producer to send data.")
 });
 
 // Receive Message
@@ -41,8 +34,6 @@ app.post('/post_data', function (req, res) {
     req_body.forEach(item => {
       data.push(item)
     });
-    // data[data_count] = (JSON.stringify(req_body));
-    // data_count ++;
     io.emit("dataUpdated", data)
     res.end('OK');
   } catch (e) {
@@ -53,7 +44,7 @@ app.post('/post_data', function (req, res) {
 http.listen(8081, function () {
   var host = "127.0.0.1";
   var port = 8081;
-  console.log("REST API listening at http://%s:%s", host, port);
+  console.log(`REST API listening at http://${host}:${port}`);
 });
 
 io.on("connection", (socket) => {

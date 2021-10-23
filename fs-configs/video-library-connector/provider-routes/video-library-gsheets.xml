@@ -25,26 +25,7 @@
     <!-- The following defines a single bean called ResourceUpdateCreationProcessor implemented by the POJO de.fhg.aisec.ids.camel.idscp2.processors.ResourceUpdateCreationProcessor -->
     <bean id="ResourceUpdateCreationProcessor" class="de.fhg.aisec.ids.camel.idscp2.processors.ResourceUpdateCreationProcessor" />
 
-    <!-- The following defines a single bean called TypeExtractionProcessor implemented by the POJO de.fhg.aisec.ids.camel.idscp2.processors.IdsMessageTypeExtractionProcessor -->
-    <!-- <bean id="TypeExtractionProcessor" -->
-          <!-- class="de.fhg.aisec.ids.camel.idscp2.processors.IdsMessageTypeExtractionProcessor"/> -->
-
-    <!-- The following defines a single bean called ContractOfferCreationProcessor implemented by the POJO de.fhg.aisec.ids.camel.idscp2.processors.ContractOfferCreationProcessor -->
-    <!-- <bean id="ContractOfferCreationProcessor" -->
-          <!-- class="de.fhg.aisec.ids.dgprocessors.ContractOfferCreationProcessor"/> -->
-
-    <!-- The following defines a single bean called ContractAgreementReceiverProcessor implemented by the POJO de.fhg.aisec.ids.camel.idscp2.processors.ContractAgreementReceiverProcessor -->
-    <!-- <bean id="ContractAgreementReceiverProcessor" -->
-          <!-- class="de.fhg.aisec.ids.camel.idscp2.processors.ContractAgreementReceiverProcessor"/> -->
-
-    <!-- The following defines a single bean called ResourceUpdateCreationProcessor implemented by the POJO de.fhg.aisec.ids.camel.idscp2.processors.ResourceUpdateCreationProcessor -->
-    <!-- <bean id="ResourceUpdateCreationProcessor" -->
-          <!-- class="de.fhg.aisec.ids.camel.idscp2.processors.ResourceUpdateCreationProcessor"/> -->
-
     <camelContext xmlns="http://camel.apache.org/schema/spring">
-        <!-- <dataFormats>
-            <json id="jack" library="Jackson" prettyPrint="true"/>
-        </dataFormats> -->
         <route id="server">
             <from uri="idscp2server://0.0.0.0:29293?sslContextParameters=#serverSslContext&amp;useIdsMessages=true&amp;tlsClientHostnameVerification=false"/>
             <process ref="TypeExtractionProcessor"/>
@@ -83,7 +64,6 @@
 
         <route id="sendProviderData2">
             <from uri="direct:sendData2"/>
-            <!-- <from uri="timer://tenSecondsTimer?fixedRate=true&amp;period=10000&amp;delay=20000"/> -->
             <!-- ensure that contract agreement is made before sending -->
             <setHeader name="CamelHttpMethod">
                 <constant>GET</constant>
@@ -93,7 +73,7 @@
                 <constant>https://farmstack.digitalgreen.org/videoLibraryGsheet</constant>
             </setProperty>
           <process ref="ResourceUpdateCreationProcessor" />
-            <to uri="idscp2server://0.0.0.0:29293?sslContextParameters=#serverSslContext&amp;useIdsMessages=true&amp;tlsClientHostnameVerification=false"/>
+            <!-- <to uri="idscp2server://0.0.0.0:29293?sslContextParameters=#serverSslContext&amp;useIdsMessages=true&amp;tlsClientHostnameVerification=false"/> -->
         </route>
     </camelContext>
 

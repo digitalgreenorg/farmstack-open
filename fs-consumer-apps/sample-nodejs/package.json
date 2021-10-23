@@ -2,7 +2,7 @@
   "name": "@farmstack/sample-nodejs",
   "version": "1.0.0",
   "description": "A sample application retrieving data through post and displaying on Homepage",
-  "main": "controller.js",
+  "main": "app.js",
   "scripts": {
     "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -12,8 +12,8 @@
     "type": "git",
     "url": "git+https://github.com/digitalgreenorg/farmstack-open.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Mayank Gautam",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/digitalgreenorg/farmstack-open"
   },
