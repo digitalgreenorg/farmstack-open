@@ -30,7 +30,7 @@ services:
       ids-wide:
         aliases:
           - consumer-core
-      location-consumer-internal:
+      consumer-internal-display:
 
   display-table-app:
     image: farmstack/merge-csv-nodejs:latest
