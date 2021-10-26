@@ -33,8 +33,6 @@ app.post('/post_data', function (req, res) {
     req_body.forEach(item => {
       data.push(item)
     });
-    // data[data_count] = (JSON.stringify(req_body));
-    // data_count ++;
 
     res.end('OK');
   } catch (e) {

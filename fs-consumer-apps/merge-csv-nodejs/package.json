@@ -1,22 +1,23 @@
 {
-  "name": "@fraunhoferaisec/ids-example-010-client",
+  "name": "@farmstack/merge-csv-nodejs",
   "version": "1.0.0",
-  "description": "A sample application retrieving MQTT data and providing it as REST service",
-  "main": "controller.js",
+  "description": "A sample application that combines data from multiple post requests and displays them on homepage",
+  "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "style": "standard"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/industrial-data-space/trusted-connector.git"
+    "url": "git+https://github.com/digitalgreenorg/farmstack-open.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Mayank Gautam",
+  "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/FraunhoferAISEC"
+    "url": "https://github.com/digitalgreenorg/farmstack-open"
   },
-  "homepage": "https://github.com/FraunhoferAISEC",
+  "homepage": "https://github.com/digitalgreenorg/farmstack-open",
   "dependencies": {
     "body-parser": "^1.18.3",
     "ejs": "^3.1.6",

@@ -2,7 +2,7 @@ version: '3'
 services:
 
   # The core platform, mounts docker control socket and route definition into the image
-  location-consumer-core2:
+  display-consumer-core:
     image: farmstack/trusted-connector:${EXAMPLE_TAG:-latest}
     tty: true
     stdin_open: true
@@ -13,7 +13,7 @@ services:
       - ../../fs-assets/etc/settings3.mapdb:/root/etc/settings.mapdb
       - ../../fs-assets/sample-certificates/consumer-keystore.p12:/root/etc/consumer-keystore.p12
       - ../../fs-assets/sample-certificates/truststore.p12:/root/etc/truststore.p12
-      - ./location-app-consumer-routes.xml:/root/deploy/location-app-consumer-routes.xml
+      - ./consumer-routes/display-table.xml:/root/deploy/display-table.xml
 
       
     # Uncomment to run the provider & consumer nodes on separate server
@@ -30,17 +30,17 @@ services:
       ids-wide:
         aliases:
           - consumer-core
-      location-consumer-internal2:
+      consumer-internal-display:
 
-  consumer-app:
+  display-table-app:
     image: farmstack/merge-csv-nodejs:latest
     ports:
       - "8081:8081"
     networks:
-      - location-consumer-internal2
+      - consumer-internal-display
 
 networks:
   ids-wide:
     driver: bridge
-  location-consumer-internal2:
+  consumer-internal-display:
     driver: bridge

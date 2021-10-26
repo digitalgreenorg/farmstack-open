@@ -1,7 +1,4 @@
 const {google} = require('googleapis');
-// const fs = require('fs');
-
-// const TOKEN_PATH = 'token.json';
 
 const auth = new google.auth.GoogleAuth({
     keyFile: './credentials.json',
