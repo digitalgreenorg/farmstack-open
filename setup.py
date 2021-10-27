@@ -1,5 +1,6 @@
 #!/bin/bash
 import os
+import shlex
 import subprocess
 import sys
 from pathlib import Path
@@ -73,12 +74,15 @@ def start_setup():
 def run_server():
     print("Server starting...")
     os_name = sys.platform
+    cmdline = "0.0.0.0:8000"
+    if len(sys.argv) > 1:
+        cmdline = " ".join(map(shlex.quote, sys.argv[1:]))
     #start server
     if not os.name.startswith('win'):
         if not os_name.startswith('linux'):
-            os.system("source .venv/bin/activate;python fs-server/manage.py makemigrations;python fs-server/manage.py migrate;python fs-server/manage.py runserver 0.0.0.0:8000;")
+            os.system("source .venv/bin/activate;python fs-server/manage.py makemigrations;python fs-server/manage.py migrate;python fs-server/manage.py runserver %s;" % cmdline)
         else:
-            os.system(".venv/bin/python fs-server/manage.py makemigrations;.venv/bin/python fs-server/manage.py migrate;.venv/bin/python fs-server/manage.py runserver 0.0.0.0:8000;")
+            os.system(".venv/bin/python fs-server/manage.py makemigrations;.venv/bin/python fs-server/manage.py migrate;.venv/bin/python fs-server/manage.py runserver %s;" % cmdline)
 
 
 if __name__ == "__main__":
