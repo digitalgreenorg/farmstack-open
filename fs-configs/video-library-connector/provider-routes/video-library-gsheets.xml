@@ -18,7 +18,7 @@
 
 
     <bean id="ArtifactRequestProcessor" class="de.fhg.aisec.ids.camel.idscp2.processors.ArtifactRequestProcessor" />
-    <bean id="ContractRequestProcessor" class="de.fhg.aisec.ids.camel.idscp2.processors.ContractRequestProcessor"/>
+    <bean id="ContractRequestProcessor" class="de.fhg.aisec.ids.dgprocessors.ContractRequestProcessor"/>
     <bean id="ContractAgreementReceiverProcessor" class="de.fhg.aisec.ids.camel.idscp2.processors.ContractAgreementReceiverProcessor"/>
     <bean id="TypeExtractionProcessor" class="de.fhg.aisec.ids.camel.idscp2.processors.IdsMessageTypeExtractionProcessor" />
 
