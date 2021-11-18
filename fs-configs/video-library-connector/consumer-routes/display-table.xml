@@ -59,29 +59,6 @@
             </choice>
         </route>
 
-        <route id="consumer">
-            <from uri="idscp2client://3.142.225.24:29292?awaitResponse=true&amp;connectionShareId=ucConnection&amp;sslContextParameters=#clientSslContext&amp;useIdsMessages=true"/>
-            <setProperty name="artifactUri">
-                <constant>https://farmstack.digitalgreen.org/videoLibrary</constant>
-            </setProperty>
-            <process ref="TypeExtractionProcessor"/>
-            <choice>
-                <when>
-                    <simple>${exchangeProperty.ids-type} == 'ResourceUpdateMessage'</simple>
-                    <log message="### Handle ResourceUpdateMessage ###"/>
-                    <setHeader name="Content-Type">
-                        <constant>application/json</constant>
-                    </setHeader>
-                    <to uri="http://display-table-app:8081/post_data"/>
-                    <removeHeader headerName="idscp2-header" />
-                    <setBody><simple>${null}</simple></setBody>
-                </when>
-                <otherwise>
-                    <log loggingLevel="ERROR" message="Expected ArtifactResponseMessage, but received:\n${body}\n### Header: ###\n${headers[idscp2-header]}"/>
-                </otherwise>
-            </choice>
-        </route>
-
         <route>
             <from uri="direct:syncData"/>
             <setProperty name="artifactUri">
@@ -89,6 +66,10 @@
             </setProperty>
             <process ref="ArtifactRequestCreationProcessor" />
             <to uri="idscp2client://3.142.225.24:29292?awaitResponse=true&amp;connectionShareId=ucConnection&amp;sslContextParameters=#clientSslContext&amp;useIdsMessages=true"/>
+            <setHeader name="Content-Type">
+                <constant>application/json</constant>
+            </setHeader>
+            <to uri="http://display-table-app:8081/post_data?bridgeEndpoint=true&amp;httpMethod=POST"/>
         </route>
     </camelContext>
 </beans>
