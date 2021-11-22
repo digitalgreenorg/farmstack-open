@@ -16,17 +16,17 @@
         </camel:trustManagers>
     </camel:sslContextParameters>
 
-    <!-- The following defines a single bean called TypeExtractionProcessor implemented by the POJO de.fhg.aisec.ids.camel.idscp2.processors.IdsMessageTypeExtractionProcessor -->
-  <bean id="TypeExtractionProcessor" class="de.fhg.aisec.ids.camel.idscp2.processors.IdsMessageTypeExtractionProcessor" />
+    <!-- The following defines a single bean called TypeExtractionProcessor implemented by the POJO de.fhg.aisec.ids.camel.processors.IdsMessageTypeExtractionProcessor -->
+  <bean id="TypeExtractionProcessor" class="de.fhg.aisec.ids.camel.processors.IdsMessageTypeExtractionProcessor" />
   
-  <!-- The following defines a single bean called ContractOfferCreationProcessor implemented by the POJO de.fhg.aisec.ids.camel.idscp2.processors.ContractOfferCreationProcessor -->
+  <!-- The following defines a single bean called ContractOfferCreationProcessor implemented by the POJO de.fhg.aisec.ids.camel.processors.ContractOfferCreationProcessor -->
   <bean id="ContractOfferCreationProcessor" class="de.fhg.aisec.ids.dgprocessors.ContractOfferCreationProcessor" />
   
-  <!-- The following defines a single bean called ContractAgreementReceiverProcessor implemented by the POJO de.fhg.aisec.ids.camel.idscp2.processors.ContractAgreementReceiverProcessor -->
-  <bean id="ContractAgreementReceiverProcessor" class="de.fhg.aisec.ids.camel.idscp2.processors.ContractAgreementReceiverProcessor" />
+  <!-- The following defines a single bean called ContractAgreementReceiverProcessor implemented by the POJO de.fhg.aisec.ids.camel.processors.ContractAgreementReceiverProcessor -->
+  <bean id="ContractAgreementReceiverProcessor" class="de.fhg.aisec.ids.camel.processors.ContractAgreementReceiverProcessor" />
   
-  <!-- The following defines a single bean called ResourceUpdateCreationProcessor implemented by the POJO de.fhg.aisec.ids.camel.idscp2.processors.ResourceUpdateCreationProcessor -->
-  <bean id="ResourceUpdateCreationProcessor" class="de.fhg.aisec.ids.camel.idscp2.processors.ResourceUpdateCreationProcessor" />
+  <!-- The following defines a single bean called ResourceUpdateCreationProcessor implemented by the POJO de.fhg.aisec.ids.camel.processors.ResourceUpdateCreationProcessor -->
+  <bean id="ResourceUpdateCreationProcessor" class="de.fhg.aisec.ids.camel.processors.ResourceUpdateCreationProcessor" />
 
     <camelContext xmlns="http://camel.apache.org/schema/spring">
         <dataFormats>

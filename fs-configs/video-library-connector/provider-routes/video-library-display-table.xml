@@ -17,13 +17,13 @@
     </camel:sslContextParameters>
 
 
-    <bean id="ArtifactRequestProcessor" class="de.fhg.aisec.ids.camel.idscp2.processors.ArtifactRequestProcessor" />
+    <bean id="ArtifactRequestProcessor" class="de.fhg.aisec.ids.camel.processors.ArtifactRequestProcessor" />
     <bean id="ContractRequestProcessor" class="de.fhg.aisec.ids.dgprocessors.ContractRequestProcessor"/>
-    <bean id="ContractAgreementReceiverProcessor" class="de.fhg.aisec.ids.camel.idscp2.processors.ContractAgreementReceiverProcessor"/>
-    <bean id="TypeExtractionProcessor" class="de.fhg.aisec.ids.camel.idscp2.processors.IdsMessageTypeExtractionProcessor" />
+    <bean id="ContractAgreementReceiverProcessor" class="de.fhg.aisec.ids.camel.processors.ContractAgreementReceiverProcessor"/>
+    <bean id="TypeExtractionProcessor" class="de.fhg.aisec.ids.camel.processors.IdsMessageTypeExtractionProcessor" />
 
-    <!-- The following defines a single bean called ResourceUpdateCreationProcessor implemented by the POJO de.fhg.aisec.ids.camel.idscp2.processors.ResourceUpdateCreationProcessor -->
-    <bean id="ResourceUpdateCreationProcessor" class="de.fhg.aisec.ids.camel.idscp2.processors.ResourceUpdateCreationProcessor" />
+    <!-- The following defines a single bean called ResourceUpdateCreationProcessor implemented by the POJO de.fhg.aisec.ids.camel.processors.ResourceUpdateCreationProcessor -->
+    <bean id="ResourceUpdateCreationProcessor" class="de.fhg.aisec.ids.camel.processors.ResourceUpdateCreationProcessor" />
 
     <camelContext xmlns="http://camel.apache.org/schema/spring">
         <route id="server">
@@ -64,7 +64,7 @@
 
         <route id="sendProviderData1">
             <from uri="direct:sendData"/>
-            <!-- ensure that contract agreement is made before sending -->
+            <!-- TODO: ensure that contract agreement is made before sending -->
             <setHeader name="CamelHttpMethod">
                 <constant>GET</constant>
             </setHeader>
@@ -72,8 +72,7 @@
             <setProperty name="artifactUri">
                 <constant>https://farmstack.digitalgreen.org/videoLibrary</constant>
             </setProperty>
-          <process ref="ResourceUpdateCreationProcessor" />
-            <!-- <to uri="idscp2server://0.0.0.0:29292?sslContextParameters=#serverSslContext&amp;useIdsMessages=true&amp;tlsClientHostnameVerification=false"/> -->
+            <process ref="ResourceUpdateCreationProcessor" />
         </route>
     </camelContext>
 
