@@ -35,9 +35,9 @@ services:
       consumer-internal-gsheets:
 
   gsheets-app:
-    image: farmstack/gsheets:latest
+    image: farmstack/gsheets:1.0.0
     ports: 
-      - "3001:3001"
+      - "4001:3001"
     networks:
       - consumer-internal-gsheets
 
