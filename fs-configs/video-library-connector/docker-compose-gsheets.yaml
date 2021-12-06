@@ -3,7 +3,7 @@ services:
 
   # The core platform, mounts docker control socket and route definition into the image
   gsheet-consumer-core:
-    image: farmstack/trusted-connector:${EXAMPLE_TAG:-latest}
+    image: farmstack/trusted-connector:test
     tty: true
     stdin_open: true
     volumes:
@@ -35,9 +35,9 @@ services:
       consumer-internal-gsheets:
 
   gsheets-app:
-    image: farmstack/gsheets:latest
+    image: farmstack/gsheets:1.0.0
     ports: 
-      - "3001:3001"
+      - "4001:3001"
     networks:
       - consumer-internal-gsheets
 

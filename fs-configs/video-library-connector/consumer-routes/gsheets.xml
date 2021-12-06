@@ -16,10 +16,10 @@
         </camel:trustManagers>
     </camel:sslContextParameters>
 
-    <bean id="ArtifactRequestCreationProcessor" class="de.fhg.aisec.ids.camel.idscp2.processors.ArtifactRequestCreationProcessor" />
-    <bean id="ContractRequestCreationProcessor" class="de.fhg.aisec.ids.camel.idscp2.processors.ContractRequestCreationProcessor"/>
-    <bean id="ContractResponseProcessor" class="de.fhg.aisec.ids.camel.idscp2.processors.ContractResponseProcessor"/>
-    <bean id="TypeExtractionProcessor" class="de.fhg.aisec.ids.camel.idscp2.processors.IdsMessageTypeExtractionProcessor" />
+    <bean id="ArtifactRequestCreationProcessor" class="de.fhg.aisec.ids.camel.processors.ArtifactRequestCreationProcessor" />
+    <bean id="ContractRequestCreationProcessor" class="de.fhg.aisec.ids.camel.processors.ContractRequestCreationProcessor"/>
+    <bean id="ContractResponseProcessor" class="de.fhg.aisec.ids.camel.processors.ContractResponseProcessor"/>
+    <bean id="TypeExtractionProcessor" class="de.fhg.aisec.ids.camel.processors.IdsMessageTypeExtractionProcessor" />
 
     <camelContext xmlns="http://camel.apache.org/schema/spring">
     
@@ -59,29 +59,6 @@
             </choice>
         </route>
 
-        <route id="consumer">
-            <from uri="idscp2client://3.142.225.24:29293?awaitResponse=true&amp;connectionShareId=ucConnection&amp;sslContextParameters=#clientSslContext&amp;useIdsMessages=true"/>
-            <setProperty name="artifactUri">
-                <constant>https://farmstack.digitalgreen.org/videoLibraryGsheet</constant>
-            </setProperty>
-            <process ref="TypeExtractionProcessor"/>
-            <choice>
-                <when>
-                    <simple>${exchangeProperty.ids-type} == 'ResourceUpdateMessage'</simple>
-                    <log message="### Handle ResourceUpdateMessage ###"/>
-                    <setHeader name="Content-Type">
-                        <constant>application/json</constant>
-                    </setHeader>
-                    <to uri="http://gsheets-app:3001/data"/>
-                    <removeHeader headerName="idscp2-header" />
-                    <setBody><simple>${null}</simple></setBody>
-                </when>
-                <otherwise>
-                    <log loggingLevel="ERROR" message="Expected ArtifactResponseMessage, but received:\n${body}\n### Header: ###\n${headers[idscp2-header]}"/>
-                </otherwise>
-            </choice>
-        </route>
-
         <route>
             <from uri="direct:syncData"/>
             <setProperty name="artifactUri">
@@ -89,6 +66,10 @@
             </setProperty>
             <process ref="ArtifactRequestCreationProcessor" />
             <to uri="idscp2client://3.142.225.24:29293?awaitResponse=true&amp;connectionShareId=ucConnection&amp;sslContextParameters=#clientSslContext&amp;useIdsMessages=true"/>
+            <setHeader name="Content-Type">
+                <constant>application/json</constant>
+            </setHeader>
+            <to uri="http://gsheets-app:3001/data?bridgeEndpoint=true&amp;httpMethod=POST"/>
         </route>
     </camelContext>
 </beans>

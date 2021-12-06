@@ -16,10 +16,10 @@
         </camel:trustManagers>
     </camel:sslContextParameters>
 
-    <!-- The following defines a single bean called TypeExtractionProcessor implemented by the POJO de.fhg.aisec.ids.camel.idscp2.processors.IdsMessageTypeExtractionProcessor -->
-    <bean id="TypeExtractionProcessor" class="de.fhg.aisec.ids.camel.idscp2.processors.IdsMessageTypeExtractionProcessor" />
-    <!-- The following defines a single bean called ContractOfferProcessor implemented by the POJO de.fhg.aisec.ids.camel.idscp2.processors.ContractOfferProcessor -->
-    <bean id="ContractOfferProcessor" class="de.fhg.aisec.ids.camel.idscp2.processors.ContractOfferProcessor" />
+    <!-- The following defines a single bean called TypeExtractionProcessor implemented by the POJO de.fhg.aisec.ids.camel.processors.IdsMessageTypeExtractionProcessor -->
+    <bean id="TypeExtractionProcessor" class="de.fhg.aisec.ids.camel.processors.IdsMessageTypeExtractionProcessor" />
+    <!-- The following defines a single bean called ContractOfferProcessor implemented by the POJO de.fhg.aisec.ids.camel.processors.ContractOfferProcessor -->
+    <bean id="ContractOfferProcessor" class="de.fhg.aisec.ids.camel.processors.ContractOfferProcessor" />
 
     <camelContext xmlns="http://camel.apache.org/schema/spring">
         <route>
