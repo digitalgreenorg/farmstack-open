@@ -17,14 +17,15 @@ services:
       
     # Uncomment to run the provider & consumer nodes on separate server
     # replace x.x.x.x with the consumer ip address
-    extra_hosts:
-      - "provider-core:3.142.225.24"
+    # extra_hosts:
+      # - "provider-core:3.142.225.24"
 
     ports:
-      - 29293:29293
-      - "8181:8181"
-      - "5005:5005"
-      - "8443:8443"
+      # uncomment these ports if running provider and consumer from different locations
+      # - 29293:29293
+      # - "8181:8181"
+      # - "5005:5005"
+      # - "8443:8443"
       - "9001:9001"
 
     # Using two networks ids-wide and provider-internal for external comunication and internal communication respectively

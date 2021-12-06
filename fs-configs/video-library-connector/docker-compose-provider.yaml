@@ -23,9 +23,10 @@ services:
 
     ports:
       - 8989:8989
-      - 29292:29292
-      - 29293:29293
-      - 29294:29294
+      # uncomment these ports if running provider and consumer from different locations
+      # - 29292:29292
+      # - 29293:29293
+      # - 29294:29294
     
     # Using two networks ids-wide and provider-internal for external comunication and internal communication respectively
     networks:

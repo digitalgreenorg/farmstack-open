@@ -18,11 +18,12 @@ services:
       
     # Uncomment to run the provider & consumer nodes on separate server
     # replace x.x.x.x with the provider ip address
-    extra_hosts:
-      - "provider-core:3.142.225.24"
+    # extra_hosts:
+      # - "provider-core:3.142.225.24"
 
     ports:
-      - 29292:29292
+      # uncomment these ports if running provider and consumer from different locations
+      # - 29292:29292
       - 9002:9002 #Port used for camel rest API
 
     # Using two networks ids-wide and provider-internal for external comunication and internal communication respectively
