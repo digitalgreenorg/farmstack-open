@@ -1,0 +1,31 @@
+{
+  "name": "mongodb_connector",
+  "version": "1.0.0",
+  "description": "MongoDB connector for FarmStack",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/digitalgreenorg/farmstack-open.git"
+  },
+  "keywords": [
+    "mongoDb",
+    "connector",
+    "FarmStack"
+  ],
+  "author": "Jashwanth Gowda",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/digitalgreenorg/farmstack-open/issues"
+  },
+  "homepage": "https://github.com/digitalgreenorg/farmstack-open#readme",
+  "dependencies": {
+    "body-parser": "^1.19.1",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "mongodb": "^4.2.2"
+  }
+}
