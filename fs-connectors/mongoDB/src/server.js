@@ -1,6 +1,10 @@
 const express = require("express");
 const fs = require("fs-extra");
 const path = require("path");
+// import { db_constants } from "./constants/dbConstants";
+const db_constants = require("./constants/dbConstants");
+// import { config } from "./config";
+const config = require("./config");
 
 const app = express();
 const port = 3000;
@@ -20,7 +24,7 @@ app.set("view engine", "ejs");
 // routes
 app.get("/", (req, res) => {
   res.render("index", {
-    db_engines: db_constants.default.engines,
+    db_engines: db_constants.engine,
     config: config,
   });
 });
