@@ -29,6 +29,22 @@ app.get("/", (req, res) => {
   });
 });
 
+// after saving configuration
+app.post("/configure", (req, res) => {
+  config.db_engine = req.body.engine;
+  config.db = {
+    host: req.body.host,
+    port: req.body.port,
+    database: req.body.database,
+    user: req.body.user,
+    password: req.body.password,
+  };
+  config.query.statement = req.body.query;
+  fs.writeJSON("savedConfig.json", config);
+//   dbService = new DBService();
+  res.redirect("/");
+});
+
 // port config
 app.listen(port, () => {
   console.log(`MongoDb connector app listening at http://localhost:${port}`);
