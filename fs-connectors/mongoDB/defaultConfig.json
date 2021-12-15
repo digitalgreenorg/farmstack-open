@@ -1,0 +1,13 @@
+{
+  "db_engine": null,
+  "db": {
+    "host": null,
+    "user": null,
+    "password": null,
+    "database": null,
+    "port": 3306
+  },
+  "query": {
+    "statement": null
+  }
+}
