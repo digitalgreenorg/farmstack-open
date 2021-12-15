@@ -24,7 +24,7 @@ app.set("view engine", "ejs");
 // routes
 app.get("/", (req, res) => {
   res.render("index", {
-    db_engines: db_constants.engine,
+    db_engine: db_constants.engine,
     config: config,
   });
 });
