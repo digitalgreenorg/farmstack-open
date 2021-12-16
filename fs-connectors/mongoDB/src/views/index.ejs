@@ -126,6 +126,34 @@
           >
         </div>
       </form>
+      <script>
+        async function testConnection() {
+          try {
+            let connStatus = document.getElementById("connection-status");
+            connStatus.innerHTML = "";
+            let myForm = document.getElementById("configurationForm");
+            let formData = JSON.stringify(
+              Object.fromEntries(new FormData(myForm))
+            );
+            const response = await fetch(`/test_configuration`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: formData,
+            });
+            const json = await response.json();
+            console.log(json);
+            if (json.success) {
+              connStatus.innerHTML = "✔️ Connection Successful";
+            } else {
+              connStatus.innerHTML = "❌ Connection Failed";
+            }
+          } catch (err) {
+            console.log(err);
+          }
+        }
+      </script>
     </div>
   </body>
 </html>
