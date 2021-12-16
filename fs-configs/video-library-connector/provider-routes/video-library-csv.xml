@@ -52,7 +52,7 @@
                     <simple>${exchangeProperty.ids-type} == 'ArtifactRequestMessage'</simple>
                     <log message="### Handle ArtifactRequestMessage ###"/>
                     <process ref="ArtifactRequestProcessor" />
-                    <to uri="direct:sendData"/>
+                    <to uri="direct:sendData3"/>
                 </when>
                 <otherwise>
                     <log loggingLevel="ERROR" message="### Server received unexpected message (otherwise branch):\n${body}\n### Header: ###\n${headers[idscp2-header]}"/>
@@ -63,7 +63,7 @@
         </route>
 
         <route id="sendProviderData3">
-            <from uri="direct:sendData"/>
+            <from uri="direct:sendData3"/>
             <!-- TODO: ensure that contract agreement is made before sending -->
             <setHeader name="CamelHttpMethod">
                 <constant>GET</constant>
