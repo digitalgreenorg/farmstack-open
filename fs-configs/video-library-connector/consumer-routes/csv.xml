@@ -42,14 +42,14 @@
                 <constant>https://farmstack.digitalgreen.org/videoLibraryCSV</constant>
             </setProperty>
             <process ref="ContractRequestCreationProcessor" />
-            <to uri="idscp2client://3.142.225.24:29294?awaitResponse=true&amp;connectionShareId=ucConnection&amp;sslContextParameters=#clientSslContext&amp;useIdsMessages=true"/>
+            <to uri="idscp2client://provider-core:29294?awaitResponse=true&amp;connectionShareId=ucConnection&amp;sslContextParameters=#clientSslContext&amp;useIdsMessages=true"/>
             <process ref="TypeExtractionProcessor"/>
             <choice>
                 <when>
                     <simple>${exchangeProperty.ids-type} == 'ContractResponseMessage'</simple>
                     <log message="### Handle ContractResponseMessage ###"/>
                     <process ref="ContractResponseProcessor"/>
-                    <to uri="idscp2client://3.142.225.24:29294?connectionShareId=ucConnection&amp;sslContextParameters=#clientSslContext&amp;useIdsMessages=true"/>
+                    <to uri="idscp2client://provider-core:29294?connectionShareId=ucConnection&amp;sslContextParameters=#clientSslContext&amp;useIdsMessages=true"/>
                 </when>
                 <otherwise>
                     <log loggingLevel="ERROR" message="Expected ContractResponseMessage, but received:\n${body}\n### Header: ###\n${headers[idscp2-header]}"/>
@@ -65,7 +65,7 @@
                 <constant>https://farmstack.digitalgreen.org/videoLibraryCSV</constant>
             </setProperty>
             <process ref="ArtifactRequestCreationProcessor" />
-            <to uri="idscp2client://3.142.225.24:29294?awaitResponse=true&amp;connectionShareId=ucConnection&amp;sslContextParameters=#clientSslContext&amp;useIdsMessages=true"/>
+            <to uri="idscp2client://provider-core:29294?awaitResponse=true&amp;connectionShareId=ucConnection&amp;sslContextParameters=#clientSslContext&amp;useIdsMessages=true"/>
             <setHeader name="Content-Type">
                 <constant>application/json</constant>
             </setHeader>
