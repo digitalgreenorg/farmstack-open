@@ -7,7 +7,7 @@ CONSUMER_DOCKER_COMPOSE=docker-compose-consumer.yaml
 
 # Application parameters
 # This should be a relative path to the config directory or an absolute path.
-CONSUMER_APP_DIR=../../fs-consumer-apps/sample-nodejs
+CONSUMER_APP_DIR=../../fs-connectors/consumer/sample-nodejs
 CONSUMER_APP_NAME='sample-nodejs' #change application name
 CONSUMER_APP_PORT=8081 #Change port according to your application
 SYSTEM_PORT=8081 # Port on the system you want to map to your application's port

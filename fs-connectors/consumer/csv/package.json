@@ -1,0 +1,40 @@
+{
+  "name": "@farmstack/csv",
+  "version": "1.0.0",
+  "description": "A Simple connector to convert json array to csv.",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node .",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon .",
+    "style": "standard"
+  },
+  "keywords": [
+    "CSV",
+    "connector",
+    "FarmStack"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/digitalgreenorg/farmstack-open.git"
+  },
+  "author": "Mayank Gautam",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/digitalgreenorg/farmstack-open"
+  },
+  "homepage": "https://github.com/digitalgreenorg/farmstack-open",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "ejs": "^3.1.6",
+    "express": "^4.16.4",
+    "json-2-csv": "^3.15.0",
+    "node-fetch": "^2.6.6",
+    "socket.io": "^4.0.0",
+    "socket.io-client": "^4.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15",
+    "standard": "^12.0.1"
+  }
+}
