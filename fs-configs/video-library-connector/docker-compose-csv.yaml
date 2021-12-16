@@ -33,13 +33,11 @@ services:
       consumer-internal-display:
 
   csv-connector:
-    image: farmstack/csv-connector:latest
+    image: farmstack/csv-connector:0.0.2
     ports:
       - "8081:8081"
     environment:
       - SYNC_URL=http://consumer-core-csv:9003/data/sync
-    volumes:
-      - ../../fs-connectors/consumer/csv:/app
     networks:
       - consumer-internal-display
 
