@@ -50,6 +50,17 @@ app.post("/configure", (req, res) => {
   res.redirect("/");
 });
 
+// after saving configuration
+app.post("/configure-server", (req, res) => {
+  config.db = {
+    url: req.body.url,
+  };
+  config.query.statement = req.body.query;
+  fs.writeJSON("savedConfig.json", config);
+  //   dbService = new DBService();
+  res.redirect("/");
+});
+
 app.post("/test_configuration-local", async (req, res) => {
   console.log(req.body);
   const newConfig = {
