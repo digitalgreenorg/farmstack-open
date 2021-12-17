@@ -8,6 +8,8 @@ const config = require("./config");
 const Config = require("./config");
 
 var MongoClient = require("mongodb").MongoClient;
+// const { db } = require("./config");
+const stringify = require("json-stringify-safe");
 
 const app = express();
 const port = 3000;
@@ -48,7 +50,7 @@ app.post("/configure", (req, res) => {
   res.redirect("/");
 });
 
-app.post("/test_configuration", async (req, res) => {
+app.post("/test_configuration-local", async (req, res) => {
   console.log(req.body);
   const newConfig = {
     db_engine: req.body.engine,
@@ -66,7 +68,7 @@ app.post("/test_configuration", async (req, res) => {
   };
   let success;
   try {
-    // let mongoUrlLocal = "mongodb://root:shani@localhost:27017";
+    // let mongoUrlLocal = "mongodb://root:shani@localhost:27017/db";
     let mongoUrl =
       "mongodb://" +
       `${newConfig.db.user}` +
@@ -76,6 +78,7 @@ app.post("/test_configuration", async (req, res) => {
       `${newConfig.db.host}` +
       ":" +
       `${newConfig.db.port}`;
+    "/" + `${newConfig.db.database}`;
     MongoClient.connect(
       mongoUrl,
       {
@@ -103,6 +106,120 @@ app.post("/test_configuration", async (req, res) => {
       success: false,
       error: err,
     });
+  }
+});
+
+app.post("/test_configuration-server", async (req, res) => {
+  console.log(req.body);
+  const newConfig = {
+    db: {
+      url: req.body.url,
+    },
+    // last_sync_time: config.last_sync_time,
+    query: {
+      statement: req.body.query,
+    },
+  };
+  let success;
+  try {
+    // let mongoUrlLocal = "mongodb://root:shani@localhost:27017/db";
+    // let mongoUrl = `${newConfig.db.urlString}`;
+    console.log(newConfig.db.url);
+
+    MongoClient.connect(
+      newConfig.db.url,
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      },
+      (err, client) => {
+        if (err) {
+          console.log(err);
+          res.json({
+            success: false,
+            error: err,
+          });
+        } else {
+          console.log("connection successful!");
+          res.json({
+            success: true,
+          });
+        }
+      }
+    );
+  } catch (err) {
+    console.log(err);
+    res.json({
+      success: false,
+      error: err,
+    });
+  }
+});
+
+app.get("/data", async (req, res) => {
+  try {
+    // let mongoUrlLocal = "mongodb://root:shani@localhost:27017";
+    let mongoUrl =
+      "mongodb://" +
+      `${config.db.user}` +
+      ":" +
+      `${config.db.password}` +
+      "@" +
+      `${config.db.host}` +
+      ":" +
+      `${config.db.port}` +
+      "/" +
+      `${config.db.database}`;
+
+    const client = new MongoClient(mongoUrl);
+    MongoClient.connect(
+      mongoUrl,
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      },
+      async (err, clients) => {
+        if (err) {
+          console.log(err);
+        } else {
+          await client.connect();
+          console.log("starting to execute queries");
+          let dbname = config.db.database;
+          console.log(dbname);
+          const db = clients.db(dbname);
+          console.log(db);
+          console.log(config.query.statement);
+          //   const result = await db
+          //     .find()
+          //     .then((res) => {
+          //       res.send(result);
+          //     })
+          //     .catch((err) => {
+          //       console.log(err);
+          //     });
+          db.createCollection("mayank", async (err, response) => {
+            if (err) {
+              console.log(err);
+              res.json(err);
+              // return err;
+            } else {
+              //   await res.json(stringify(response));
+              res.send(`<p>collection created!</p>`);
+              console.log("Collection created!");
+              console.log(response);
+              //   res.json(response.s);
+            }
+          });
+          //   console.log(result);
+          //   res.json({ result });
+
+          //   res.send(`<p>some html</p>`);
+        }
+      }
+    );
+  } catch (err) {
+    console.log(err);
+    res.json({ error: err });
   }
 });
 

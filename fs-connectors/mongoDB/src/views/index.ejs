@@ -113,7 +113,7 @@
           <button
             type="button"
             class="btn btn-secondary mb-3 mx-3 float-end"
-            onclick="testConnection()"
+            onclick="testConnection_local()"
           >
             Test Configuration
           </button>
@@ -126,8 +126,61 @@
           >
         </div>
       </form>
+      <form
+        action=""
+        class="d-grid gap-3"
+        action="/configure"
+        method="POST"
+        id="configurationForm-server"
+      >
+        <div>
+          <h3>Method 2</h3>
+          <div class="form-group col">
+            <label for="url" class="form-label"
+              >Paste your connection string (SRV or Standard )</label
+            >
+            <input
+              name="url"
+              type="text"
+              class="form-control"
+              placeholder="url string"
+              value="<%= config.db.url%>"
+            />
+          </div>
+          <div class="form-group col-12">
+            <label for="query" class="form-label">SQL Query</label>
+            <textarea
+              name="query"
+              class="form-control"
+              placeholder="SELECT * FROM example_table"
+              rows="3"
+            >
+<%= config.query.statement %></textarea
+            >
+          </div>
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary mb-3 float-end">
+            Save Configuration
+          </button>
+          <button
+            type="button"
+            class="btn btn-secondary mb-3 mx-3 float-end"
+            onclick="testConnection_server()"
+          >
+            Test Configuration
+          </button>
+          <span
+            id="connection-status-server"
+            class="text-success float-end my-auto"
+          ></span>
+          <span id="connection-failed" class="text-danger float-end invisible"
+            >❌ Connection Failed</span
+          >
+        </div>
+      </form>
       <script>
-        async function testConnection() {
+        async function testConnection_local() {
           try {
             let connStatus = document.getElementById("connection-status");
             connStatus.innerHTML = "";
@@ -135,7 +188,36 @@
             let formData = JSON.stringify(
               Object.fromEntries(new FormData(myForm))
             );
-            const response = await fetch(`/test_configuration`, {
+            const response = await fetch(`/test_configuration-local`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: formData,
+            });
+            const json = await response.json();
+            console.log(json);
+            if (json.success) {
+              connStatus.innerHTML = "✔️ Connection Successful";
+            } else {
+              connStatus.innerHTML = "❌ Connection Failed";
+            }
+          } catch (err) {
+            console.log(err);
+          }
+        }
+
+        async function testConnection_server() {
+          try {
+            let connStatus = document.getElementById(
+              "connection-status-server"
+            );
+            connStatus.innerHTML = "";
+            let myForm = document.getElementById("configurationForm-server");
+            let formData = JSON.stringify(
+              Object.fromEntries(new FormData(myForm))
+            );
+            const response = await fetch(`/test_configuration-server`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
