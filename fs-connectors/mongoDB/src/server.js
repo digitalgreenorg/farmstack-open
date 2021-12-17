@@ -208,19 +208,22 @@ app.get("/data", async (req, res) => {
           //     .catch((err) => {
           //       console.log(err);
           //     });
-          db.createCollection("mayank", async (err, response) => {
-            if (err) {
-              console.log(err);
-              res.json(err);
-              // return err;
-            } else {
-              //   await res.json(stringify(response));
-              res.send(`<p>collection created!</p>`);
-              console.log("Collection created!");
-              console.log(response);
-              //   res.json(response.s);
-            }
-          });
+          db.collection("jashu")
+            .find({})
+            .toArray(function (err, response) {
+              if (err) {
+                console.log(err);
+                res.json(err);
+                // return err;
+              } else {
+                //   await res.json(stringify(response));
+                // res.send(`<p>collection created!</p>`);
+                // console.log("Collection created!");
+                res.json(response);
+                console.log(response);
+                //   res.json(response.s);
+              }
+            });
           //   console.log(result);
           //   res.json({ result });
 
