@@ -16,6 +16,7 @@ var Config = {
     user: { type: String },
     password: { type: String },
     database: { type: String },
+    collection: { type: String },
     url: { type: String },
   },
   //   last_sync_time= "1970-01-01 00:00:00.000",

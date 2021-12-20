@@ -167,7 +167,7 @@ app.post("/test_configuration-server", async (req, res) => {
   }
 });
 
-app.get("/data", async (req, res) => {
+app.get("/data-local", async (req, res) => {
   try {
     // let mongoUrlLocal = "mongodb://root:shani@localhost:27017";
     let mongoUrl =
