@@ -243,6 +243,68 @@ app.post("/test_configuration-server", async (req, res) => {
   }
 });
 
+app.get("/data-server", async (req, res) => {
+  try {
+    // let mongoUrlLocal = "mongodb://root:shani@localhost:27017";
+    let mongoUrl = configServer.db.url;
+    console.log(mongoUrl);
+
+    const client = new MongoClient(mongoUrl);
+    MongoClient.connect(
+      mongoUrl,
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      },
+      async (err, clients) => {
+        if (err) {
+          console.log(err);
+        } else {
+          await client.connect();
+          console.log("starting to execute queries");
+          let dbname = configServer.db.database;
+          console.log(dbname);
+          const db = clients.db(dbname);
+          console.log(db);
+          //   console.log(config.query.statement);
+          //   const result = await db
+          //     .find()
+          //     .then((res) => {
+          //       res.send(result);
+          //     })
+          //     .catch((err) => {
+          //       console.log(err);
+          //     });
+          console.log(configServer.db.collection);
+          db.collection(configServer.db.collection)
+            .find({})
+            .toArray(function (err, response) {
+              if (err) {
+                console.log(err);
+                res.json(err);
+                // return err;
+              } else {
+                //   await res.json(stringify(response));
+                // res.send(`<p>collection created!</p>`);
+                // console.log("Collection created!");
+                res.json(response);
+                console.log(response);
+                //   res.json(response.s);
+              }
+            });
+          //   console.log(result);
+          //   res.json({ result });
+
+          //   res.send(`<p>some html</p>`);
+        }
+      }
+    );
+  } catch (err) {
+    console.log(err);
+    res.json({ error: err });
+  }
+});
+
 // port config
 app.listen(port, () => {
   console.log(`MongoDb connector app listening at http://localhost:${port}`);
