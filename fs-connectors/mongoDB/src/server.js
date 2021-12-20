@@ -4,7 +4,9 @@ const path = require("path");
 // import { db_constants } from "./constants/dbConstants";
 const db_constants = require("./constants/dbConstants");
 // import { config } from "./config";
+const configServer = require("./config-server");
 const config = require("./config");
+// const configServer = require("./config-server");
 
 var MongoClient = require("mongodb").MongoClient;
 // const { db } = require("./config");
@@ -58,6 +60,7 @@ app.post("/test_configuration-local", async (req, res) => {
       host: req.body.host,
       port: req.body.port,
       database: req.body.database,
+      collection: req.body.collection,
       user: req.body.user,
       password: req.body.password,
     },
@@ -182,12 +185,12 @@ app.get("/data-local", async (req, res) => {
 
 // after saving configuration
 app.post("/configure-server", (req, res) => {
-  config.db = {
+  configServer.db = {
     url: req.body.url,
+    database: req.body.database,
+    collection: req.body.collection,
   };
-  config.query.statement = req.body.query;
-  fs.writeJSON("savedServerConfig.json", config);
-  //   dbService = new DBService();
+  fs.writeJSON("savedServerConfig.json", configServer);
   res.redirect("/");
 });
 
@@ -196,11 +199,13 @@ app.post("/test_configuration-server", async (req, res) => {
   const newConfig = {
     db: {
       url: req.body.url,
+      database: req.body.database,
+      collection: req.body.collection,
     },
     // last_sync_time: config.last_sync_time,
-    query: {
-      statement: req.body.query,
-    },
+    // query: {
+    //   statement: req.body.query,
+    // },
   };
   let success;
   try {

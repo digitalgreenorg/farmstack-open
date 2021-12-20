@@ -1,19 +1,20 @@
 const fs = require("fs-extra");
 
-let config_server = Config;
+let configServer = ConfigServer;
 
 if (fs.existsSync("savedServerConfig.json")) {
-  config_server = fs.readJsonSync("savedServerConfig.json"); // could be changed to other more secure storage options
+  configServer = fs.readJsonSync("savedServerConfig.json"); // could be changed to other more secure storage options
 } else {
-  config_server = fs.readJsonSync("defaultConfig.json");
+  configServer = fs.readJsonSync("defaultServerConfig.json");
 }
 
-var Config = {
+var ConfigServer = {
   db: {
     database: { type: String },
     collection: { type: String },
+    url: { type: String },
   },
 };
 
 // export default config;
-module.exports = config_server;
+module.exports = configServer;
