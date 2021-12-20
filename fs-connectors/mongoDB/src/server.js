@@ -5,7 +5,6 @@ const path = require("path");
 const db_constants = require("./constants/dbConstants");
 // import { config } from "./config";
 const config = require("./config");
-const Config = require("./config");
 
 var MongoClient = require("mongodb").MongoClient;
 // const { db } = require("./config");
@@ -51,17 +50,6 @@ app.post("/configure", (req, res) => {
   res.redirect("/");
 });
 
-// after saving configuration
-app.post("/configure-server", (req, res) => {
-  config.db = {
-    url: req.body.url,
-  };
-  config.query.statement = req.body.query;
-  fs.writeJSON("savedConfig.json", config);
-  //   dbService = new DBService();
-  res.redirect("/");
-});
-
 app.post("/test_configuration-local", async (req, res) => {
   console.log(req.body);
   const newConfig = {
@@ -93,53 +81,6 @@ app.post("/test_configuration-local", async (req, res) => {
     "/" + `${newConfig.db.database}`;
     MongoClient.connect(
       mongoUrl,
-      {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      },
-      (err, client) => {
-        if (err) {
-          console.log(err);
-          res.json({
-            success: false,
-            error: err,
-          });
-        } else {
-          console.log("connection successful!");
-          res.json({
-            success: true,
-          });
-        }
-      }
-    );
-  } catch (err) {
-    console.log(err);
-    res.json({
-      success: false,
-      error: err,
-    });
-  }
-});
-
-app.post("/test_configuration-server", async (req, res) => {
-  console.log(req.body);
-  const newConfig = {
-    db: {
-      url: req.body.url,
-    },
-    // last_sync_time: config.last_sync_time,
-    query: {
-      statement: req.body.query,
-    },
-  };
-  let success;
-  try {
-    // let mongoUrlLocal = "mongodb://root:shani@localhost:27017/db";
-    // let mongoUrl = `${newConfig.db.urlString}`;
-    console.log(newConfig.db.url);
-
-    MongoClient.connect(
-      newConfig.db.url,
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,
@@ -236,6 +177,64 @@ app.get("/data-local", async (req, res) => {
   } catch (err) {
     console.log(err);
     res.json({ error: err });
+  }
+});
+
+// after saving configuration
+app.post("/configure-server", (req, res) => {
+  config.db = {
+    url: req.body.url,
+  };
+  config.query.statement = req.body.query;
+  fs.writeJSON("savedServerConfig.json", config);
+  //   dbService = new DBService();
+  res.redirect("/");
+});
+
+app.post("/test_configuration-server", async (req, res) => {
+  console.log(req.body);
+  const newConfig = {
+    db: {
+      url: req.body.url,
+    },
+    // last_sync_time: config.last_sync_time,
+    query: {
+      statement: req.body.query,
+    },
+  };
+  let success;
+  try {
+    // let mongoUrlLocal = "mongodb://root:shani@localhost:27017/db";
+    // let mongoUrl = `${newConfig.db.urlString}`;
+    console.log(newConfig.db.url);
+
+    MongoClient.connect(
+      newConfig.db.url,
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      },
+      (err, client) => {
+        if (err) {
+          console.log(err);
+          res.json({
+            success: false,
+            error: err,
+          });
+        } else {
+          console.log("connection successful!");
+          res.json({
+            success: true,
+          });
+        }
+      }
+    );
+  } catch (err) {
+    console.log(err);
+    res.json({
+      success: false,
+      error: err,
+    });
   }
 });
 

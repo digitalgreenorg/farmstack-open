@@ -17,7 +17,8 @@
   </head>
   <body>
     <div class="container mt-4">
-      <h1>MongoDB Connector</h1>
+      <h1 class="text-center">MongoDB Connector</h1>
+      <h4>Method 1</h4>
       <form
         class="d-grid gap-3"
         action="/configure"
@@ -104,18 +105,6 @@
           </div>
         </div>
 
-        <div class="form-group col-12">
-          <label for="query" class="form-label">SQL Query</label>
-          <textarea
-            name="query"
-            class="form-control"
-            placeholder="SELECT * FROM example_table"
-            rows="3"
-          >
-<%= config.query.statement %></textarea
-          >
-        </div>
-
         <div class="col-auto">
           <button type="submit" class="btn btn-primary mb-3 float-end">
             Save Configuration
@@ -143,7 +132,7 @@
         id="configurationForm-server"
       >
         <div>
-          <h3>Method 2</h3>
+          <h4>Method 2</h4>
           <div class="form-group col">
             <label for="url" class="form-label"
               >Paste your connection string (SRV or Standard )</label
