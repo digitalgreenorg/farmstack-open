@@ -41,6 +41,7 @@ app.post("/configure", (req, res) => {
     host: req.body.host,
     port: req.body.port,
     database: req.body.database,
+    collection: req.body.collection,
     user: req.body.user,
     password: req.body.password,
   };
@@ -208,7 +209,8 @@ app.get("/data-local", async (req, res) => {
           //     .catch((err) => {
           //       console.log(err);
           //     });
-          db.collection("jashu")
+          console.log(config.db.collection);
+          db.collection(config.db.collection)
             .find({})
             .toArray(function (err, response) {
               if (err) {
