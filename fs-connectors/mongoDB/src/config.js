@@ -21,7 +21,7 @@ var Config = {
   },
   //   last_sync_time= "1970-01-01 00:00:00.000",
   query: {
-    statement: { type: String },
+    statement: { type: Object },
   },
 };
 

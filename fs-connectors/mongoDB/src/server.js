@@ -45,7 +45,7 @@ app.post("/configure", (req, res) => {
     collection: req.body.collection,
     user: req.body.user,
     password: req.body.password,
-    url:req.body.url,
+    url: req.body.url,
   };
   config.query.statement = req.body.query;
   fs.writeJSON("savedConfig.json", config);
@@ -184,18 +184,18 @@ app.get("/data-local", async (req, res) => {
   }
 });
 
-// after saving configuration
-app.post("/configure-server", (req, res) => {
-  configServer.db = {
-    url: req.body.url,
-    database: req.body.database,
-    collection: req.body.collection,
-  };
-  fs.writeJSON("savedServerConfig.json", configServer);
-  res.redirect("/");
-});
+// // after saving configuration
+// app.post("/configure-server", (req, res) => {
+//   configServer.db = {
+//     url: req.body.url,
+//     database: req.body.database,
+//     collection: req.body.collection,
+//   };
+//   fs.writeJSON("savedServerConfig.json", configServer);
+//   res.redirect("/");
+// });
 
-app.post("/test_configuration-server", async (req, res) => {
+app.post("/test_configuration", async (req, res) => {
   console.log(req.body);
   const newConfig = {
     db: {
@@ -244,10 +244,10 @@ app.post("/test_configuration-server", async (req, res) => {
   }
 });
 
-app.get("/data-server", async (req, res) => {
+app.get("/data", async (req, res) => {
   try {
     // let mongoUrlLocal = "mongodb://root:shani@localhost:27017";
-    let mongoUrl = configServer.db.url;
+    let mongoUrl = config.db.url;
     console.log(mongoUrl);
 
     const client = new MongoClient(mongoUrl);
@@ -276,9 +276,10 @@ app.get("/data-server", async (req, res) => {
           //     .catch((err) => {
           //       console.log(err);
           //     });
-          console.log(configServer.db.collection);
-          db.collection(configServer.db.collection)
-            .find({})
+          console.log(config.db.collection);
+          console.log(config.query.statement);
+          db.collection(config.db.collection)
+            .find(config.query.statement)
             .toArray(function (err, response) {
               if (err) {
                 console.log(err);

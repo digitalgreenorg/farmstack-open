@@ -113,7 +113,7 @@
             let formData = JSON.stringify(
               Object.fromEntries(new FormData(myForm))
             );
-            const response = await fetch(`/test_configuration-server`, {
+            const response = await fetch(`/test_configuration`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",

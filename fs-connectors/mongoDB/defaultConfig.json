@@ -6,9 +6,9 @@
     "password": null,
     "database": null,
     "port": 27017,
-    "urlString":null
+    "urlString": null
   },
   "query": {
-    "statement": null
+    "statement": {}
   }
 }
