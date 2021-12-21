@@ -27,7 +27,7 @@
         <div>
           <div class="form-group col m-3">
             <label for="url" class="form-label"
-              >Paste your connection string (SRV or Standard )</label
+              >Paste Your Connection String (SRV or Standard )</label
             >
             <input
               name="url"
@@ -36,10 +36,15 @@
               value="<%= config.db.url %>"
               placeholder="mongodb+srv://[User]:[Password]@[connection url]/[Database]?retryWrites=true&w=majority"
             />
-            <blockquote>
-              For Example: "mongodb+srv://[User]:[Password]@[connection
+            <small>
+              For Server,Example: "mongodb+srv://[User]:[Password]@[connection
               url]/[Database]?retryWrites=true&w=majority"
-            </blockquote>
+            </small>
+            <br />
+            <small>
+              For localhost,Example: "mongodb://[User]:[Password]@[connection
+              url]/[Database]"
+            </small>
           </div>
           <div class="row">
             <div class="form-group col m-3">
