@@ -12,6 +12,8 @@ var MongoClient = require("mongodb").MongoClient;
 // const { db } = require("./config");
 const stringify = require("json-stringify-safe");
 
+let query;
+
 const app = express();
 const port = 3000;
 
@@ -277,9 +279,18 @@ app.get("/data", async (req, res) => {
           //       console.log(err);
           //     });
           console.log(config.db.collection);
+          console.log(typeof config.query.statement);
           console.log(config.query.statement);
+          //   query = JSON.parse(
+          //     config.query.statement == "" ? {} : config.query.statement
+          //   );
+          console.log(JSON.parse(config.query.statement));
           db.collection(config.db.collection)
-            .find(config.query.statement)
+            .find(
+              config.query.statement == ""
+                ? {}
+                : JSON.parse(config.query.statement)
+            )
             .toArray(function (err, response) {
               if (err) {
                 console.log(err);
