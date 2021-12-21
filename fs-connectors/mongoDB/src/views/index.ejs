@@ -118,9 +118,11 @@
             const json = await response.json();
             console.log(json);
             if (json.success) {
-              connStatus.innerHTML = "✔️ Connection Successful";
+              connStatus.innerHTML =
+                "Checked Your Connection String! ✔️ Connection Successful";
             } else {
-              connStatus.innerHTML = "❌ Connection Failed";
+              connStatus.innerHTML =
+                "Checked Your Connection String! ❌ Connection Failed";
             }
           } catch (err) {
             console.log(err);
