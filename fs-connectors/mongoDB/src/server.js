@@ -45,6 +45,7 @@ app.post("/configure", (req, res) => {
     collection: req.body.collection,
     user: req.body.user,
     password: req.body.password,
+    url:req.body.url,
   };
   config.query.statement = req.body.query;
   fs.writeJSON("savedConfig.json", config);

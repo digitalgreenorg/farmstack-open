@@ -18,122 +18,14 @@
   <body>
     <div class="container mt-4">
       <h1 class="text-center">MongoDB Connector</h1>
-      <h4>Method 1</h4>
       <form
         class="d-grid gap-3"
         action="/configure"
         method="POST"
         id="configurationForm"
       >
-        <div class="row">
-          <div class="form-group col">
-            <label for="engine" class="form-label">DB Engine</label>
-            <select id="engine" class="form-select" name="engine">
-              <% Object.keys(db_engine).forEach(element => { %> <%
-              if(config.db_engine === db_engine[element]) { %>
-              <option selected><% } else {%></option>
-
-              <option><% } %> <%= db_engine[element]%></option>
-              <% }); %>
-            </select>
-          </div>
-          <div class="form-group col">
-            <label for="host" class="form-label">Connection URI (host)</label>
-            <input
-              name="host"
-              type="text"
-              class="form-control"
-              placeholder="Connection URI"
-              value="<%= config.db.host %>"
-            />
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="form-group col">
-            <label for="port" class="form-label">Connection port</label>
-            <input
-              name="port"
-              type="text"
-              class="form-control"
-              placeholder="Connection port"
-              value="<%= config.db.port %>"
-            />
-          </div>
-          <div class="form-group col">
-            <label for="database" class="form-label">Database Name</label>
-            <input
-              name="database"
-              type="text"
-              class="form-control"
-              placeholder="Database Name"
-              value="<%= config.db.database %>"
-            />
-          </div>
-          <div class="form-group col">
-            <label for="collection" class="form-label">Collection Name</label>
-            <input
-              name="collection"
-              type="text"
-              class="form-control"
-              placeholder="Collection Name"
-              value="<%= config.db.collection %>"
-            />
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="form-group col">
-            <label for="user" class="form-label">User</label>
-            <input
-              name="user"
-              type="text"
-              class="form-control"
-              placeholder="User"
-              value="<%= config.db.user %>"
-            />
-          </div>
-          <div class="form-group col">
-            <label for="password" class="form-label">Password</label>
-            <input
-              name="password"
-              type="password"
-              class="form-control"
-              placeholder="Password"
-              value="<%= config.db.password %>"
-            />
-          </div>
-        </div>
-
-        <div class="col-auto">
-          <button type="submit" class="btn btn-primary mb-3 float-end">
-            Save Configuration
-          </button>
-          <button
-            type="button"
-            class="btn btn-secondary mb-3 mx-3 float-end"
-            onclick="testConnection_local()"
-          >
-            Test Configuration
-          </button>
-          <span
-            id="connection-status"
-            class="text-success float-end my-auto"
-          ></span>
-          <span id="connection-failed" class="text-danger float-end invisible"
-            >❌ Connection Failed</span
-          >
-        </div>
-      </form>
-      <form
-        class="d-grid gap-3"
-        action="/configure-server"
-        method="POST"
-        id="configurationForm-server"
-      >
         <div>
-          <h4>Method 2</h4>
-          <div class="form-group col">
+          <div class="form-group col m-3">
             <label for="url" class="form-label"
               >Paste your connection string (SRV or Standard )</label
             >
@@ -141,28 +33,48 @@
               name="url"
               type="text"
               class="form-control"
-              placeholder="url string"
+              value="<%= config.db.url %>"
+              placeholder="mongodb+srv://[User]:[Password]@[connection url]/[Database]?retryWrites=true&w=majority"
             />
+            <blockquote>
+              For Example: "mongodb+srv://[User]:[Password]@[connection
+              url]/[Database]?retryWrites=true&w=majority"
+            </blockquote>
           </div>
           <div class="row">
-            <div class="form-group col">
+            <div class="form-group col m-3">
               <label for="database" class="form-label">Database Name</label>
               <input
                 name="database"
                 type="text"
                 class="form-control"
                 placeholder="Database Name"
+                value="<%= config.db.database %>"
               />
             </div>
-            <div class="form-group col">
+            <div class="form-group col m-3">
               <label for="collection" class="form-label">Collection Name</label>
               <input
                 name="collection"
                 type="text"
                 class="form-control"
                 placeholder="Collection Name"
+                value="<%= config.db.collection %>"
               />
             </div>
+          </div>
+          <div class="form-group col-12 m-3">
+            <label for="query" class="form-label"
+              >Enter MongoDB Find Query</label
+            >
+            <textarea
+              name="query"
+              class="form-control"
+              placeholder="SELECT * FROM example_table"
+              rows="3"
+            >
+<%= config.query.statement %></textarea
+            >
           </div>
         </div>
         <div class="col-auto">
@@ -186,40 +98,13 @@
         </div>
       </form>
       <script>
-        async function testConnection_local() {
-          try {
-            let connStatus = document.getElementById("connection-status");
-            connStatus.innerHTML = "";
-            let myForm = document.getElementById("configurationForm");
-            let formData = JSON.stringify(
-              Object.fromEntries(new FormData(myForm))
-            );
-            const response = await fetch(`/test_configuration-local`, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: formData,
-            });
-            const json = await response.json();
-            console.log(json);
-            if (json.success) {
-              connStatus.innerHTML = "✔️ Connection Successful";
-            } else {
-              connStatus.innerHTML = "❌ Connection Failed";
-            }
-          } catch (err) {
-            console.log(err);
-          }
-        }
-
         async function testConnection_server() {
           try {
             let connStatus = document.getElementById(
               "connection-status-server"
             );
             connStatus.innerHTML = "";
-            let myForm = document.getElementById("configurationForm-server");
+            let myForm = document.getElementById("configurationForm");
             let formData = JSON.stringify(
               Object.fromEntries(new FormData(myForm))
             );
