@@ -5,7 +5,7 @@
   "main": "src/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node .",
+    "start": "nodemon --exec npx ts-node src/app.ts",
     "build": "tsc src/app.ts",
     "dev": "ts-node -r dotenv/config src/app.ts dotenv_config_path=postgres.env"
   },
