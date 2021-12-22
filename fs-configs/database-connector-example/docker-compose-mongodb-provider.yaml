@@ -13,7 +13,7 @@ services:
       - ../../fs-assets/etc/settings.mapdb:/root/etc/settings.mapdb
       - ../../fs-assets/sample-certificates/provider-keystore.p12:/root/etc/provider-keystore.p12
       - ../../fs-assets/sample-certificates/truststore.p12:/root/etc/truststore.p12
-      - ./example-provider-routes.xml:/root/deploy/example-provider-routes.xml
+      - ./example-mongodb-provider-routes.xml:/root/deploy/example-mongodb-provider-routes.xml
     
     # Uncomment to run the provider & consumer nodes on separate server 
     # replace x.x.x.x with the consumer ip address
