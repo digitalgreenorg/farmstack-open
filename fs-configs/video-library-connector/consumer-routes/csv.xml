@@ -23,7 +23,7 @@
 
     <camelContext xmlns="http://camel.apache.org/schema/spring">
     
-        <restConfiguration component="jetty" port="9002" enableCORS="true">
+        <restConfiguration component="jetty" port="9003" enableCORS="true">
             <corsHeaders key="Access-Control-Allow-Origin" value="*"/>
             <corsHeaders key="Access-Control-Allow-Headers" value="Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers"/>
             <corsHeaders key="Access-Control-Allow-Methods" value="GET,PUT,POST,HEAD,OPTIONS"/>
@@ -39,17 +39,17 @@
         <route>
             <from uri="timer://contractRequest?repeatCount=1" />
             <setProperty name="artifactUri">
-                <constant>https://farmstack.digitalgreen.org/videoLibrary</constant>
+                <constant>https://farmstack.digitalgreen.org/videoLibraryCSV</constant>
             </setProperty>
             <process ref="ContractRequestCreationProcessor" />
-            <to uri="idscp2client://3.142.225.24:29292?awaitResponse=true&amp;connectionShareId=ucConnection&amp;sslContextParameters=#clientSslContext&amp;useIdsMessages=true"/>
+            <to uri="idscp2client://3.142.225.24:29294?awaitResponse=true&amp;connectionShareId=ucConnection&amp;sslContextParameters=#clientSslContext&amp;useIdsMessages=true"/>
             <process ref="TypeExtractionProcessor"/>
             <choice>
                 <when>
                     <simple>${exchangeProperty.ids-type} == 'ContractResponseMessage'</simple>
                     <log message="### Handle ContractResponseMessage ###"/>
                     <process ref="ContractResponseProcessor"/>
-                    <to uri="idscp2client://3.142.225.24:29292?connectionShareId=ucConnection&amp;sslContextParameters=#clientSslContext&amp;useIdsMessages=true"/>
+                    <to uri="idscp2client://3.142.225.24:29294?connectionShareId=ucConnection&amp;sslContextParameters=#clientSslContext&amp;useIdsMessages=true"/>
                 </when>
                 <otherwise>
                     <log loggingLevel="ERROR" message="Expected ContractResponseMessage, but received:\n${body}\n### Header: ###\n${headers[idscp2-header]}"/>
@@ -62,14 +62,14 @@
         <route>
             <from uri="direct:syncData"/>
             <setProperty name="artifactUri">
-                <constant>https://farmstack.digitalgreen.org/videoLibrary</constant>
+                <constant>https://farmstack.digitalgreen.org/videoLibraryCSV</constant>
             </setProperty>
             <process ref="ArtifactRequestCreationProcessor" />
-            <to uri="idscp2client://3.142.225.24:29292?awaitResponse=true&amp;connectionShareId=ucConnection&amp;sslContextParameters=#clientSslContext&amp;useIdsMessages=true"/>
+            <to uri="idscp2client://3.142.225.24:29294?awaitResponse=true&amp;connectionShareId=ucConnection&amp;sslContextParameters=#clientSslContext&amp;useIdsMessages=true"/>
             <setHeader name="Content-Type">
                 <constant>application/json</constant>
             </setHeader>
-            <to uri="http://display-table-app:8081/post_data?bridgeEndpoint=true&amp;httpMethod=POST"/>
+            <to uri="http://csv-connector:8081/data?bridgeEndpoint=true&amp;httpMethod=POST"/>
         </route>
     </camelContext>
 </beans>

@@ -55,7 +55,7 @@
 </svg> Syncing Data`;
             let myForm = document.getElementById('configurationForm');
             let formData = JSON.stringify(Object.fromEntries(new FormData(myForm)));
-            const response = await fetch(`http://localhost:9001/data/sync`, {
+            const response = await fetch(`http://${document.location.hostname}:9001/data/sync`, {
               method: 'GET'
             })
             const json = await response.json()

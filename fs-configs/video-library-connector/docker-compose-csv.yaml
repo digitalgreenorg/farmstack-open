@@ -2,7 +2,7 @@ version: '3'
 services:
 
   # The core platform, mounts docker control socket and route definition into the image
-  gsheet-consumer-core:
+  consumer-core-csv:
     image: farmstack/trusted-connector:test
     tty: true
     stdin_open: true
@@ -10,39 +10,39 @@ services:
       - ./logs/provider/:/root/log/
       - /var/run/docker.sock:/var/run/docker.sock
       - ../../fs-assets/deploy/allow-all-flows.pl:/root/deploy/allow-all-flows.pl
-      - ../../fs-assets/etc/settings2.mapdb:/root/etc/settings.mapdb
+      - ../../fs-assets/etc/settings3.mapdb:/root/etc/settings.mapdb
       - ../../fs-assets/sample-certificates/consumer-keystore.p12:/root/etc/consumer-keystore.p12
       - ../../fs-assets/sample-certificates/truststore.p12:/root/etc/truststore.p12
-      - ./consumer-routes/gsheets.xml:/root/deploy/gsheets.xml
+      - ./consumer-routes/csv.xml:/root/deploy/csv.xml
+
       
     # Uncomment to run the provider & consumer nodes on separate server
-    # replace x.x.x.x with the consumer ip address
+    # replace x.x.x.x with the provider ip address
     extra_hosts:
       - "provider-core:3.142.225.24"
 
     ports:
-      - 29293:29293
-      - "8181:8181"
-      - "5005:5005"
-      - "8443:8443"
-      - "9001:9001"
+      # - 29292:29292
+      - 9003:9003 #Port used for camel rest API
 
     # Using two networks ids-wide and provider-internal for external comunication and internal communication respectively
     networks:
       ids-wide:
         aliases:
           - consumer-core
-      consumer-internal-gsheets:
+      consumer-internal-display:
 
-  gsheets-app:
-    image: farmstack/gsheets:1.0.0
-    ports: 
-      - "4001:3001"
+  csv-connector:
+    image: farmstack/csv-connector:0.0.2
+    ports:
+      - "8081:8081"
+    environment:
+      - SYNC_URL=http://consumer-core-csv:9003/data/sync
     networks:
-      - consumer-internal-gsheets
+      - consumer-internal-display
 
 networks:
   ids-wide:
     driver: bridge
-  consumer-internal-gsheets:
+  consumer-internal-display:
     driver: bridge

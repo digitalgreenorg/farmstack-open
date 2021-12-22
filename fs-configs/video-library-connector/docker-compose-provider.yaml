@@ -3,7 +3,7 @@ services:
 
   # The core platform, mounts docker control socket and route definition into the image
   provider-core:
-    image: farmstack/trusted-connector
+    image: farmstack/trusted-connector:test
     tty: true
     stdin_open: true
     volumes:
@@ -15,6 +15,7 @@ services:
       - ../../fs-assets/sample-certificates/truststore.p12:/root/etc/truststore.p12
       - ./provider-routes/video-library-display-table.xml:/root/deploy/video-library-display-table.xml
       - ./provider-routes/video-library-gsheets.xml:/root/deploy/video-library-gsheets.xml
+      - ./provider-routes/video-library-csv.xml:/root/deploy/video-library-csv.xml
     
     # Uncomment to run the provider & consumer nodes on separate server 
     # replace x.x.x.x with the consumer ip address
