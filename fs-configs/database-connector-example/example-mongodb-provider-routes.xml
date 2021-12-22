@@ -79,7 +79,7 @@
     <route id="sendData">
       <!-- <from uri="direct:update"/> -->
       <from uri="timer://tenSecondsTimer?fixedRate=true&amp;period=100000&amp;delay=20000"/>
-      <to uri="http://mongodb-connector:3000/data"/>
+      <to uri="http://mongodbconnector:3000/data"/>
       <!-- ensure that contract agreement is made before sending-->
       <delay asyncDelayed="true">
         <constant>10000</constant>

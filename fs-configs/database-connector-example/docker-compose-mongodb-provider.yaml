@@ -28,7 +28,7 @@ services:
       - ids-wide
       - provider-internal
 
-  mongodb-connector:
+  mongodbconnector:
     image: public.ecr.aws/l6i0z5a3/fs-mongodb-connector:1.0
     ports:
       - 3000:3000
