@@ -13,7 +13,7 @@ services:
       - ./logs/consumer/:/root/log/
       - ../../fs-assets/sample-certificates/consumer-keystore.p12:/root/etc/consumer-keystore.p12
       - ../../fs-assets/sample-certificates/truststore.p12:/root/etc/truststore.p12
-      - ./example-consumer-routes.xml:/root/deploy/example-consumer-routes.xml
+      - ./consumer.xml:/root/deploy/example-consumer-routes.xml
 
     # Uncomment to run the provider & consumer nodes on separate server 
     # replace x.x.x.x with the provider ip address
@@ -24,6 +24,7 @@ services:
     ports:
     # Enable this port mapping (along with "ports:" above) to allow access to IDSCP from outside the ids-wide network
       - "29292:29292"
+      - "9001:9001"
     # Using two networks ids-wide and consumer-internal for external comunication and internal communication, respectively
     networks:
       - ids-wide
@@ -31,7 +32,7 @@ services:
 
   # Data App (REST consumer, displays web page)
   consumer-app:
-    image: farmstack/merge-csv-nodejs
+    image: farmstack/mongo-merge-consumer:test 
     ports:
       - "8081:8081"
     networks:

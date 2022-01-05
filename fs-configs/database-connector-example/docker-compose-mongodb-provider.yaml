@@ -1,6 +1,5 @@
-version: '3'
+version: "3"
 services:
-
   # The core platform, mounts docker control socket and route definition into the image
   provider-core:
     image: farmstack/trusted-connector
@@ -13,16 +12,16 @@ services:
       - ../../fs-assets/etc/settings.mapdb:/root/etc/settings.mapdb
       - ../../fs-assets/sample-certificates/provider-keystore.p12:/root/etc/provider-keystore.p12
       - ../../fs-assets/sample-certificates/truststore.p12:/root/etc/truststore.p12
-      - ./example-mongodb-provider-routes.xml:/root/deploy/example-mongodb-provider-routes.xml
-    
-    # Uncomment to run the provider & consumer nodes on separate server 
+      - ./provider.xml:/root/deploy/example-mongodb-provider-routes.xml
+
+    # Uncomment to run the provider & consumer nodes on separate server
     # replace x.x.x.x with the consumer ip address
     # extra_hosts:
     #  - "consumer-core:x.x.x.x"
 
     ports:
       - 8989:8989
-    
+
     # Using two networks ids-wide and provider-internal for external comunication and internal communication respectively
     networks:
       - ids-wide
@@ -32,7 +31,7 @@ services:
     image: public.ecr.aws/l6i0z5a3/fs-mongodb-connector:1.0
     ports:
       - 3000:3000
-    networks: 
+    networks:
       - provider-internal
 
 networks:
