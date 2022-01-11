@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:camel="http://camel.apache.org/schema/spring"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+          http://camel.apache.org/schema/spring
+          http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+    <camel:sslContextParameters id="clientSslContext" certAlias="1.0.1">
+        <camel:keyManagers keyPassword="password">
+            <camel:keyStore resource="etc/consumer-keystore.p12" password="password"/>
+        </camel:keyManagers>
+        <camel:trustManagers>
+            <camel:keyStore resource="etc/truststore.p12" password="password"/>
+        </camel:trustManagers>
+    </camel:sslContextParameters>
+
+    <bean id="ArtifactRequestCreationProcessor" class="de.fhg.aisec.ids.camel.idscp2.processors.ArtifactRequestCreationProcessor" />
+    <bean id="ContractRequestCreationProcessor" class="de.fhg.aisec.ids.camel.idscp2.processors.ContractRequestCreationProcessor"/>
+    <bean id="ContractResponseProcessor" class="de.fhg.aisec.ids.camel.idscp2.processors.ContractResponseProcessor"/>
+    <bean id="TypeExtractionProcessor" class="de.fhg.aisec.ids.camel.idscp2.processors.IdsMessageTypeExtractionProcessor" />
+
+    <camelContext xmlns="http://camel.apache.org/schema/spring">
+    
+        <restConfiguration component="jetty" port="9001" enableCORS="true">
+            <corsHeaders key="Access-Control-Allow-Origin" value="*"/>
+            <corsHeaders key="Access-Control-Allow-Headers" value="Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers"/>
+            <corsHeaders key="Access-Control-Allow-Methods" value="GET,PUT,POST,HEAD,OPTIONS"/>
+            
+        </restConfiguration>
+
+        <rest path="/data">
+            <get uri="/sync">
+                <to uri="direct:farmOSData"/>
+            </get>
+        </rest>
+
+        <route>
+            <from uri="timer://contractRequest?repeatCount=1" />
+            <setProperty name="artifactUri">
+                <constant>https://farmstack.digitalgreen.org/farmos</constant>
+            </setProperty>
+            <process ref="ContractRequestCreationProcessor" />
+            <to uri="idscp2client://provider-core:8989?awaitResponse=true&amp;connectionShareId=ucConnection&amp;sslContextParameters=#clientSslContext&amp;useIdsMessages=true"/>
+            <process ref="TypeExtractionProcessor"/>
+            <choice>
+                <when>
+                    <simple>${exchangeProperty.ids-type} == 'ContractResponseMessage'</simple>
+                    <log message="### Handle ContractResponseMessage ###"/>
+                    <process ref="ContractResponseProcessor"/>
+                    <to uri="idscp2client://provider-core:8989?connectionShareId=ucConnection&amp;sslContextParameters=#clientSslContext&amp;useIdsMessages=true"/>
+                </when>
+                <otherwise>
+                    <log loggingLevel="ERROR" message="Expected ContractResponseMessage, but received:\n${body}\n### Header: ###\n${headers[idscp2-header]}"/>
+                    <removeHeader headerName="idscp2-header" />
+                    <setBody><simple>${null}</simple></setBody>
+                </otherwise>
+            </choice>
+        </route>
+
+        <route id="consumer">
+            <from uri="idscp2client://provider-core:8989?awaitResponse=true&amp;connectionShareId=ucConnection&amp;sslContextParameters=#clientSslContext&amp;useIdsMessages=true"/>
+            <setProperty name="artifactUri">
+                <constant>https://farmstack.digitalgreen.org/farmos</constant>
+            </setProperty>
+            <process ref="TypeExtractionProcessor"/>
+            <choice>
+                <when>
+                    <simple>${exchangeProperty.ids-type} == 'ResourceUpdateMessage'</simple>
+                    <log message="### Handle ResourceUpdateMessage ###"/>
+                    <setHeader name="Content-Type">
+                        <constant>application/json</constant>
+                    </setHeader>
+                    <!--Change the rest api url where you what the response of farmos-->
+                    <to uri="http://farmos-consumer:5003/farmos/response"/>
+                    <removeHeader headerName="idscp2-header" />
+                    <setBody><simple>${null}</simple></setBody>
+                </when>
+                <otherwise>
+                    <log loggingLevel="ERROR" message="Expected ArtifactResponseMessage, but received:\n${body}\n### Header: ###\n${headers[idscp2-header]}"/>
+                </otherwise>
+            </choice>
+        </route>
+
+       <route>
+            <from uri="direct:farmOSData"/>
+            <setProperty name="artifactUri">
+                <constant>https://farmstack.digitalgreen.org/farmos</constant>
+            </setProperty>
+            <process ref="ArtifactRequestCreationProcessor" />
+            <to uri="idscp2client://provider-core:8989?awaitResponse=true&amp;connectionShareId=ucConnection&amp;sslContextParameters=#clientSslContext&amp;useIdsMessages=true"/>
+        </route>
+    </camelContext>
+</beans>

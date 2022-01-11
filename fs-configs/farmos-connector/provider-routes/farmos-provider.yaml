@@ -1,0 +1,75 @@
+version: '3'
+services:
+
+  # The core platform, mounts docker control socket and route definition into the image
+  provider-core:
+    image: farmstack/trusted-connector
+    tty: true
+    stdin_open: true
+    volumes:
+      - ./logs/provider/:/root/log/
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ../../../fs-assets/deploy/allow-all-flows.pl:/root/deploy/allow-all-flows.pl
+      - ../../../fs-assets/etc/settings2.mapdb:/root/etc/settings.mapdb
+      - ../../../fs-assets/sample-certificates/provider-keystore.p12:/root/etc/provider-keystore.p12
+      - ../../../fs-assets/sample-certificates/truststore.p12:/root/etc/truststore.p12
+      - ./farmos-provider.xml:/root/deploy/farmos-provider.xml
+    
+    # Uncomment to run the provider & consumer nodes on separate server 
+    # replace x.x.x.x with the consumer ip address
+#    extra_hosts:
+#     - "consumer-core:34.136.125.81"
+
+    ports:
+      - 8989:8989
+      # - 29292:29292
+      # - 29293:29293
+      # - 29294:29294
+    
+    # Using two networks ids-wide and provider-internal for external comunication and internal communication respectively
+    networks:
+      - ids-wide
+      - provider-internal
+
+  db:
+    image: mariadb:latest
+    volumes:
+      - './db:/var/lib/mysql'
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: farm
+      MYSQL_DATABASE: farm
+      MYSQL_USER: farm
+      MYSQL_PASSWORD: farm
+    networks:
+      - provider-internal
+
+  www:
+    depends_on:
+      - db
+    image: farmos/farmos:dev
+    volumes:
+      - './www:/var/www/html'
+    ports:
+      - '80:80'
+    environment:
+      XDEBUG_CONFIG: remote_host=172.17.0.1
+    networks:
+      - provider-internal
+
+
+  farmos-custom-app:
+    image: farmstack/farmos-custom-app:restapi
+    ports:
+      - '5000:5000'
+    networks:
+      - provider-internal
+
+
+
+networks:
+  ids-wide:
+    driver: bridge
+  provider-internal:
+    driver: bridge
