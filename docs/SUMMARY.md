@@ -7,6 +7,7 @@
 * [Deploying Farmstack](deploying-farmstack/README.md)
   * [Installing Prerequisites](deploying-farmstack/installing-prerequisites.md)
   * [Setting up Self-Managed Connectors](deploying-farmstack/setting-up-self-managed-connectors.md)
+  * [Setting up Video Library Connector](deploying-farmstack/setting-up-video-library-connector.md)
   * [Local Deployment](deploying-farmstack/local-deployment.md)
   * [Deployment on AWS EC2](deploying-farmstack/aws-ec2.md)
 * [Guides](operation-guides/README.md)
@@ -19,4 +20,3 @@
     * [Flask](operation-guides/dockerization/dockerization-flask.md)
   * [Install a dockerized application with connector](operation-guides/install-a-nodejs-application-with-connector.md)
 * [Contributing to FarmStack](contributing-to-farmstack.md)
-

@@ -10,14 +10,14 @@ You can follow this process for any file, here we will be using a file called ci
 
 Clone the FarmStack Github repository on your local machine and open it.
 
-```text
+```
 git clone https://github.com/digitalgreenorg/farmstack-open.git
 cd farmstack-open
 ```
 
 In the FarmStack repository, open  `example-provide-routes.yaml` file in `fs-config/usage-control-example/` directory.
 
-```text
+```
 code fs-configs/usage-control-example/example-provider-routes.xml
 ```
 
@@ -27,11 +27,11 @@ In the route `sendData`, replace `sample_data1.csv` with filename of your CSV fi
 
 Next, open `docker-compose-provider.yaml` file in `fs-config/usage-control-example/` directory.
 
-```text
+```
 code fs-configs/usage-control-example/docker-compose-provider.yaml
 ```
 
-Here comment out the lines which mount `sample_data1.csv` and __`sample_data2.csv` to the docker container, and add the line to mount the `cities.csv` to the container, as shown here:
+Here comment out the lines which mount `sample_data1.csv` and __ `sample_data2.csv` to the docker container, and add the line to mount the `cities.csv` to the container, as shown here:
 
 ![](../.gitbook/assets/csv-image-2.png)
 
@@ -39,7 +39,7 @@ There is no limit on the number of CSV files that can be mounted on connector, f
 
 Save the files and in the terminal window type the following command to run FarmStack setup:
 
-```text
+```
 python3 setup.py
 ```
 
@@ -58,4 +58,3 @@ Watch this space for super exciting updates. Our bots are already hard at work t
 ## Next Steps
 
 This completes the tutorial for CSV file transfer through FarmStack Provider Connector. If you face any issue while setting up your own csv file kindly open a new issue in the github repository and our experts will guide you.
-
