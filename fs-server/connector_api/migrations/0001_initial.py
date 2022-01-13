@@ -9,20 +9,20 @@ def insert_models(apps, schema_editor):
         {
             'name': 'gsheets',
             'display_name': 'Google Sheets',
-            'port': '3001',
+            'port': '4001',
             'icon': 'google-sheets.png',
         },
         {
             'name': 'display',
             'display_name': 'Display Table',
-            'port': '8081',
+            'port': '4002',
             'icon': 'table.png',
         },
         {
             'name': 'csv',
             'display_name': 'Download CSV',
-            'port': '3001',
-            'icon': 'table.png',
+            'port': '4003',
+            'icon': 'csv.svg',
         }
     ]
     ConnectorApp = apps.get_model('connector_api','ConnectorApp')
@@ -31,7 +31,7 @@ def insert_models(apps, schema_editor):
         connector_app.save()
 
 def remove_models(app, schema_editor):
-    ConnectorApp = apps.get_model('connector_api','ConnectorApp')
+    ConnectorApp = app.get_model('connector_api','ConnectorApp')
     ConnectorApp.objects.all().delete()
 
 class Migration(migrations.Migration):

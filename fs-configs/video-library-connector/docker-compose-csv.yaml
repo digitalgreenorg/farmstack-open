@@ -10,7 +10,7 @@ services:
       - ./logs/provider/:/root/log/
       - /var/run/docker.sock:/var/run/docker.sock
       - ../../fs-assets/deploy/allow-all-flows.pl:/root/deploy/allow-all-flows.pl
-      - ../../fs-assets/etc/settings3.mapdb:/root/etc/settings.mapdb
+      - ../../fs-assets/etc/settings4.mapdb:/root/etc/settings.mapdb
       - ../../fs-assets/sample-certificates/consumer-keystore.p12:/root/etc/consumer-keystore.p12
       - ../../fs-assets/sample-certificates/truststore.p12:/root/etc/truststore.p12
       - ./consumer-routes/csv.xml:/root/deploy/csv.xml
@@ -35,7 +35,7 @@ services:
   csv-connector:
     image: farmstack/csv-connector:0.0.2
     ports:
-      - "8081:8081"
+      - "4003:8081"
     environment:
       - SYNC_URL=http://consumer-core-csv:9003/data/sync
     networks:

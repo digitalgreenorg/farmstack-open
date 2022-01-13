@@ -35,7 +35,7 @@ services:
   display-table-app:
     image: farmstack/merge-csv-nodejs:latest
     ports:
-      - "8081:8081"
+      - "4002:8081"
     networks:
       - consumer-internal-display
 

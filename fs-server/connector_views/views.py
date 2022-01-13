@@ -30,7 +30,7 @@ def start_connector(request):
     elif connector_app.name == 'display':
         script_path = 'scripts/video-lib-connector/run-consumer-display.sh'
     else:
-        script_path = 'scripts/video-lib-connector/run-consumer-display.sh'
+        script_path = 'scripts/video-lib-connector/run-consumer-csv.sh'
         
     create_connector = ConnectorSerializer(data=data, many=isinstance(data, list))
     if create_connector.is_valid():
@@ -71,10 +71,11 @@ def configure_gsheets(config):
     }
     retry_count = 0
     max_retry_count = 10
+    gsheet_connector = ConnectorApp.objects.get(name='gsheets')
     while(True):
         time.sleep(5)
         try:
-            r = requests.post('http://localhost:3001/configure/', data=form_data)
+            r = requests.post('http://localhost:%s/configure/' % gsheet_connector.port, data=form_data)
             if r.status_code == 200:
                 break
             else:
@@ -121,7 +122,7 @@ def stop_connector(request):
         elif connector_app.name == 'display':
             script_path = 'scripts/video-lib-connector/stop-consumer-display.sh'
         else:
-            script_path = 'scripts/video-lib-connector/stop-consumer-display.sh'
+            script_path = 'scripts/video-lib-connector/stop-consumer-csv.sh'
         run_script(script_path)
         connector.delete()
     except Exception as e:
