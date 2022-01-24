@@ -1,4 +1,5 @@
 const express = require("express");
+const bodyParser = require('body-parser');
 const {sheets, drive} = require("./services/sheetService");
 const fs = require('fs-extra');
 const { config } = require("./config");
@@ -8,7 +9,12 @@ const path = require('path');
 const app = express();
 const port = 3001;
 
-app.use(express.json());
+
+app.use(bodyParser.json({
+  inflate: true,
+  limit: '100mb'
+}));
+
 app.use(
     express.urlencoded({
     extended: true,

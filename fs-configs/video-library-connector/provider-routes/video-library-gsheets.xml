@@ -35,7 +35,7 @@
                     <log message="### Handle ContractRequestMessage ###"/>
                     <setProperty name="containerUri">
                         <constant>
-                            https://hub.docker.com/layers/farmstack/gsheets/latest/images/sha256-01869f569f201a2f0b71781c64698a9ae84122a8e66c4ab6ddb1cf69e05276a1#3001
+                            https://hub.docker.com/layers/farmstack/gsheets/latest/images/sha256-9ee938a7787805bd72520ba3bd08c1913c64f1ed1ffc362f2df123a004cc54d7#3001
                         </constant>
                     </setProperty>
                     <process ref="ContractRequestProcessor"/>
