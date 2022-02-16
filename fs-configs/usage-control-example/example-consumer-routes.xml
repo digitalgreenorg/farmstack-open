@@ -16,12 +16,13 @@
         </camel:trustManagers>
     </camel:sslContextParameters>
 
-    <!-- The following defines a single bean called TypeExtractionProcessor implemented by the POJO de.fhg.aisec.ids.camel.processors.IdsMessageTypeExtractionProcessor -->
-    <bean id="TypeExtractionProcessor" class="de.fhg.aisec.ids.camel.idscp2.processors.IdsMessageTypeExtractionProcessor" />
+    <!-- The following defines a single bean called TypeExtractionProcessor implemented by the POJO de.fhg.aisec.test.ids.camel.processors.IdsMessageTypeExtractionProcessor -->
+    <bean id="TypeExtractionProcessor" class="de.fhg.aisec.ids.camel.processors.IdsMessageTypeExtractionProcessor" />
     <!-- The following defines a single bean called ContractOfferProcessor implemented by the POJO de.fhg.aisec.ids.camel.processors.ContractOfferProcessor -->
-    <bean id="ContractOfferProcessor" class="de.fhg.aisec.ids.camel.idscp2.processors.ContractOfferProcessor" />
+    <bean id="ContractOfferProcessor" class="de.fhg.aisec.ids.camel.processors.ContractOfferProcessor" />
 
     <camelContext xmlns="http://camel.apache.org/schema/spring">
+    
         <route>
       <from uri="idscp2server://0.0.0.0:29292?sslContextParameters=#serverSslContext&amp;useIdsMessages=true"/>
       <!-- Checks message and it's type based on its headers. -->
@@ -48,7 +49,7 @@
         <otherwise>
           <!-- if header doesn't match to a known header -->
           <log loggingLevel="ERROR" message="Expected ContractOfferMessage or ResourceUpdateMessage, but received:\n${body}\n### Header: ###\n${headers[idscp2-header]}"/>
-          <removeHeader headerName="idscp2-header" />
+          <removeHeader name="idscp2-header" />
           <setBody>
             <simple>${null}</simple>
           </setBody>

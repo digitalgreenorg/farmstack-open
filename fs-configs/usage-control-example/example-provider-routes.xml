@@ -17,16 +17,16 @@
     </camel:sslContextParameters>
 
     <!-- The following defines a single bean called TypeExtractionProcessor implemented by the POJO de.fhg.aisec.ids.camel.processors.IdsMessageTypeExtractionProcessor -->
-  <bean id="TypeExtractionProcessor" class="de.fhg.aisec.ids.camel.idscp2.processors.IdsMessageTypeExtractionProcessor" />
+  <bean id="TypeExtractionProcessor" class="de.fhg.aisec.ids.camel.processors.IdsMessageTypeExtractionProcessor" />
   
   <!-- The following defines a single bean called ContractOfferCreationProcessor implemented by the POJO de.fhg.aisec.ids.camel.processors.ContractOfferCreationProcessor -->
   <bean id="ContractOfferCreationProcessor" class="de.fhg.aisec.ids.dgprocessors.ContractOfferCreationProcessor" />
   
   <!-- The following defines a single bean called ContractAgreementReceiverProcessor implemented by the POJO de.fhg.aisec.ids.camel.processors.ContractAgreementReceiverProcessor -->
-  <bean id="ContractAgreementReceiverProcessor" class="de.fhg.aisec.ids.camel.idscp2.processors.ContractAgreementReceiverProcessor" />
+  <bean id="ContractAgreementReceiverProcessor" class="de.fhg.aisec.ids.camel.processors.ContractAgreementReceiverProcessor" />
   
   <!-- The following defines a single bean called ResourceUpdateCreationProcessor implemented by the POJO de.fhg.aisec.ids.camel.processors.ResourceUpdateCreationProcessor -->
-  <bean id="ResourceUpdateCreationProcessor" class="de.fhg.aisec.ids.camel.idscp2.processors.ResourceUpdateCreationProcessor" />
+  <bean id="ResourceUpdateCreationProcessor" class="de.fhg.aisec.ids.camel.processors.ResourceUpdateCreationProcessor" />
 
     <camelContext xmlns="http://camel.apache.org/schema/spring">
         <dataFormats>
@@ -70,7 +70,7 @@
         </otherwise>
       </choice>
       <!-- removes idscp2 header -->
-      <removeHeader headerName="idscp2-header" />
+      <removeHeader name="idscp2-header" />
       <setBody>
         <simple>${null}</simple>
       </setBody>
@@ -78,12 +78,12 @@
 
     <route id="sendData">
       <!-- <from uri="direct:update"/> -->
-      <from uri="file://deploy/?fileName=sample_data1.csv&amp;charset=utf-8&amp;noop=true"/>
+      <from uri="file://deploy/?fileName=sample_data1.csv&amp;charset=utf-8&amp;noop=true&amp;delay=10000"/>
       <!-- ensure that contract agreement is made before sending-->
       <delay asyncDelayed="true">
         <constant>10000</constant>
       </delay>
-      <log message="Sending data from file: sample_data1.csv"/>
+      <!-- <log message="Sending data from file: sample_data1.csv ${body}"/> -->
       <!-- Parses CSV -->
       <unmarshal>
         <csv delimiter="," useMaps="true"/>
@@ -92,6 +92,7 @@
       <marshal>
         <json/>
       </marshal>
+      <log message="Sending data from file: sample_data1.csv ${body}"/>
       <setProperty name="artifactUri">
         <constant>https://farmstack.digitalgreen.org/usageControlExample</constant>
       </setProperty>
