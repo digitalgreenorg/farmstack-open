@@ -27,12 +27,16 @@
             <corsHeaders key="Access-Control-Allow-Origin" value="*"/>
             <corsHeaders key="Access-Control-Allow-Headers" value="Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers"/>
             <corsHeaders key="Access-Control-Allow-Methods" value="GET,PUT,POST,HEAD,OPTIONS"/>
-            
         </restConfiguration>
 
-        <rest path="/data">
-            <post uri="/sync">
+        <rest path="/farm">
+            <post uri="/data">
                 <to uri="direct:farmOSData"/>
+            </post>
+        </rest>
+        <rest path="/farm">
+            <post uri="/file">
+                <to uri="direct:farmOSFile"/>
             </post>
         </rest>
 
@@ -52,7 +56,7 @@
                     <to uri="idscp2client://provider-core:8989?connectionShareId=ucConnection&amp;sslContextParameters=#clientSslContext&amp;useIdsMessages=true"/>
                 </when>
                 <otherwise>
-                    <log loggingLevel="ERROR" message="Expected ContractResponseMessage, but received:\n${body}\n### Header: ###\n${headers[idscp2-header]}"/>
+                    <log loggingLevel="ERROR" message="Expected ContractResponseMessage 8989, but received:\n${body}\n### Header: ###\n${headers[idscp2-header]}"/>
                     <removeHeader headerName="idscp2-header" />
                     <setBody><simple>${null}</simple></setBody>
                 </otherwise>
@@ -66,24 +70,24 @@
             </setProperty>
             <process ref="TypeExtractionProcessor"/>
             <choice>
-                <when>
+                 <when>
                     <simple>${exchangeProperty.ids-type} == 'ResourceUpdateMessage'</simple>
                     <log message="### Handle ResourceUpdateMessage ###"/>
                     <setHeader name="Content-Type">
                         <constant>application/json</constant>
                     </setHeader>
                     <!--Change the rest api url where you what the response of farmos-->
-                    <to uri="http://farmos-consumer:5003/farmos/response"/>
+                    <to uri="http://farmos-consumer:5003/farm/data/response"/>
                     <removeHeader headerName="idscp2-header" />
                     <setBody><simple>${null}</simple></setBody>
                 </when>
                 <otherwise>
-                    <log loggingLevel="ERROR" message="Expected ArtifactResponseMessage, but received:\n${body}\n### Header: ###\n${headers[idscp2-header]}"/>
+                    <log loggingLevel="ERROR" message="Expected ArtifactResponseMessage 8989, but received:\n${body}\n### Header: ###\n${headers[idscp2-header]}"/>
                 </otherwise>
             </choice>
         </route>
 
-       <route>
+        <route>
             <from uri="direct:farmOSData"/>
             <setProperty name="artifactUri">
                 <constant>https://farmstack.digitalgreen.org/farmos</constant>
@@ -91,5 +95,63 @@
             <process ref="ArtifactRequestCreationProcessor" />
             <to uri="idscp2client://provider-core:8989?awaitResponse=true&amp;connectionShareId=ucConnection&amp;sslContextParameters=#clientSslContext&amp;useIdsMessages=true"/>
         </route>
+
+
+        <route>
+            <from uri="timer://contractRequest?repeatCount=1" />
+            <setProperty name="artifactUri">
+                <constant>https://farmstack.digitalgreen.org/farmos/file</constant>
+            </setProperty>
+            <process ref="ContractRequestCreationProcessor" />
+            <to uri="idscp2client://provider-core:29292?awaitResponse=true&amp;connectionShareId=ucConnection&amp;sslContextParameters=#clientSslContext&amp;useIdsMessages=true"/>
+            <process ref="TypeExtractionProcessor"/>
+            <choice>
+                <when>
+                    <simple>${exchangeProperty.ids-type} == 'ContractResponseMessage'</simple>
+                    <log message="### Handle ContractResponseMessage ###"/>
+                    <process ref="ContractResponseProcessor"/>
+                    <to uri="idscp2client://provider-core:29292?connectionShareId=ucConnection&amp;sslContextParameters=#clientSslContext&amp;useIdsMessages=true"/>
+                </when>
+                <otherwise>
+                    <log loggingLevel="ERROR" message="Expected ContractResponseMessage :29292, but received:\n${body}\n### Header: ###\n${headers[idscp2-header]}"/>
+                    <removeHeader headerName="idscp2-header" />
+                    <setBody><simple>${null}</simple></setBody>
+                </otherwise>
+            </choice>
+        </route>
+
+        <route id="fileConsumer">
+            <from uri="idscp2client://provider-core:29292?awaitResponse=true&amp;connectionShareId=ucConnection&amp;sslContextParameters=#clientSslContext&amp;useIdsMessages=true"/>
+            <setProperty name="artifactUri">
+                <constant>https://farmstack.digitalgreen.org/farmos/file</constant>
+            </setProperty>
+            <process ref="TypeExtractionProcessor"/>
+            <choice>
+                 <when>
+                    <simple>${exchangeProperty.ids-type} == 'ResourceUpdateMessage'</simple>
+                    <log message="### Handle ResourceUpdateMessage ###"/>
+                    <setHeader name="Content-Type">
+                        <constant>application/json</constant>
+                    </setHeader>
+                    <!--Change the rest api url where you what the response of farmos-->
+                    <to uri="http://farmos-consumer:5003/farm/file/response"/>
+                    <removeHeader headerName="idscp2-header" />
+                    <setBody><simple>${null}</simple></setBody>
+                </when>
+                <otherwise>
+                    <log loggingLevel="ERROR" message="Expected ArtifactResponseMessage 29292, but received:\n${body}\n### Header: ###\n${headers[idscp2-header]}"/>
+                </otherwise>
+            </choice>
+        </route>
+
+        <route>
+            <from uri="direct:farmOSFile"/>
+            <setProperty name="artifactUri">
+                <constant>https://farmstack.digitalgreen.org/farmos/file</constant>
+            </setProperty>
+            <process ref="ArtifactRequestCreationProcessor" />
+            <to uri="idscp2client://provider-core:29292?awaitResponse=true&amp;connectionShareId=ucConnection&amp;sslContextParameters=#clientSslContext&amp;useIdsMessages=true"/>
+        </route>
+
     </camelContext>
 </beans>

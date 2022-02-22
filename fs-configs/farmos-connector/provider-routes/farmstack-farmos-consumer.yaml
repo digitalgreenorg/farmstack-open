@@ -14,17 +14,7 @@ services:
       - ../../../fs-assets/sample-certificates/consumer-keystore.p12:/root/etc/consumer-keystore.p12
       - ../../../fs-assets/sample-certificates/truststore.p12:/root/etc/truststore.p12
       - ./farmstack-farmos-consumer.xml:/root/deploy/farmstack-farmos-consumer.xml
-      
-    # Uncomment to run the provider & consumer nodes on separate server
-    # replace x.x.x.x with the consumer ip address
-#    extra_hosts:
-#      - "provider-core:13.59.74.187"
-
     ports:
-#      - 29292:29292
-      # - "8181:8181"
-      # - "5005:5005"
-      # - "8443:8443"
       - 9001:9001
 
     # Using two networks ids-wide and provider-internal for external comunication and internal communication respectively
