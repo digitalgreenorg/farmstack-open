@@ -13,7 +13,7 @@ services:
       - ../../fs-assets/etc/settings.mapdb:/root/etc/settings.mapdb
       - ../../fs-assets/sample-certificates/consumer-keystore.p12:/root/etc/consumer-keystore.p12
       - ../../fs-assets/sample-certificates/truststore.p12:/root/etc/truststore.p12
-#      - ./consumer-routes/farmstack-farmos-data-consumer.xml:/root/deploy/farmstack-farmos-data-consumer.xml
+      - ./consumer-routes/farmstack-farmos-data-consumer.xml:/root/deploy/farmstack-farmos-data-consumer.xml
       - ./consumer-routes/farmstack-farmos-file-consumer.xml:/root/deploy/farmstack-farmos-file-consumer.xml
 
     ports:
