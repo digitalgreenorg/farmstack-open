@@ -33,11 +33,11 @@
             <corsHeaders key="Access-Control-Allow-Methods" value="GET,PUT,POST,HEAD,OPTIONS"/>
           </restConfiguration>
 
-<!--         <rest path="/farmos">-->
-<!--            <post uri="/response">-->
-<!--                <to uri="direct:sendFarmOSReportData"/>-->
-<!--            </post>-->
-<!--        </rest>-->
+         <rest path="/farm">
+            <post uri="/report">
+                <to uri="direct:sendFarmOSReportData"/>
+            </post>
+        </rest>
 
         <route id="server">
             <from uri="idscp2server://0.0.0.0:29291?sslContextParameters=#serverSslContext&amp;useIdsMessages=true&amp;tlsClientHostnameVerification=false"/>
@@ -49,7 +49,7 @@
                     <log message="### Handle ContractRequestMessage ###"/>
                     <setProperty name="containerUri">
                         <constant>
-                            https://hub.docker.com/layers/164595253/farmstack/farmos-consumer/restapi/images/sha256-cd48394df51115aaa4047850653599c959113bd4368cd72c2826fec8552b356d#5003
+                            https://hub.docker.com/layers/164595253/farmstack/farmos-consumer/restapi/images/sha256-ce5956502e3a114f895ca1c33b9eabf245037748301ab9596b39f52632d5f334#5003
                         </constant>
                     </setProperty>
                     <process ref="ContractRequestProcessor"/>
@@ -95,20 +95,19 @@
           <process ref="ResourceUpdateCreationProcessor" />
         </route>
 
-<!--        <route>-->
-<!--            <from uri="direct:sendFarmOSReportData"/>-->
-
-<!--          <setProperty name="artifactUri">-->
-<!--                <constant>https://farmstack.digitalgreen.org/farmos</constant>-->
-<!--          </setProperty>-->
-<!--          &lt;!&ndash; check this &ndash;&gt;-->
-<!--          <process ref="ResourceUpdateCreationProcessor" />-->
-<!--          <to uri="idscp2client://consumer-core:9001?awaitResponse=true&amp;connectionShareId=ucConnection&amp;sslContextParameters=#serverSslContext&amp;useIdsMessages=true"/>-->
-<!--          &lt;!&ndash; Sets the correct header for the text answer "OK" &ndash;&gt;-->
-<!--          <setHeader name="Content-Type">-->
-<!--            <constant>application/json</constant>-->
-<!--          </setHeader>-->
-<!--        </route>-->
+       <route>
+            <from uri="direct:sendFarmOSReportData"/>
+          <setProperty name="artifactUri">
+                <constant>https://farmstack.digitalgreen.org/farmos</constant>
+          </setProperty>
+          <!-- check this -->
+          <process ref="ResourceUpdateCreationProcessor" />
+          <to uri="idscp2client://consumer-core:29291?awaitResponse=true&amp;connectionShareId=ucConnectionData&amp;sslContextParameters=#serverSslContext&amp;useIdsMessages=true"/>
+          <!-- Sets the correct header for the text answer "OK" -->
+          <setHeader name="Content-Type">
+            <constant>application/json</constant>
+          </setHeader>
+        </route>
     </camelContext>
 
 </beans>

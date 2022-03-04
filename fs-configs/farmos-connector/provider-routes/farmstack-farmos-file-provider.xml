@@ -39,7 +39,7 @@
                     <log message="### Handle ContractRequestMessage ###"/>
                     <setProperty name="containerUri">
                         <constant>
-                            https://hub.docker.com/layers/164595253/farmstack/farmos-consumer/restapi/images/sha256-cd48394df51115aaa4047850653599c959113bd4368cd72c2826fec8552b356d#5003
+                            https://hub.docker.com/layers/164595253/farmstack/farmos-consumer/restapi/images/sha256-ce5956502e3a114f895ca1c33b9eabf245037748301ab9596b39f52632d5f334#5003
                         </constant>
                     </setProperty>
                     <process ref="ContractRequestProcessor"/>
@@ -81,9 +81,9 @@
             <setProperty name="artifactUri">
                 <constant>https://farmstack.digitalgreen.org/farmos/file</constant>
             </setProperty>
-            <transform>
-                    <simple>${body}</simple>
-            </transform>
+            <setHeader name="Content-Type">
+                <constant>application/json</constant>
+            </setHeader>
             <process ref="ResourceUpdateCreationProcessor" />
             </route>
 
