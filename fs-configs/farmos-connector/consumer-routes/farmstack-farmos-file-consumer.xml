@@ -68,9 +68,9 @@
                  <when>
                     <simple>${exchangeProperty.ids-type} == 'ResourceUpdateMessage'</simple>
                     <log message="### Handle ResourceUpdateMessage ${body} ###"/>
-                    <transform>
-                        <simple>${body}</simple>
-                    </transform>
+                     <setHeader name="Content-Type">
+                        <constant>application/json</constant>
+                     </setHeader>
                     <!--Change the rest api url where you what the response of farmos-->
                     <to uri="http://farmos-consumer:5003/farm/file/response"/>
                     <removeHeader headerName="idscp2-header" />
