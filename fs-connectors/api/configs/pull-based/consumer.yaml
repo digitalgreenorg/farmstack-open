@@ -1,0 +1,55 @@
+version: '3'
+services:
+
+  # The core platform, mounts docker control socket and route definition into the image
+  consumer-core:
+    image: farmstack/trusted-connector:1.0.0
+    tty: true
+    stdin_open: true
+    volumes:
+      - ../logs/provider/:/root/log/
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ../cert-store/consumer-keystore.p12:/root/etc/consumer-keystore.p12
+      - ../cert-store/truststore.p12:/root/etc/truststore.p12
+      - ../etc/settings2.mapdb:/root/etc/settings.mapdb
+      - ../deploy/allow-all-flows.pl:/root/deploy/allow-all-flows.pl
+      - ./consumer.xml:/root/deploy/consumer.xml
+      
+    # Uncomment to run the provider & consumer nodes on separate server
+    # replace x.x.x.x with the consumer ip address
+
+    ports:
+      - 29292:29292
+      # - "8181:8181"
+      # - "5005:5005"
+      # - "8443:8443"
+      - "9001:9001"
+
+    # Using two networks ids-wide and provider-internal for external comunication and internal communication respectively
+    networks:
+      - ids-wide
+      - location-consumer-internal
+
+  consumer-app:
+    image: farmstack/consumer-app:latest
+    # volumes:
+    #   - ../../location-app/app.js:/app/app.js
+    # env_file:
+    #   - ../../location-app/.env
+    ports:
+      - 4000:4000
+    networks:
+      - location-consumer-internal
+
+  # gsheets-app:
+  #   image: farmstack/gsheets:latest
+  #   ports: 
+  #     - "3001:3001"
+  #   networks:
+  #     - location-consumer-internal
+
+networks:
+  ids-wide:
+    driver: bridge
+  location-consumer-internal:
+    driver: bridge
